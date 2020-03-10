@@ -22,7 +22,7 @@ Local Library is an application for upgrading an old library in Siusarna hometow
    -Search for books  
 - As restricted authorized user you can  
    -Do all things that unauthorized user can do  
-   -Observe book  
+   -Subscribe to availability updates for books  
    -Rate books  
    -Leave a book review  
 - As regular authorized user you can  
