@@ -6,6 +6,7 @@ const router = new Router({
   prefix: '/accounts',
 });
 
-router.get('/', accControllers.getProfile);
+router.post('/sign-in', accControllers.auth);
+router.post('/sign-up', accControllers.register);
 
 module.exports = router;
