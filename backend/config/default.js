@@ -13,6 +13,12 @@ module.exports = {
       },
     },
   },
+  crypto: {
+    hash: {
+      length: 128,
+      iterations: 12000,
+    },
+  },
   pg: {
     client: 'pg',
     connection: {
