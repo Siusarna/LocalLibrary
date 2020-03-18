@@ -5,8 +5,8 @@ async function start() {
     table.string('tokenId');
     table.integer('userId');
     table.foreign('userId')
-      .references('user.id');
-    table.timestamp('createdAt')
+      .references('users.id');
+    table.timestamp('updatedAt')
       .defaultTo(knex.fn.now());
   });
 }

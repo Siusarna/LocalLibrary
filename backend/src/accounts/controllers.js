@@ -6,69 +6,61 @@ const { createAndUpdateTokens } = require('../utils/jwtToken');
 const { parseTimeFromConfig } = require('../utils/parseConfig');
 
 const auth = async (ctx) => {
-  try {
-    const { email, password } = ctx.request.body;
-    const [user] = await knex('users')
-      .where({ login: email })
-      .select('*');
-    if (!user || !checkPassword(password, user.password)) {
-      return ctx.throw(400, 'Email or password is incorrect');
-    }
-    const { accessToken, refreshToken } = await createAndUpdateTokens(user.id);
-    ctx.cookies.set('accessToken', accessToken, { maxAge: parseTimeFromConfig(config.jwt.tokens.access.expiresIn) });
-    ctx.cookies.set('refreshToken', refreshToken, { maxAge: parseTimeFromConfig(config.jwt.tokens.refresh.expiresIn) });
-    ctx.body = {
-      firstName: user.firstName,
-      lastName: user.lastName,
-      photo: user.photo,
-      role: user.role,
-    };
-    return ctx;
-  } catch (err) {
-    return ctx.throw(500, err.message);
+  const { email, password } = ctx.request.body;
+  const [user] = await knex('users')
+    .where({ email })
+    .select('*');
+  if (!user || !checkPassword(password, user.password, user.salt)) {
+    return ctx.throw(400, 'Email or password is incorrect');
   }
+  const { accessToken, refreshToken } = await createAndUpdateTokens(user.id);
+  ctx.cookies.set('accessToken', accessToken, { maxAge: parseTimeFromConfig(config.jwt.tokens.access.expiresIn) });
+  ctx.cookies.set('refreshToken', refreshToken, { maxAge: parseTimeFromConfig(config.jwt.tokens.refresh.expiresIn) });
+  ctx.body = {
+    firstName: user.firstName,
+    lastName: user.lastName,
+    photo: user.photo,
+    role: user.role,
+  };
+  return ctx;
 };
 
 const register = async (ctx) => {
-  try {
-    const {
-      password, confirmPassword, email, ...rest
-    } = ctx.request.body;
-    if (password !== confirmPassword) {
-      return ctx.throw(400, 'Password and confirm password must match');
-    }
-    const [user] = await knex('users')
-      .where({ email })
-      .select('*');
-    if (user) {
-      return ctx.throw(400, 'User with this email already exist');
-    }
-    const salt = crypto.randomBytes(config.crypto.hash.length)
-      .toString('base64');
-    const passwordHash = crypto
-      .pbkdf2Sync(password, salt, config.crypto.hash.iterations, config.crypto.hash.length, 'sha1')
-      .toString('base64');
-    const [newUser] = await knex('users')
-      .insert({
-        email,
-        password: passwordHash,
-        salt,
-        ...rest,
-      })
-      .returning(['id', 'firstName', 'lastName', 'photo', 'role']);
-    const { accessToken, refreshToken } = await createAndUpdateTokens(newUser.id);
-    ctx.cookies.set('accessToken', accessToken, { maxAge: parseTimeFromConfig(config.jwt.tokens.access.expiresIn) });
-    ctx.cookies.set('refreshToken', refreshToken, { maxAge: parseTimeFromConfig(config.jwt.tokens.refresh.expiresIn) });
-    ctx.body = {
-      firstName: newUser.firstName,
-      lastName: newUser.lastName,
-      photo: newUser.photo,
-      role: newUser.role,
-    };
-    return ctx;
-  } catch (err) {
-    return ctx.throw(500, err.message);
+  const {
+    password, confirmPassword, email, ...rest
+  } = ctx.request.body;
+  if (password !== confirmPassword) {
+    return ctx.throw(400, 'Password and confirm password must match');
   }
+  const [user] = await knex('users')
+    .where({ email })
+    .select('*');
+  if (user) {
+    return ctx.throw(400, 'User with this email already exist');
+  }
+  const salt = crypto.randomBytes(config.crypto.hash.length)
+    .toString('base64');
+  const passwordHash = crypto
+    .pbkdf2Sync(password, salt, config.crypto.hash.iterations, config.crypto.hash.length, 'sha1')
+    .toString('base64');
+  const [newUser] = await knex('users')
+    .insert({
+      email,
+      password: passwordHash,
+      salt,
+      ...rest,
+    })
+    .returning(['id', 'firstName', 'lastName', 'photo', 'role']);
+  const { accessToken, refreshToken } = await createAndUpdateTokens(newUser.id);
+  ctx.cookies.set('accessToken', accessToken, { maxAge: parseTimeFromConfig(config.jwt.tokens.access.expiresIn) });
+  ctx.cookies.set('refreshToken', refreshToken, { maxAge: parseTimeFromConfig(config.jwt.tokens.refresh.expiresIn) });
+  ctx.body = {
+    firstName: newUser.firstName,
+    lastName: newUser.lastName,
+    photo: newUser.photo,
+    role: newUser.role,
+  };
+  return ctx;
 };
 //
 // const profile = async (req, res) => {

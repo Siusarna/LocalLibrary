@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const uuid = require('uuid/v4');
+const { v4: uuid } = require('uuid');
 const knex = require('../libs/knex');
 
 
@@ -39,7 +39,7 @@ const createAndUpdateTokens = async (userId) => {
         .where({ userId })
         .update({
           tokenId,
-          updatedAt: Date.now(),
+          updatedAt: ((new Date()).toJSON()).replace('T', ' ').replace('Z', ''),
         });
     } else {
       await knex('token')

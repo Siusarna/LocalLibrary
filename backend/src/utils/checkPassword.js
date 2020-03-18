@@ -1,8 +1,15 @@
-const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
+const {
+  crypto: { hash },
+} = require('config');
 
-const checkPassword = (inputPassword, passwordFromDb) => {
-  if (!inputPassword || passwordFromDb) return false;
-  return bcrypt.compareSync(inputPassword, passwordFromDb);
+const checkPassword = (inputPassword, passwordFromDb, salt) => {
+  if (!inputPassword || !passwordFromDb) return false;
+  return (
+    crypto
+      .pbkdf2Sync(inputPassword, salt, hash.iterations, hash.length, 'sha1')
+      .toString('base64') === passwordFromDb
+  );
 };
 
 module.exports = {

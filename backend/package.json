@@ -16,6 +16,7 @@
     "bcryptjs": "^2.4.3",
     "config": "^3.3.0",
     "crypto": "^1.0.1",
+    "jimp": "^0.9.6",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.20.11",
     "koa": "^2.11.0",
@@ -23,7 +24,8 @@
     "koa-router": "^8.0.8",
     "nodemailer": "^6.4.4",
     "pg-promise": "^10.4.4",
-    "uuid": "^7.0.2"
+    "uuid": "^7.0.2",
+    "validator": "^12.2.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
