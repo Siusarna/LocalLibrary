@@ -12,6 +12,16 @@ const checkPassword = (inputPassword, passwordFromDb, salt) => {
   );
 };
 
+const genSalt = () => crypto
+  .randomBytes(hash.length)
+  .toString('base64');
+
+const genPassword = (password, salt) => crypto
+  .pbkdf2Sync(password, salt, hash.iterations, hash.length, 'sha1')
+  .toString('base64');
+
 module.exports = {
   checkPassword,
+  genSalt,
+  genPassword,
 };
