@@ -12,10 +12,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "^6.5.5",
     "aws-sdk": "^2.636.0",
     "bcryptjs": "^2.4.3",
     "config": "^3.3.0",
     "crypto": "^1.0.1",
+    "generate-password": "^1.5.1",
     "jimp": "^0.9.6",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.20.11",

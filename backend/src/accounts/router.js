@@ -8,5 +8,6 @@ const router = new Router({
 
 router.post('/sign-in', validation.auth, accControllers.auth);
 router.post('/sign-up', validation.register, accControllers.register);
+router.post('/forgotPassword', validation.forgotPassword, accControllers.forgotPassword);
 
 module.exports = router;

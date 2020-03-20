@@ -1,6 +1,9 @@
+const generatePassword = require('generate-password');
+const config = require('config');
 const { checkPassword, genSalt, genPassword } = require('../utils/password');
 const { createAndUpdateTokens } = require('../utils/jwtToken');
 const { uploadFile } = require('../utils/s3-bucket');
+const { sendEmail } = require('../libs/sendGrid');
 const queries = require('./queries');
 
 const authServices = async ({ email, password }) => {
@@ -50,8 +53,23 @@ const registerServices = async ({
   };
 };
 
+const forgotPasswordServices = async (email) => {
+  const [user] = await queries.getUserByEmail(email);
+  if (!user) {
+    throw new Error('User with this email not exist');
+  }
+  const password = generatePassword.generate(config.randomPassword);
+  const salt = genSalt();
+  const passwordHash = genPassword(password, salt);
+  await queries.updateUserById(user.id, {
+    password: passwordHash,
+    salt,
+  });
+  await sendEmail(user.email, user.firstName, user.lastName, password);
+};
 
 module.exports = {
   authServices,
   registerServices,
+  forgotPasswordServices,
 };

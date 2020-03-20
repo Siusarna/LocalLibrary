@@ -1,10 +1,10 @@
 const config = require('config');
 const { parseTimeFromConfig } = require('../utils/parseConfig');
-const { authServices, registerServices } = require('../accounts/services');
+const Services = require('../accounts/services');
 
 const auth = async (ctx) => {
   try {
-    const { accessToken, refreshToken, ...rest } = await authServices(ctx.request.body);
+    const { accessToken, refreshToken, ...rest } = await Services.authServices(ctx.request.body);
     ctx.cookies.set('accessToken', accessToken, { maxAge: parseTimeFromConfig(config.jwt.tokens.access.expiresIn) });
     ctx.cookies.set('refreshToken', refreshToken, { maxAge: parseTimeFromConfig(config.jwt.tokens.refresh.expiresIn) });
     ctx.body = rest;
@@ -16,7 +16,7 @@ const auth = async (ctx) => {
 
 const register = async (ctx) => {
   try {
-    const { accessToken, refreshToken, ...rest } = await registerServices(ctx.request.body);
+    const { accessToken, refreshToken, ...rest } = await Services.registerServices(ctx.request.body);
     ctx.cookies.set('accessToken', accessToken, { maxAge: parseTimeFromConfig(config.jwt.tokens.access.expiresIn) });
     ctx.cookies.set('refreshToken', refreshToken, { maxAge: parseTimeFromConfig(config.jwt.tokens.refresh.expiresIn) });
     ctx.body = rest;
@@ -25,7 +25,17 @@ const register = async (ctx) => {
     return ctx.throw(400, error);
   }
 };
-//
+
+const forgotPassword = async (ctx) => {
+  try {
+    await Services.forgotPasswordServices(ctx.request.body.email);
+    ctx.body = 'New password successfully sent to your email';
+    return ctx;
+  } catch (error) {
+    return ctx.throw(400, error);
+  }
+};
+
 // const profile = async (req, res) => {
 //   const { user } = req;
 //   const userProfile = await user.getProfile();
@@ -108,43 +118,7 @@ const register = async (ctx) => {
 //   });
 // };
 //
-// const forgotPassword = async (req, res) => {
-//   try {
-//     const errors = validationResult(req);
-//
-//     if (!errors.isEmpty()) {
-//       return res.status(400).json(X({ errors }));
-//     }
-//
-//     const { email } = req.body;
-//     const user = await User.findOne({ email });
-//
-//     if (!user) {
-//       return res.status(400).json(X({
-//         fields: {
-//           email: 'NOT_EXIST_EMAIL',
-//         },
-//         code: 'FORMAT_ERROR',
-//       }));
-//     }
-//
-//     const codeId = uuid();
-//
-//     const code = await Code.findOneAndUpdate({ userId: user._id }, { codeId }, {
-//       upsert: true,
-//       new: true,
-//     });
-//
-//     await sendEmail(email, user.firstName, user.lastName, code);
-//     return res.json({
-//       message: 'request on changing password sent to your email',
-//     });
-//   } catch (err) {
-//     return res.status(500).json(X({
-//       message: err,
-//     }));
-//   }
-// };
+
 //
 // const checkCode = async (req, res) => {
 //   let { code } = req.params;
@@ -211,11 +185,11 @@ const register = async (ctx) => {
 module.exports = {
   auth,
   register,
+  forgotPassword,
   // profile,
   // updateProfile,
   // updatePhoto,
   // changePassword,
-  // forgotPassword,
   // checkCode,
   // resetPassword,
   // logout,
