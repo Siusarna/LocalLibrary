@@ -68,8 +68,24 @@ const forgotPasswordServices = async (email) => {
   await sendEmail(user.email, user.firstName, user.lastName, password);
 };
 
+const changePassword = async (user, { currentPassword, newPassword, confirmNewPassword }) => {
+  if (!user || !checkPassword(currentPassword, user.password, user.salt)) {
+    throw new Error('Incorrect current password ');
+  }
+  if (newPassword !== confirmNewPassword) {
+    throw new Error('New password and confirm password must match');
+  }
+  const salt = genSalt();
+  const passwordHash = genPassword(newPassword, salt);
+  await queries.updateUserById(user.id, {
+    password: passwordHash,
+    salt,
+  });
+};
+
 module.exports = {
   authServices,
   registerServices,
   forgotPasswordServices,
+  changePassword,
 };

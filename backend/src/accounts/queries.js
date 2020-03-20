@@ -12,8 +12,13 @@ const updateUserById = (id, newData) => knex('users')
   .where({ id })
   .update({ ...newData });
 
+const getUserById = (id) => knex('users')
+  .where({ id })
+  .select('*');
+
 module.exports = {
   getUserByEmail,
   insertNewUser,
   updateUserById,
+  getUserById,
 };

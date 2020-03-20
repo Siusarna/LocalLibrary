@@ -36,6 +36,17 @@ const forgotPassword = async (ctx) => {
   }
 };
 
+const changePassword = async (ctx) => {
+  try {
+    await Services.changePassword(ctx.state.user, ctx.request.body);
+    ctx.body = 'Password successfully change';
+    return ctx;
+  } catch (error) {
+    return ctx.throw(400, error);
+  }
+};
+
+
 // const profile = async (req, res) => {
 //   const { user } = req;
 //   const userProfile = await user.getProfile();
@@ -84,40 +95,7 @@ const forgotPassword = async (ctx) => {
 //     }));
 //   }
 // };
-//
-// const changePassword = async (req, res) => {
-//   const errors = validationResult(req);
-//   if (!errors.isEmpty()) {
-//     return res.status(400).json(X({ errors }));
-//   }
-//   const { user } = req;
-//   const { currentPassword, newPassword, confirmNewPassword } = req.body;
-//
-//   if (!user || !user.checkPassword(currentPassword)) {
-//     return res.status(400).json(X({
-//       fields: {
-//         password: 'WRONG_PASSWORD',
-//       },
-//       code: 'FORMAT_ERROR',
-//     }));
-//   }
-//
-//   if (newPassword !== confirmNewPassword) {
-//     return res.status(400).json(X({
-//       fields: {
-//         confirmPassword: 'WRONG_CONFIRM_PASSWORD',
-//       },
-//       code: 'FORMAT_ERROR',
-//     }));
-//   }
-//   user.changePassword(newPassword);
-//   user.save();
-//
-//   return res.json({
-//     message: 'you change password successfully',
-//   });
-// };
-//
+
 
 //
 // const checkCode = async (req, res) => {
@@ -186,10 +164,10 @@ module.exports = {
   auth,
   register,
   forgotPassword,
+  changePassword,
   // profile,
   // updateProfile,
   // updatePhoto,
-  // changePassword,
   // checkCode,
   // resetPassword,
   // logout,
