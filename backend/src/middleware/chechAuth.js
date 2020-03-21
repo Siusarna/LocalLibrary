@@ -33,8 +33,8 @@ const checkAuth = async (ctx, next) => {
   if (!ctx.cookies) {
     return ctx.throw(400, 'Unauthorized');
   }
-  const accessToken = ctx.cookies.get('accessToken');
-  const refreshToken = ctx.cookies.get('refreshToken');
+  const accessToken = ctx.cookies.get('accessToken') || ctx.request.headers.accesstoken;
+  const refreshToken = ctx.cookies.get('refreshToken') || ctx.request.headers.refreshtoken;
   if (!accessToken) {
     return processingRefreshToken(refreshToken, ctx, next);
   }

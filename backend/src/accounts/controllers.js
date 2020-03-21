@@ -20,6 +20,7 @@ const register = async (ctx) => {
     ctx.cookies.set('accessToken', accessToken, { maxAge: parseTimeFromConfig(config.jwt.tokens.access.expiresIn) });
     ctx.cookies.set('refreshToken', refreshToken, { maxAge: parseTimeFromConfig(config.jwt.tokens.refresh.expiresIn) });
     ctx.body = rest;
+    ctx.status = 201;
     return ctx;
   } catch (error) {
     return ctx.throw(400, error);
@@ -29,7 +30,7 @@ const register = async (ctx) => {
 const forgotPassword = async (ctx) => {
   try {
     await Services.forgotPasswordServices(ctx.request.body.email);
-    ctx.body = 'New password successfully sent to your email';
+    ctx.body = { message: 'New password successfully sent to your email' };
     return ctx;
   } catch (error) {
     return ctx.throw(400, error);
@@ -39,7 +40,7 @@ const forgotPassword = async (ctx) => {
 const changePassword = async (ctx) => {
   try {
     await Services.changePassword(ctx.state.user, ctx.request.body);
-    ctx.body = 'Password successfully change';
+    ctx.body = { message: 'Password successfully change' };
     return ctx;
   } catch (error) {
     return ctx.throw(400, error);
@@ -76,7 +77,7 @@ const updatePhoto = async (ctx) => {
 const logout = async (ctx) => {
   try {
     await Services.logout(ctx.state.user.id);
-    ctx.body = 'Logout was successfully';
+    ctx.body = { message: 'Logout was successfully' };
     ctx.cookies.set('accessToken', null);
     ctx.cookies.set('refreshToken', null);
     return ctx;

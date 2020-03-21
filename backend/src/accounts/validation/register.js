@@ -1,5 +1,5 @@
 const {
-  isEmail, matches, isLength, isInt, isMobilePhone,
+  isEmail, matches, isLength, isMobilePhone,
 } = require('validator');
 const { checkPhoto } = require('./checkPhoto');
 
@@ -40,9 +40,9 @@ const register = (ctx, next) => {
   })) {
     return ctx.throw(400, 'Wrong address');
   }
-  if (!age || !isInt(age, {
+  if (!age || !isLength(age, {
     min: 1,
-    max: 99,
+    max: 3,
   })) {
     return ctx.throw(400, 'Wrong age');
   }
