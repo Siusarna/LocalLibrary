@@ -16,9 +16,19 @@ const getUserById = (id) => knex('users')
   .where({ id })
   .select('*');
 
+const getProfileById = (id) => knex('users')
+  .where({ id })
+  .select('firstName', 'lastName', 'photo', 'role', 'age', 'city', 'phone', 'address');
+
+const deleteTokenByUserId = (userId) => knex('token')
+  .where({ userId })
+  .del();
+
 module.exports = {
   getUserByEmail,
   insertNewUser,
   updateUserById,
   getUserById,
+  getProfileById,
+  deleteTokenByUserId,
 };

@@ -46,129 +46,52 @@ const changePassword = async (ctx) => {
   }
 };
 
+const profile = async (ctx) => {
+  try {
+    ctx.body = await Services.profileServices(ctx.state.user);
+    return ctx;
+  } catch (e) {
+    return ctx.throw(e);
+  }
+};
 
-// const profile = async (req, res) => {
-//   const { user } = req;
-//   const userProfile = await user.getProfile();
-//   return res.json({
-//     userProfile,
-//   });
-// };
-//
-// const updateProfile = async (req, res) => {
-//   try {
-//     const errors = validationResult(req);
-//     if (!errors.isEmpty()) {
-//       return res.status(400).json(X({ errors }));
-//     }
-//     const { _id } = req.user;
-//     let user = req.body;
-//     user = await User.findByIdAndUpdate(_id, user, { upsert: true });
-//     const userProfile = await user.getProfile();
-//     return res.json({
-//       userProfile,
-//     });
-//   } catch (err) {
-//     return res.status(500).json(X({
-//       message: err,
-//       code: 'SERVER_ERROR',
-//     }));
-//   }
-// };
-//
-// const updatePhoto = async (req, res) => {
-//   try {
-//     const errors = validationResult(req);
-//     if (!errors.isEmpty()) {
-//       return res.status(400).json(X({ errors }));
-//     }
-//     const { _id } = req.user;
-//     const { photo } = req.body;
-//     const urlPhoto = await uploadFile(photo, _id);
-//     await User.findByIdAndUpdate(_id, { photo: urlPhoto }, { upsert: true });
-//     return res.json({
-//       photo: urlPhoto,
-//     });
-//   } catch (err) {
-//     return res.status(500).json(X({
-//       message: err,
-//     }));
-//   }
-// };
+const updateProfile = async (ctx) => {
+  try {
+    ctx.body = await Services.updateProfileServices(ctx.state.user.id, ctx.request.body);
+    return ctx;
+  } catch (err) {
+    return ctx.throw(err);
+  }
+};
 
+const updatePhoto = async (ctx) => {
+  try {
+    ctx.body = await Services.updatePhotoServices(ctx.state.user.id, ctx.request.body.photo);
+    return ctx;
+  } catch (err) {
+    return ctx.throw(err);
+  }
+};
 
-//
-// const checkCode = async (req, res) => {
-//   let { code } = req.params;
-//
-//   code = await Code.findOne({ codeId: code });
-//
-//   if (!code) {
-//     return res.status(400).json(X({
-//       fields: {
-//         code: 'NOT_EXIST_CODE',
-//       },
-//       code: 'FORMAT_ERROR',
-//     }));
-//   }
-//
-//   return res.json({
-//     code: code.codeId,
-//   });
-// };
-//
-// const resetPassword = async (req, res) => {
-//   const errors = validationResult(req);
-//
-//   if (!errors.isEmpty()) {
-//     return res.status(400).json(X({ errors }));
-//   }
-//
-//   const { code, newPassword, confirmNewPassword } = req.body;
-//
-//   if (newPassword !== confirmNewPassword) {
-//     return res.status(400).json(X({
-//       fields: {
-//         confirmPassword: 'WRONG_CONFIRM_PASSWORD',
-//       },
-//       code: 'FORMAT_ERROR',
-//     }));
-//   }
-//
-//   const userId = Code.findOne({ codeId: code });
-//   Code.deleteOne({ codeId: code });
-//   const user = User.findById(userId);
-//   user.changePassword(newPassword);
-//   user.save();
-//   return res.json({
-//     message: 'you change password successfully',
-//   });
-// };
-//
-// const logout = async (req, res) => {
-//   try {
-//     const { _id } = req.user;
-//     await Token.findOneAndDelete({ userId: _id });
-//     res.json({
-//       message: 'logout was successfully',
-//     });
-//   } catch (e) {
-//     res.status(500).json(X({
-//       message: e,
-//     }));
-//   }
-// };
-//
-//
+const logout = async (ctx) => {
+  try {
+    await Services.logout(ctx.state.user.id);
+    ctx.body = 'Logout was successfully';
+    ctx.cookies.set('accessToken', null);
+    ctx.cookies.set('refreshToken', null);
+    return ctx;
+  } catch (e) {
+    return ctx.throw(e);
+  }
+};
+
 module.exports = {
   auth,
   register,
   forgotPassword,
   changePassword,
-  // profile,
-  // updateProfile,
-  // updatePhoto,
-  // checkCode,
-  // resetPassword,
-  // logout,
+  profile,
+  updateProfile,
+  updatePhoto,
+  logout,
 };

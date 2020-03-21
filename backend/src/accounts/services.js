@@ -83,9 +83,30 @@ const changePassword = async (user, { currentPassword, newPassword, confirmNewPa
   });
 };
 
+const profileServices = async (user) => queries.getProfileById(user.id);
+
+const updateProfileServices = async (id, newProfile) => {
+  await queries.updateUserById(id, { ...newProfile });
+  return queries.getProfileById(id);
+};
+
+const updatePhotoServices = async (id, photo) => {
+  const urlPhoto = await uploadFile(photo, 'User', id);
+  await queries.updateUserById(id, { photo: urlPhoto });
+  return { photo: urlPhoto };
+};
+
+const logout = async (id) => {
+  await queries.deleteTokenByUserId(id);
+};
+
 module.exports = {
   authServices,
   registerServices,
   forgotPasswordServices,
   changePassword,
+  profileServices,
+  updateProfileServices,
+  updatePhotoServices,
+  logout,
 };
