@@ -4,7 +4,7 @@ const {
 
 const forgotPassword = (ctx, next) => {
   const { email } = ctx.request.body;
-  if (!isEmail(email)) {
+  if (!email || !isEmail(email)) {
     ctx.throw(400, 'Wrong email');
   }
   return next();

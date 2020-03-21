@@ -4,10 +4,10 @@ const {
 
 const auth = (ctx, next) => {
   const { email, password } = ctx.request.body;
-  if (!isEmail(email)) {
+  if (!email || !isEmail(email)) {
     ctx.throw(400, 'Wrong email');
   }
-  if (!matches(password, /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)) {
+  if (!password || !matches(password, /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)) {
     ctx.throw(400, 'Wrong password');
   }
   return next();
