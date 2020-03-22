@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/.bin/mocha  --exit --timeout 30000 src/**/*.test.js",
     "lint": "eslint ./src",
     "start": "node app.js",
     "server": "nodemon app.js"
@@ -12,25 +12,35 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "^6.5.5",
     "aws-sdk": "^2.636.0",
     "bcryptjs": "^2.4.3",
     "config": "^3.3.0",
+    "crypto": "^1.0.1",
+    "generate-password": "^1.5.1",
+    "jimp": "^0.9.6",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.20.11",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^8.0.8",
+    "koa-static": "^5.0.0",
+    "koa2-swagger-ui": "^2.16.0",
     "nodemailer": "^6.4.4",
     "pg-promise": "^10.4.4",
-    "uuid": "^7.0.2"
+    "uuid": "^7.0.2",
+    "validator": "^12.2.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
+    "mocha": "^7.1.1",
     "nodemon": "^2.0.2",
     "pre-commit": "^1.2.2"
   },

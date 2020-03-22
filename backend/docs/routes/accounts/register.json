@@ -1,0 +1,141 @@
+{
+  "post": {
+    "summary": "Register a new user",
+    "tags": [
+      "auth"
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/User"
+          }
+        }
+      }
+    },
+    "responses": {
+      "201": {
+        "description": "User registration success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/RegisterSuccess"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "User registration error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/RegisterFail"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "minimum": 8
+          },
+          "confirmPassword": {
+            "type": "string",
+            "minimum": 8
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "age": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string",
+            "description": "(base64)"
+          }
+        },
+        "required": [
+          "email",
+          "password",
+          "confirmPassword",
+          "firstName",
+          "lastName",
+          "age",
+          "city",
+          "address",
+          "phone",
+          "photo"
+        ],
+        "example": {
+          "email": "generalTest1@gmail.com",
+          "password": "test1234",
+          "confirmPassword": "test1234",
+          "firstName": "Dima",
+          "lastName": "Petruniak",
+          "city": "Kyiv",
+          "address": "Yangelya20",
+          "age": "19",
+          "phone": "+380678321235",
+          "photo": "data:image/jpeg;base64,/9j/4AAQSk"
+        }
+      },
+      "RegisterSuccess": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string",
+            "description": "(url)"
+          },
+          "role": {
+            "type": "string",
+            "description": "(UTC milliseconds)"
+          }
+        }
+      },
+      "RegisterFail": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "success": false,
+          "message": "Such email already exists!"
+        }
+      }
+    }
+  }
+}
