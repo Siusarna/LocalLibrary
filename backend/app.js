@@ -13,6 +13,8 @@ const accountsRouter = require('./src/accounts/router');
 router.use(accountsRouter.routes());
 app.use(router.routes());
 
+require('./src/schedule/deleteExpiredToken');
+
 module.exports = app.listen(config.port, () => {
   // eslint-disable-next-line no-console
   console.log(`SERVER is listening on port: ${config.port}`);
