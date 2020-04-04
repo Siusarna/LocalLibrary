@@ -5,8 +5,8 @@ async function start() {
     table.increments('id');
     table.string('firstName');
     table.string('lastName');
-    table.date('yearOfBirthday');
-    table.date('yearOfDeath');
+    table.integer('yearOfBirthday');
+    table.string('yearOfDeath');
   });
 }
 
