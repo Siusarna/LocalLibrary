@@ -1,6 +1,6 @@
 const config = require('config');
 const { parseTimeFromConfig } = require('../utils/parseConfig');
-const Services = require('../accounts/services');
+const Services = require('./services');
 
 const auth = async (ctx) => {
   try {
