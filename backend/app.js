@@ -9,8 +9,10 @@ const router = new Router({
 require('./src/middleware/index')(app);
 
 const accountsRouter = require('./src/accounts/router');
+const booksRouter = require('./src/books/router');
 
 router.use(accountsRouter.routes());
+router.use(booksRouter.routes());
 app.use(router.routes());
 
 require('./src/schedule/deleteExpiredToken');
