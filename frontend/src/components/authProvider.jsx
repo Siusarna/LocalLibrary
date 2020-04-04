@@ -1,7 +1,6 @@
-import AuthContext from '../../context/authContext';
+import AuthContext from '../context/authContext';
 import React from 'react';
 import { useState, useEffect } from 'react';
-import useFetch from '../../hooks/useFetch';
 
 const AuthProvider = (props) => {
   const [role, setRole] = useState('unauthorized');
