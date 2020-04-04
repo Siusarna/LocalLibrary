@@ -1,3 +1,3 @@
 const cors = require('kcors');
 
-module.exports = cors();
+module.exports = cors({ credentials: true });
