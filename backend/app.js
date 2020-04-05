@@ -9,10 +9,10 @@ const router = new Router({
 require('./src/middleware/index')(app);
 
 const accountsRouter = require('./src/accounts/router');
-const authorRouter = require('./src/author/router');
+const authorsRouter = require('./src/authors/router');
 
 router.use(accountsRouter.routes());
-router.use(authorRouter.routes());
+router.use(authorsRouter.routes());
 app.use(router.routes());
 
 require('./src/schedule/deleteExpiredToken');

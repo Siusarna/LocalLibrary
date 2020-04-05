@@ -2,11 +2,8 @@ const Services = require('./services');
 
 const addAuthor = async (ctx) => {
   try {
-    await Services.addAuthor(ctx.request.body);
-    ctx.body = {
-      success: 'true',
-      message: 'Author successfully added',
-    };
+    const [author] = await Services.addAuthor(ctx.request.body);
+    ctx.body = author;
     return ctx;
   } catch (error) {
     return ctx.throw(400, error);
@@ -40,10 +37,8 @@ const getAllAuthors = async (ctx) => {
 
 const getAuthor = async (ctx) => {
   try {
-    const author = await Services.getAuthor(ctx.params);
-    ctx.body = {
-      data: author,
-    };
+    const [author] = await Services.getAuthor(ctx.params);
+    ctx.body = author;
     return ctx;
   } catch (error) {
     return ctx.throw(400, error);
@@ -52,10 +47,8 @@ const getAuthor = async (ctx) => {
 
 const updateAuthor = async (ctx) => {
   try {
-    const updatedAuthor = await Services.updateAuthor(ctx.request.body);
-    ctx.body = {
-      data: updatedAuthor,
-    };
+    const [author] = await Services.updateAuthor(ctx.request.body);
+    ctx.body = author;
     return ctx;
   } catch (error) {
     return ctx.throw(400, error);

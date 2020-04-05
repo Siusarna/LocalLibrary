@@ -7,13 +7,16 @@ const getAuthorByName = (firstName, lastName) => knex('author')
     lastName,
   });
 
-const addAuthor = (firstName, lastName, yearOfBirthday, yearOfDeath) => knex('author')
+const addAuthor = ({
+  firstName, lastName, yearOfBirthday, yearOfDeath,
+}) => knex('author')
   .insert({
     firstName,
     lastName,
     yearOfBirthday,
     yearOfDeath,
-  });
+  })
+  .returning(['id', 'firstName', 'lastName', 'yearOfBirthday', 'yearOfDeath']);
 
 const getAuthorById = (id) => knex('author')
   .select('*')
@@ -29,7 +32,11 @@ const getAllAuthors = () => knex('author')
 const updateAuthorById = (id, newData) => knex('author')
   .where({ id })
   .update({ ...newData })
-  .returning(['*']);
+  .returning(['id', 'firstName', 'lastName', 'yearOfBirthday', 'yearOfDeath']);
+
+const insertNewUser = (user) => knex('users')
+  .insert({ ...user })
+  .returning(['id', 'firstName', 'lastName', 'photo', 'role']);
 
 module.exports = {
   getAuthorByName,
@@ -38,4 +45,5 @@ module.exports = {
   deleteAuthorById,
   getAllAuthors,
   updateAuthorById,
+  insertNewUser,
 };

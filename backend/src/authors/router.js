@@ -5,7 +5,7 @@ const { checkAuth } = require('../middleware/chechAuth');
 const { checkAccess } = require('../middleware/checkAccess');
 
 const router = new Router({
-  prefix: '/author',
+  prefix: '/authors',
 });
 
 router.post('/', checkAuth, checkAccess, validation.addAuthor, booksControllers.addAuthor);
