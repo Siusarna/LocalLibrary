@@ -1,6 +1,6 @@
 const config = require('config');
 const { parseTimeFromConfig } = require('../utils/parseConfig');
-const Services = require('../accounts/services');
+const Services = require('./services');
 
 const auth = async (ctx) => {
   try {
@@ -42,7 +42,7 @@ const forgotPassword = async (ctx) => {
 
 const changePassword = async (ctx) => {
   try {
-    await Services.changePassword(ctx.state.user, ctx.request.body);
+    await Services.changePasswordServices(ctx.state.user, ctx.request.body);
     ctx.body = {
       success: 'true',
       message: 'Password successfully changed',
@@ -82,7 +82,7 @@ const updatePhoto = async (ctx) => {
 
 const logout = async (ctx) => {
   try {
-    await Services.logout(ctx.state.user.id);
+    await Services.logoutServices(ctx.state.user.id);
     ctx.body = {
       success: 'true',
       message: 'Logout was successfully',

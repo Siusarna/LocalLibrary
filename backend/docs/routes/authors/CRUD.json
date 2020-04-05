@@ -1,0 +1,308 @@
+{
+  "post": {
+    "summary": "Register a new author",
+    "tags": [
+      "authors"
+    ],
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/User"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Author registration success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/RegisterSuccess"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Author registration error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/RegisterFail"
+            }
+          }
+        }
+      }
+    }
+  },
+  "delete": {
+    "summary": "Delete exist author",
+    "tags": [
+      "authors"
+    ],
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/Delete"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Author delete success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/DeleteResult"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Author delete error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/DeleteResult"
+            }
+          }
+        }
+      }
+    }
+  },
+  "get": {
+    "summary": "Get all authors",
+    "tags": [
+      "authors"
+    ],
+    "responses": {
+      "200": {
+        "description": "Get authors success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/AuthorsSuccess"
+            }
+          }
+        }
+      }
+    }
+  },
+  "put": {
+    "summary": "Update author",
+    "tags": [
+      "authors"
+    ],
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/Author"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Author update success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UpdateSuccess"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Author update error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UpdateFail"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "yearOfBirthday": {
+            "type": "string"
+          },
+          "yearOfDeath": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName",
+          "yearOfBirthday",
+          "yearOfDeath"
+        ],
+        "example": {
+          "firstName": "Dima",
+          "lastName": "Petruniak",
+          "yearOfBirthday": "2000",
+          "yearOfDeath": "-"
+        }
+      },
+      "RegisterSuccess": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "yearOfBirthday": {
+            "type": "string"
+          },
+          "yearOfDeath": {
+            "type": "string"
+          }
+        }
+      },
+      "RegisterFail": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "success": false,
+          "message": "Such author already exists!"
+        }
+      },
+      "Delete": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "DeleteResult": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "AuthorsSuccess": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "yearOfBirthday": {
+              "type": "string"
+            },
+            "yearOfDeath": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Author": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "yearOfBirthday": {
+            "type": "string"
+          },
+          "yearOfDeath": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "firstName": "Dima",
+          "lastName": "Petruniak",
+          "yearOfBirthday": "2000",
+          "yearOfDeath": "-"
+        }
+      },
+      "UpdateSuccess": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "yearOfBirthday": {
+            "type": "string"
+          },
+          "yearOfDeath": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateFail": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
+
