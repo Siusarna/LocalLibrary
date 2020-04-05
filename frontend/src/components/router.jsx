@@ -5,6 +5,7 @@ import HomePage from '../pages/HomePage';
 import ProfilePage from '../pages/ProfilePage';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
+import BookPage from "../pages/BookPage";
 
 
 const Router = () => (
@@ -13,6 +14,7 @@ const Router = () => (
     <Route path='/profile'    component={ProfilePage}/>
     <Route path='/login'      component={LoginPage}/>
     <Route path='/register'   component={RegisterPage}/>
+    <Route path='/books/:id'  component={BookPage}/>
   </Switch>
 );
 

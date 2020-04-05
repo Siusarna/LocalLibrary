@@ -40,16 +40,26 @@ a {
 }
 
 input[type=text]{
-
-}
-
-button {
   padding: 0;
   border: none;
   font: inherit;
   color: inherit;
   cursor: pointer;
+}
 
+button.dark {
+  border: none;
+  background-color: $SecondaryColor;
+  color: $SecondaryFontColor;
+  padding: 10px;
+
+  &:hover {
+    background-color: $AccentColor;
+    transition: background-color 0.15s;
+  }
+}
+
+button.search {
   background-color: $PrimaryColor;
   border: 1px solid grey;
   border-radius: 80%;
@@ -142,7 +152,7 @@ button {
     flex-direction: column;
     
     img {
-      max-width:10px;
+      max-width: 10px;
     }
     .title {
       width: 100%;
@@ -184,6 +194,34 @@ button {
   }
 }
 
+.ImageTextContainer {
+  display: flex;
+
+  margin: 20px 0px;
+  img {
+    width: 25%;
+  }
+  .content {
+    width: 100%;
+  }
+
+  background-color: $SecondaryColor;
+  color: $SecondaryFontColor;
+}
+
+.BookInfo {
+  .title {
+    padding: 5px;
+  }
+  .linkBox,
+  p {
+    padding: 5px;
+    font-size: 12px;
+  }
+  button {
+    width: 100%;
+  }
+}
 /** Other **/
 
 .linkBox {
@@ -195,4 +233,8 @@ button {
     background-color: $AccentColor;
     transition: background-color 0.15s;
   }
+}
+
+.starIcon {
+  max-width:15px;
 }
