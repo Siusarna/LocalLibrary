@@ -153,6 +153,35 @@ button {
   }
 }
 
+.News {
+  background-color: $SecondaryColor2;
+  color: $SecondaryFontColor;
+
+  padding: 1px;
+  margin: 30px;
+  .info {
+    @include flex;
+    .title,
+    .time {
+      width: 100%;
+      padding: 5px;
+    }
+
+    .time {
+      text-align: right;
+    }
+  }
+  .content {
+    p {
+      margin: 0;
+    }
+    background-color: $PrimaryColor;
+    color: $PrimaryFontColor;
+    margin: 0;
+    padding: 10px;
+  }
+}
+
 /** Other **/
 
 .linkBox {
