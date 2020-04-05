@@ -15,7 +15,9 @@ const SectionTitle = (props) => {
   }
   return (
     <div className='SectionTitle'>
+      <div className='container'>
       {props.text}
+      </div>
     </div>
   )
 }
