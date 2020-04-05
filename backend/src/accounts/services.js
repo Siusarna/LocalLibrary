@@ -68,7 +68,7 @@ const forgotPasswordServices = async (email) => {
   await sendEmail(user.email, user.firstName, user.lastName, password);
 };
 
-const changePassword = async (user, { currentPassword, newPassword, confirmNewPassword }) => {
+const changePasswordServices = async (user, { currentPassword, newPassword, confirmNewPassword }) => {
   if (!user || !checkPassword(currentPassword, user.password, user.salt)) {
     throw new Error('Incorrect current password ');
   }
@@ -96,7 +96,7 @@ const updatePhotoServices = async (id, photo) => {
   return { photo: urlPhoto };
 };
 
-const logout = async (id) => {
+const logoutServices = async (id) => {
   await queries.deleteTokenByUserId(id);
 };
 
@@ -104,9 +104,9 @@ module.exports = {
   authServices,
   registerServices,
   forgotPasswordServices,
-  changePassword,
+  changePasswordServices,
   profileServices,
   updateProfileServices,
   updatePhotoServices,
-  logout,
+  logoutServices,
 };
