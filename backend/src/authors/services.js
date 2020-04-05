@@ -25,9 +25,21 @@ const deleteAuthor = async ({ id }) => {
 
 const getAllAuthors = () => queries.getAllAuthors();
 
-const getAuthor = ({ id }) => queries.getAuthorById(id);
+const getAuthor = async ({ id }) => {
+  const [author] = await queries.getAuthorById(id);
+  if (!author) {
+    throw new Error('Author with this id doesnt exist');
+  }
+  return author;
+};
 
-const updateAuthor = ({ id, ...newData }) => queries.updateAuthorById(id, { ...newData });
+const updateAuthor = async ({ id, ...newData }) => {
+  const [author] = await queries.getAuthorById(id);
+  if (!author) {
+    throw new Error('Author with this id doesnt exist');
+  }
+  return queries.updateAuthorById(id, { ...newData });
+};
 
 module.exports = {
   addAuthor,
