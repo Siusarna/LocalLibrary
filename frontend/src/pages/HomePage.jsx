@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../components/header';
 import { Link } from 'react-router-dom';
 import BookSearch from '../components/bookSearch';
+import Recommendations from '../components/recommendations';
 
 const HomePage = () => (
   <>
@@ -14,6 +15,7 @@ const HomePage = () => (
       </Link>
     </Header>
     <BookSearch />
+    <Recommendations/>
   </>
 )
 
