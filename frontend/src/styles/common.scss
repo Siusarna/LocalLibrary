@@ -1,10 +1,9 @@
 /** Variables **/
 
 $PrimaryColor: white;
-$SecondaryColor1:  rgb(51, 48, 48);
-$SecondaryColor2: rgb(57, 57, 192);
+$SecondaryColor: rgb(22, 22, 22);
 
-$DarkerSecondaryColor: rgb(36, 36, 148);
+$AccentColor: rgb(173, 58, 58);
 $DarkerPrimaryColor: rgb(243, 243, 243);
 
 $PrimaryFontColor: rgb(51, 48, 48);
@@ -72,7 +71,7 @@ button {
 .Header {
   @include flex();
 
-  background-color: $SecondaryColor2;
+  background-color: $SecondaryColor;
   color: $SecondaryFontColor;
   
   padding: 10px 40px;
@@ -99,7 +98,7 @@ button {
 }
 
 .SectionTitle {
-  background-color: $SecondaryColor2;
+  background-color: $SecondaryColor;
   color: $SecondaryFontColor;
   border-radius: 0px;
 }
@@ -158,7 +157,7 @@ button {
 }
 
 .News {
-  background-color: $SecondaryColor2;
+  background-color: $SecondaryColor;
   color: $SecondaryFontColor;
 
   padding: 1px;
@@ -184,13 +183,13 @@ button {
 /** Other **/
 
 .linkBox {
-  background-color: $SecondaryColor2;
+  background-color: $SecondaryColor;
   color: $SecondaryFontColor;
   padding: 10px;
   border-radius: 5px;
 
   &:hover {
-    background-color: $DarkerSecondaryColor;
+    background-color: $AccentColor;
     transition: background-color 0.15s;
   }
 }
