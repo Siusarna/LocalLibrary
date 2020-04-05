@@ -1,5 +1,110 @@
-$myColor: rgb(51, 51, 131);
+/** Variables **/
 
-h1 {
-  color: $myColor
+$PrimaryColor: rgb(251, 251, 251);
+$SecondaryColor1:  rgb(51, 48, 48);
+$SecondaryColor2: rgb(57, 57, 192);
+
+$DarkerSecondaryColor: rgb(36, 36, 148);
+$DarkerPrimaryColor: rgb(243, 243, 243);
+
+$PrimaryFontColor: rgb(51, 48, 48);
+$SecondaryFontColor: rgb(251, 251, 251);
+
+/** Web Fonts **/
+
+@font-face {
+  font-family: 'for-logo';
+  src: url('fonts/for-logo.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/** HTML elements **/
+
+body {
+  max-width: 760px;
+  width: 100%;
+  margin: 0px auto;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+input[type=text]{
+
+}
+
+button {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+
+  background-color: $PrimaryColor;
+  border: 1px solid grey;
+  border-radius: 80%;
+  padding: 5px 10px;
+  
+
+  img {
+    width: 10px;
+    height: 10px;
+  }
+  &:hover {
+    background-color: $DarkerPrimaryColor;
+    transition: background-color 0.15s;
+  }
+}
+
+/** React Components **/
+
+.Header {
+  background-color: $SecondaryColor2;
+  color: $SecondaryFontColor;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  
+  padding: 10px 40px;
+}
+
+.Logo {
+  font-family: 'for-logo';
+  font-size: 32px;
+
+  flex: 1 1 460px;
+}
+
+.BookSearch {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  margin: 10px;
+
+  input {
+    border: 1px solid grey;
+    padding: 5px;
+    width: 90%;
+    border-radius: 50px;
+  }
+}
+
+/** Other **/
+
+.linkBox {
+  background-color: $SecondaryColor2;
+  color: $SecondaryFontColor;
+  padding: 10px;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: $DarkerSecondaryColor;
+    transition: background-color 0.15s;
+  }
 }
