@@ -1,4 +1,5 @@
 import React from 'react';
+import LeftRightContainer from './leftRightContainer';
 
 // Fake data
 // Must be replaced by request on server
@@ -36,10 +37,10 @@ const News = (props) => {
   const news = sampleNews[props.id];
   return (
     <div className='News'>
-      <div className='info'>
-        <div className='title'>{news.title}</div>
-        <div className='time'>{news.timeOfPublishing}</div>
-      </div>
+      <LeftRightContainer 
+        left={news.title}
+        right={news.timeOfPublishing}
+      />
       <div className='content'>
         <p>{news.content}</p>
       </div>

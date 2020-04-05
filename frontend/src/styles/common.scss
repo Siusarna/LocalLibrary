@@ -112,6 +112,19 @@ button {
   color: $PrimaryFontColor;
 }
 
+.LeftRightContainer {
+  width: 100%;
+  @include flex;
+  .left,
+  .right {
+    width: 100%;
+  }
+  .right {
+    text-align: right;
+  }
+}
+
+
 .Book {
   width: 20%;
   margin: 5px;
@@ -133,18 +146,9 @@ button {
       font-size: 13px;
       color: $PrimaryFontColor;
     }
-    .secondaryInfo {
+    .LeftRightContainer {
       font-size: 10px;
       color: rgb(53, 53, 53);
-      
-      @include flex;
-      flex-direction: row;
-      
-      width: 100%;
-
-      .author {
-        flex: 1 1 40%;
-      }
     }
   }
   &:hover {
@@ -159,16 +163,11 @@ button {
 
   padding: 1px;
   margin: 30px;
-  .info {
-    @include flex;
-    .title,
-    .time {
-      width: 100%;
-      padding: 5px;
-    }
 
-    .time {
-      text-align: right;
+  .LeftRightContainer {
+    .left,
+    .right {
+      padding: 5px;
     }
   }
   .content {

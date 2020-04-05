@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import LeftRightContainer from './leftRightContainer';
 
 // Fake data
 // Must be replaced by request on server
@@ -45,13 +46,15 @@ const Book = (props) => {
           <img src={book.cover} />
           <div className='bookInfo'>
             <div className='title'>{book.title}</div>
-            <div className='secondaryInfo'>
-              <div className='author'>{book.author}</div>
-              <div className='rating'>
-                <img src='/star.png' />
-                {book.rating}
-              </div>
-            </div>
+            <LeftRightContainer
+              left={book.author}
+              right={
+                <>
+                  <img src='/star.png' />
+                  {book.rating}
+                </>
+              }
+            />
           </div>
         </div>
       </Link>
