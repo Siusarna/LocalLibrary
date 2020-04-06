@@ -42,7 +42,7 @@ const BookInfo = () => {
             </>}
           />
         </div>
-        <SectionTitle to={'authors/' + book.authorID} text={book.author}/>
+        <SectionTitle to={'/authors/' + book.authorID} text={book.author}/>
         <p>{'ISBN: ' + book.isbn}</p>
         <p>{'Published in: ' + book.yearOfPublishing}</p>
         <p>{book.description}</p>
