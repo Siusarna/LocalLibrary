@@ -50,7 +50,7 @@ const Book = (props) => {
               left={book.author}
               right={
                 <>
-                  <img src='/star.png' />
+                  <img src='/star.png' className='starIcon'/>
                   {book.rating}
                 </>
               }
