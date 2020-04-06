@@ -6,15 +6,17 @@ import ProfilePage from '../pages/ProfilePage';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 import BookPage from "../pages/BookPage";
+import AuthorPage from "../pages/AuthorPage";
 
 
 const Router = () => (
   <Switch>
-    <Route exact path='/'     component={HomePage}/>
-    <Route path='/profile'    component={ProfilePage}/>
-    <Route path='/login'      component={LoginPage}/>
-    <Route path='/register'   component={RegisterPage}/>
-    <Route path='/books/:id'  component={BookPage}/>
+    <Route exact path='/'       component={HomePage}/>
+    <Route path='/profile'      component={ProfilePage}/>
+    <Route path='/login'        component={LoginPage}/>
+    <Route path='/register'     component={RegisterPage}/>
+    <Route path='/books/:id'    component={BookPage}/>
+    <Route path='/authors/:id'  component={AuthorPage}/>
   </Switch>
 );
 

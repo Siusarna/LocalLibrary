@@ -39,6 +39,11 @@ a {
   text-decoration: none;
 }
 
+p {
+  padding: 5px;
+  font-size: 12px;
+}
+
 input[type=text]{
   padding: 0;
   border: none;
@@ -215,8 +220,7 @@ button.search {
   .title {
     padding: 5px;
   }
-  .linkBox,
-  p {
+  .linkBox {
     padding: 5px;
     font-size: 12px;
   }
@@ -224,6 +228,13 @@ button.search {
     width: 100%;
   }
 }
+
+.AuthorInfo {
+  .name {
+    padding: 5px;
+  }
+}
+
 /** Other **/
 
 .linkBox {
