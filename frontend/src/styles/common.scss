@@ -117,12 +117,14 @@ button.search {
   }
 }
 
-.Recommendations {
-  @include flex();
-  flex-direction: row;
+.BookList {
+  .bookRow {
+    @include flex();
+    flex-direction: row;
 
-  background-color: $PrimaryColor;
-  color: $PrimaryFontColor;
+    background-color: $PrimaryColor;
+    color: $PrimaryFontColor;
+  }
 }
 
 .LeftRightContainer {

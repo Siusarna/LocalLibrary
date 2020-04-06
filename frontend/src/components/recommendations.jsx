@@ -1,6 +1,7 @@
 import React from 'react';
 import Book from './book';
 import SectionTitle from './sectionTitle';
+import BookList from './bookList';
 
 // Fake data
 // Must be replaced by request on server
@@ -10,9 +11,7 @@ const Recommendations = () => {
   return (
     <>
       <SectionTitle text='Recommendations' to='/recommendations'/>
-      <div className='Recommendations'>
-        {books.map(id => <Book key={id} id={id} />)}
-      </div>
+      <BookList books={books.slice(0, 5)}/>
     </>
   )
 };
