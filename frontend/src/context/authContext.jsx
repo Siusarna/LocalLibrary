@@ -1,5 +1,5 @@
 import React from 'react';
 
-const newContext = React.createContext({ role: 'unauthorized' });
+const AuthContext = React.createContext({ role: 'unauthorized' });
 
-export default newContext;
+export default AuthContext;
