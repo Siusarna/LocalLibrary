@@ -35,7 +35,6 @@ const SignInForm = () => {
           body: JSON.stringify(values),
         })
           .then((res) => {
-            console.dir({res});
             if (res.status === 200) {
               updateAuth();
               setSuccess(true);
@@ -43,7 +42,6 @@ const SignInForm = () => {
             return res.json()
           })
           .then((json) => {
-            console.dir({json});
             if (!success) {
               const error = json.message || 'Server Error';
               setServerError(error);
@@ -72,26 +70,3 @@ const SignInForm = () => {
 };
 
 export default SignInForm;
-
-/*
-  const login = () => {
-    fetch('https://aqueous-refuge-56947.herokuapp.com/api/accounts/sign-in', {
-      method: 'POST',
-      credentials: 'include',
-      headers: { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify({
-        'email': 'generalTest1@gmail.com',
-        'password': 'test1234'
-      }),
-      keepalive: true,
-    })
-      .then((res) => {
-        updateAuth();
-        return res.json()
-      })
-      .then((res) => console.log(res));
-  }
-  */
