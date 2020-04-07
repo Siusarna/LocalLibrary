@@ -7,14 +7,7 @@ import NewsList from '../components/newsList';
 
 const HomePage = () => (
   <>
-    <Header>
-      <Link to='/register'>
-        <div className='linkBox'>Sign Up</div>
-      </Link>
-      <Link to='/sign-in'>
-        <div className='linkBox'>Sign In</div>
-      </Link>
-    </Header>
+    <Header/>
     <BookSearch />
     <Recommendations/>
     <NewsList/>
