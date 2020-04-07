@@ -1,6 +1,6 @@
 {
   "get": {
-    "summary": "Get all authors",
+    "summary": "Get author by id",
     "tags": [
       "authors"
     ],
@@ -42,6 +42,12 @@
             "type": "string"
           },
           "yearOfDeath": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          },
+          "description": {
             "type": "string"
           }
         }

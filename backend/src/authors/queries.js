@@ -8,18 +8,20 @@ const getAuthorByName = (firstName, lastName) => knex('author')
   });
 
 const addAuthor = ({
-  firstName, lastName, yearOfBirthday, yearOfDeath,
+  firstName, lastName, yearOfBirthday, yearOfDeath, photo, description,
 }) => knex('author')
   .insert({
     firstName,
     lastName,
     yearOfBirthday,
     yearOfDeath,
+    photo,
+    description,
   })
   .returning(['id', 'firstName', 'lastName', 'yearOfBirthday', 'yearOfDeath']);
 
 const getAuthorById = (id) => knex('author')
-  .select('*')
+  .select('id', 'firstName', 'lastName', 'yearOfBirthday', 'yearOfDeath', 'photo', 'description')
   .where({ id });
 
 const deleteAuthorById = (id) => knex('author')
@@ -27,12 +29,12 @@ const deleteAuthorById = (id) => knex('author')
   .del();
 
 const getAllAuthors = () => knex('author')
-  .select('firstName', 'lastName', 'yearOfBirthday', 'yearOfDeath');
+  .select('id', 'firstName', 'lastName', 'yearOfBirthday', 'yearOfDeath', 'photo');
 
 const updateAuthorById = (id, newData) => knex('author')
   .where({ id })
   .update({ ...newData })
-  .returning(['id', 'firstName', 'lastName', 'yearOfBirthday', 'yearOfDeath']);
+  .returning(['id', 'firstName', 'lastName', 'yearOfBirthday', 'yearOfDeath', 'photo', 'description']);
 
 const insertNewUser = (user) => knex('users')
   .insert({ ...user })

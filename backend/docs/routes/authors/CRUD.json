@@ -118,7 +118,7 @@
       "content": {
         "application/json": {
           "schema": {
-            "$ref": "#/components/schemas/Author"
+            "$ref": "#/components/schemas/UpdateAuthor"
           }
         }
       }
@@ -162,19 +162,29 @@
           },
           "yearOfDeath": {
             "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
           }
         },
         "required": [
           "firstName",
           "lastName",
           "yearOfBirthday",
-          "yearOfDeath"
+          "yearOfDeath",
+          "photo",
+          "description"
         ],
         "example": {
           "firstName": "Dima",
           "lastName": "Petruniak",
           "yearOfBirthday": "2000",
-          "yearOfDeath": "-"
+          "yearOfDeath": "-",
+          "photo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAMgCAMAAADsrvZaAAABfVBMVEU",
+          "description": "Lorem ipsum"
         }
       },
       "RegisterSuccess": {
@@ -190,6 +200,12 @@
             "type": "string"
           },
           "yearOfDeath": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          },
+          "description": {
             "type": "string"
           }
         }
@@ -247,11 +263,14 @@
             },
             "yearOfDeath": {
               "type": "string"
+            },
+            "photo": {
+              "type": "string"
             }
           }
         }
       },
-      "Author": {
+      "UpdateAuthor": {
         "type": "object",
         "properties": {
           "firstName": {
@@ -265,13 +284,21 @@
           },
           "yearOfDeath": {
             "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
           }
         },
         "example": {
           "firstName": "Dima",
           "lastName": "Petruniak",
           "yearOfBirthday": "2000",
-          "yearOfDeath": "-"
+          "yearOfDeath": "-",
+          "photo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAMgCAMAAADsrvZaAAABfVBMVEU",
+          "description": "Lorem ipsum"
         }
       },
       "UpdateSuccess": {
@@ -287,6 +314,12 @@
             "type": "string"
           },
           "yearOfDeath": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          },
+          "description": {
             "type": "string"
           }
         }
