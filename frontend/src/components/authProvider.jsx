@@ -9,7 +9,7 @@ const AuthProvider = (props) => {
   useEffect(() => {
     if(isValid) return;
 
-    fetch('https://aqueous-refuge-56947.herokuapp.com/api/accounts/profile', 
+    fetch('https://fathomless-ravine-92681.herokuapp.com/api/accounts/profile', 
       {credentials: 'include'}
     )    
       .then(res => {
