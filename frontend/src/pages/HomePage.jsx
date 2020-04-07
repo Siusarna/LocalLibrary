@@ -11,7 +11,7 @@ const HomePage = () => (
       <Link to='/register'>
         <div className='linkBox'>Sign Up</div>
       </Link>
-      <Link to='/login'>
+      <Link to='/sign-in'>
         <div className='linkBox'>Sign In</div>
       </Link>
     </Header>
