@@ -44,7 +44,7 @@ p {
   font-size: 12px;
 }
 
-input[type=text]{
+button {
   padding: 0;
   border: none;
   font: inherit;
@@ -233,6 +233,38 @@ button.search {
   .name {
     padding: 5px;
   }
+}
+
+/** Forms **/
+
+form {
+  width: 80%;
+  min-width: 180px;
+  margin: 20px auto;
+}
+
+label {
+  margin-top: 10px;
+  display: block;
+}
+
+input {
+  width: 99%;
+}
+
+.error {
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: red;
+}
+
+select {
+  display: block;
+}
+
+.submit {
+  width: 100%;
+  margin-top: 10px;
 }
 
 /** Other **/
