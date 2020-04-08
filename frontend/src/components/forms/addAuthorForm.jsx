@@ -66,11 +66,11 @@ const AddAuthorForm = () => {
     >
       <Form>
         <SectionTitle text='' />
-        <TextInput type="text" name="firstName" label="First Name" />
-        <TextInput type="text" name="lastName" label="Last Name" />
-        <TextInput type="text" name="yearOfBirthday" label="Year of Birth" />
-        <TextInput type="text" name="yearOfDeath" label="Year of Death" />
-        <TextArea type="text" name="description" label="Description" />
+        <TextInput type='text' name='firstName' label='First Name' />
+        <TextInput type='text' name='lastName' label='Last Name' />
+        <TextInput type='text' name='yearOfBirthday' label='Year of Birth' />
+        <TextInput type='text' name='yearOfDeath' label='Year of Death' />
+        <TextArea type='text' name='description' label='Description' />
         <FileInput name='photo' label='Photo' />
         <div className='error'>{serverError}</div>
         <button type='submit' className='dark submit' disabled={Formik.isSubmitting}>Add Author</button>

@@ -1,5 +1,5 @@
 import React from 'react';
-import UpdateBookForm from "../components/forms/updateBookForm";
+import UpdateBookForm from '../components/forms/updateBookForm';
 
 const UpdateBookPage = () => {
   return (

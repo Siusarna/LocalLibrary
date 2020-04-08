@@ -1,24 +1,24 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 
 import PrivateRoute from '../components/privateRoute';
 
 import HomePage from '../pages/HomePage';
 import ProfilePage from '../pages/ProfilePage';
 import SignInPage from '../pages/SignInPage';
-import BookPage from "../pages/BookPage";
-import AuthorPage from "../pages/AuthorPage";
-import SignUpPage from "../pages/SignUpPage";
-import ForgotPasswordPage from "../pages/ForgotPasswordPage";
-import ChangePasswordPage from "../pages/ChangePasswordPage";
-import ChangeProfilePage from "../pages/ChangeProfilePage";
-import ChangePhotoPage from "../pages/ChangePhotoPage";
-import AllAuthorsPage from "../pages/AllAuthorsPage";
-import AllBooksPage from "../pages/AllBooksPage";
-import AddBookPage from "../pages/AddBookPage";
-import AddAuthorPage from "../pages/AddAuthorPage";
-import UpdateBookPage from "../pages/UpdateBookPage";
-import UpdateAuthorPage from "../pages/UpdateAuthorPage";
+import BookPage from '../pages/BookPage';
+import AuthorPage from '../pages/AuthorPage';
+import SignUpPage from '../pages/SignUpPage';
+import ForgotPasswordPage from '../pages/ForgotPasswordPage';
+import ChangePasswordPage from '../pages/ChangePasswordPage';
+import ChangeProfilePage from '../pages/ChangeProfilePage';
+import ChangePhotoPage from '../pages/ChangePhotoPage';
+import AllAuthorsPage from '../pages/AllAuthorsPage';
+import AllBooksPage from '../pages/AllBooksPage';
+import AddBookPage from '../pages/AddBookPage';
+import AddAuthorPage from '../pages/AddAuthorPage';
+import UpdateBookPage from '../pages/UpdateBookPage';
+import UpdateAuthorPage from '../pages/UpdateAuthorPage';
 
 
 const Router = () => (

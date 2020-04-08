@@ -9,7 +9,7 @@ const FileInput = ({ label, ...props }) => {
   return (
     <>
       <label htmlFor={props.id || props.name}>{label}</label>
-      <input name={props.name} type="file" {...props} onChange={(event) => {
+      <input name={props.name} type='file' {...props} onChange={(event) => {
         const file = event.currentTarget.files[0];
         toBase64(file, (url) => {
           setFieldValue(props.name, url);

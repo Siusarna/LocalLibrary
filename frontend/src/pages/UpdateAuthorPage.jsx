@@ -1,5 +1,5 @@
 import React from 'react';
-import UpdateAuthorForm from "../components/forms/updateAuthorForm";
+import UpdateAuthorForm from '../components/forms/updateAuthorForm';
 
 const UpdateAuthorPage = () => {
   return (
