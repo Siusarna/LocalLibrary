@@ -12,6 +12,7 @@ router.post('/', checkAuth, checkAccess, validation.addAuthor, authorsController
 router.delete('/', checkAuth, checkAccess, authorsControllers.deleteAuthor);
 router.get('/', authorsControllers.getAllAuthors);
 router.get('/:id', authorsControllers.getAuthor);
+router.get('/:id/book', authorsControllers.getAllAuthorBooks);
 router.put('/', checkAuth, checkAccess, validation.updateAuthor, authorsControllers.updateAuthor);
 
 module.exports = router;

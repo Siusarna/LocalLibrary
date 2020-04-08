@@ -37,6 +37,8 @@ const getAuthor = async ({ id }) => {
   return author;
 };
 
+const getAllAuthorBooks = ({ id }) => queries.getBooksByAuthorId(id);
+
 const updateAuthor = async ({ id, ...newData }) => {
   const [author] = await queries.getAuthorById(id);
   if (!author) {
@@ -53,5 +55,6 @@ module.exports = {
   deleteAuthor,
   getAllAuthors,
   getAuthor,
+  getAllAuthorBooks,
   updateAuthor,
 };

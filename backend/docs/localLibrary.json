@@ -60,6 +60,9 @@
     "/authors/:id": {
       "$ref": "/routes/authors/getOne.json"
     },
+    "/authors/:id/book": {
+      "$ref": "/routes/authors/getAllBookByAuthorId.json"
+    },
     "/books": {
       "$ref": "/routes/books/CRUD.json"
     },

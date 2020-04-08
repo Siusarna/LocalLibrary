@@ -41,6 +41,15 @@ const getAuthor = async (ctx) => {
   }
 };
 
+const getAllAuthorBooks = async (ctx) => {
+  try {
+    ctx.body = await Services.getAllAuthorBooks(ctx.params);
+    return ctx;
+  } catch (error) {
+    return ctx.throw(400, error);
+  }
+};
+
 const updateAuthor = async (ctx) => {
   try {
     const [author] = await Services.updateAuthor(ctx.request.body);
@@ -56,5 +65,6 @@ module.exports = {
   deleteAuthor,
   getAllAuthors,
   getAuthor,
+  getAllAuthorBooks,
   updateAuthor,
 };
