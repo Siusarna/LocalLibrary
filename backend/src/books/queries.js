@@ -21,8 +21,11 @@ const addBook = ({
   .returning(['*']);
 
 const getBookById = (id) => knex('book')
-  .select('*')
-  .where({ id });
+  .where({ 'book.id': id })
+  .join('author', 'authorId', '=', 'author.id')
+  .select('book.id', 'authorId', 'title',
+    'book.photo', 'rating', 'book.description',
+    'available', 'isbn', 'yearOfPublishing', 'author.firstName', 'author.lastName');
 
 const deleteBookById = (id) => knex('book')
   .where({ id })
