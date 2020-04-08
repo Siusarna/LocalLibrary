@@ -43,6 +43,7 @@ a {
 p {
   padding: 5px;
   font-size: 12px;
+  margin: 2px 0;
 }
 
 button {
@@ -217,6 +218,7 @@ button.search {
   color: $SecondaryFontColor;
 }
 
+.ProfileInfo,
 .BookInfo {
   .title {
     padding: 5px;

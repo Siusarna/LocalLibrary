@@ -1,31 +1,4 @@
 import React, { useEffect, useState } from 'react';
-/*
-const useFetch = (url) => {
-  const [data, setData] = useState();
-  const [isLoaded, setLoaded] = useState(false);
-  const [status, setStatus] = useState();
-  const [error, setError] = useState(null)
-
-  useEffect(() => {
-    fetch(url, {credentials: 'include'})
-      .then(result => {
-        setStatus(result.status);
-        console.dir({result});
-        return result.json();
-      })
-      .then(data => {
-        console.dir({data});
-        setData(data);
-        setLoaded(true);
-      })
-      .catch(err => {
-        setError(err);
-      });
-  }, [])
-
-  return { data, status, isLoaded, error };
-}
-*/
 
 const useFetch = (url) => {
   const [fetchResult, setFetchResult] = useState({ isLoaded: false, error: null });
@@ -45,7 +18,6 @@ const useFetch = (url) => {
         newFetchResult.error = error;
       })
       .then(() => {
-        console.log('wtf');
         setFetchResult(newFetchResult);
       });
   }, [])
