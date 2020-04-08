@@ -2,7 +2,7 @@ import React from 'react';
 import LeftRightContainer from './leftRightContainer';
 
 // Fake data
-// Must be replaced by request on server
+// Must be replaced with request on server
 const sampleNews = {
   '1': {
     title: 'Filler 1',

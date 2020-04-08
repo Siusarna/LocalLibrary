@@ -1,12 +1,10 @@
 
-import React, { useState, useContext } from 'react';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import React, { useState } from 'react';
+import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import TextInput from '../textInput';
 import TextArea from '../textArea';
-import Select from '../select';
 import SectionTitle from '../sectionTitle';
-import AuthContext from '../../context/authContext';
 import { Redirect, useParams } from 'react-router-dom';
 import FileInput from '../fileInput';
 import useFetch from '../../hooks/useFetch';

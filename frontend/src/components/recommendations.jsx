@@ -1,5 +1,4 @@
 import React from 'react';
-import Book from './book';
 import SectionTitle from './sectionTitle';
 import BookList from './bookList';
 import useFetch from '../hooks/useFetch';

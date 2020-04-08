@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LeftRightContainer from './leftRightContainer';
 
 const Book = (props) => {
   const author = props.author;

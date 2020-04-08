@@ -1,9 +1,8 @@
 
 import React, { useState, useContext } from 'react';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import TextInput from '../textInput';
-import Select from '../select';
 import SectionTitle from '../sectionTitle';
 import AuthContext from '../../context/authContext';
 import { Redirect } from 'react-router-dom';

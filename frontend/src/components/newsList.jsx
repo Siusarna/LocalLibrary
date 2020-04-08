@@ -3,7 +3,7 @@ import SectionTitle from './sectionTitle';
 import News from './news';
 
 // Fake data
-// Must be replaced by request on server
+// Must be replaced with request on server
 const news = ['3', '2', '1'];
 
 const NewsList = () => {
