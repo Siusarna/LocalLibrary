@@ -1,45 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ImageTextContainer from './imageTextContainer';
 import SectionTitle from './sectionTitle';
 import BookList from './bookList';
+import { useParams, Redirect } from 'react-router-dom';
+import useFetch from '../hooks/useFetch';
+import { useContext } from 'react';
+import AuthContext from '../context/authContext';
 
-// Fake data
-// Must be replaced by request on server
-const author = {
-  firstName: 'Jhon',
-  lastName: 'Doe',
-
-  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut' +
-    'labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi' +
-    'ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum' +
-    'dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia' +
-    'deserunt mollit anim id est laborum.',
-
-  dateOfBirth: '24.01.1789',
-  dateOfDeath: '07.05.1847',
-
-  image: 'https://res.cloudinary.com/domvzvfy1/image/upload/v1586194528/9f97d77545450042f2a28c407d28896f_v0ylfl.jpg',
-  books: ['1', '2', '3', '4', '5', '1', '2', '3', '4', '5'],
+const deleteAuthor = (id, setRedirect) => () => {
+  const isConfirmed = window.confirm('Do you really want to delete this Author ?');
+  if (isConfirmed) {
+    fetch('https://fathomless-ravine-92681.herokuapp.com/api/authors', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'DELETE',
+      credentials: 'include',
+      body: JSON.stringify({ id }),
+    }).then(res => {
+      if (res.status === 200) {
+        setRedirect(true);
+      }
+    })
+  }
 }
 
 const AuthorInfo = () => {
-  const { image, firstName, lastName, dateOfDeath, dateOfBirth, description, books } = author;
+  const [isRedirect, setRedirect] = useState(false);
+  const { role } = useContext(AuthContext);
+  const { id } = useParams();
+  const { data: author, isLoaded: isAuthorLoaded } = useFetch('https://fathomless-ravine-92681.herokuapp.com/api/authors/' + id);
+  const { data: books, isLoaded: isBooksLoaded } = useFetch('https://fathomless-ravine-92681.herokuapp.com/api/authors/' + id + '/book');
+
+  if (!isAuthorLoaded) return true;
+  if (!isBooksLoaded) return true;
+  if (isRedirect) return <Redirect to='/authors/all'/>
+
+  const { photo, firstName, lastName, yearOfDeath, yearOfBirthday, description } = author;
   const fullName = firstName + ' ' + lastName;
+  const life = (yearOfBirthday || '???') + ' - ' + (yearOfDeath || '???');
   return (
     <div className='AuthorInfo'>
-      <ImageTextContainer src={image}>
+      <ImageTextContainer src={photo}>
         <div className='name'>
           {fullName}
         </div>
-        <p>
-          {
-            (dateOfBirth ? dateOfBirth : '???') + ' - ' +
-              (dateOfDeath ? dateOfDeath : '???')
-          }
-        </p>
+        <p>{life}</p>
         <p>{description}</p>
       </ImageTextContainer>
-      <SectionTitle text={'Books of ' + fullName}/>
+      {(role === 'librarian' && books.length === 0) && 
+        <button className='dark' onClick={deleteAuthor(id, setRedirect)}>Delete Author</button>}
+      {role === 'librarian' && <SectionTitle text='Update Author' to={'/authors/' + id + '/update'} className='center'/>}
+      {books.length > 0 && <SectionTitle text={'Books of ' + fullName} className='center'/>}
       <BookList books={books}/>
     </div>
   )
