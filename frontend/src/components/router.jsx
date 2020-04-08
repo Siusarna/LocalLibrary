@@ -13,6 +13,12 @@ import ForgotPasswordPage from "../pages/ForgotPasswordPage";
 import ChangePasswordPage from "../pages/ChangePasswordPage";
 import ChangeProfilePage from "../pages/ChangeProfilePage";
 import ChangePhotoPage from "../pages/ChangePhotoPage";
+import AllAuthorsPage from "../pages/AllAuthorsPage";
+import AllBooksPage from "../pages/AllBooksPage";
+import AddBookPage from "../pages/AddBookPage";
+import AddAuthorPage from "../pages/AddAuthorPage";
+import UpdateBookPage from "../pages/UpdateBookPage";
+import UpdateAuthorPage from "../pages/UpdateAuthorPage";
 
 
 const Router = () => (
@@ -21,12 +27,19 @@ const Router = () => (
     <Route path='/sign-in'          component={SignInPage}/>
     <Route path='/register'         component={SignUpPage}/>
     <Route path='/forgot-password'  component={ForgotPasswordPage}/>
-    <Route path='/books/:id'        component={BookPage}/>
-    <Route path='/authors/:id'      component={AuthorPage}/>
+    <Route path='/books/all'        component={AllBooksPage}/>
+    <Route path='/authors/all'      component={AllAuthorsPage}/>
     <PrivateRoute path='/profile'   component={ProfilePage}/>
     <PrivateRoute path='/change-password'   component={ChangePasswordPage}/>
     <PrivateRoute path='/change-profile'    component={ChangeProfilePage}/>
     <PrivateRoute path='/change-photo'      component={ChangePhotoPage}/>
+    <PrivateRoute path='/change-photo'      component={ChangePhotoPage}/>
+    <PrivateRoute path='/books/add'             role='librarian'  component={AddBookPage}/>
+    <PrivateRoute path='/authors/add'           role='librarian'  component={AddAuthorPage}/>
+    <PrivateRoute path='/books/:id/update'      role='librarian'  component={UpdateBookPage}/>
+    <PrivateRoute path='/authors/:id/update'    role='librarian'  component={UpdateAuthorPage}/>
+    <Route path='/books/:id'        component={BookPage}/>
+    <Route path='/authors/:id'      component={AuthorPage}/>
   </Switch>
 );
 
