@@ -31,7 +31,7 @@
     "schemas": {
       "BookSuccess": {
         "type": "array",
-        "item": {
+        "items": {
           "type": "object",
           "properties": {
             "id": {
@@ -58,7 +58,7 @@
           }
         }
       },
-      "AuthorFail": {
+      "BookFail": {
         "type": "object",
         "properties": {
           "success": {
