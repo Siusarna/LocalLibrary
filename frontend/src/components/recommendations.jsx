@@ -2,12 +2,11 @@ import React from 'react';
 import Book from './book';
 import SectionTitle from './sectionTitle';
 import BookList from './bookList';
-
-// Fake data
-// Must be replaced by request on server
-const books = ['1', '2', '3', '4', '5']; //recommended books IDs
+import useFetch from '../hooks/useFetch';
 
 const Recommendations = () => {
+  const { isLoaded, data: books } = useFetch('https://fathomless-ravine-92681.herokuapp.com/api/books');
+  if (!isLoaded) return true;
   return (
     <>
       <SectionTitle text='Recommendations' to='/recommendations'/>
