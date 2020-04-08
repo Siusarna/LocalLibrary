@@ -34,7 +34,6 @@ const BookInfo = (props) => {
   const { data: book, isLoaded } = useFetch('https://fathomless-ravine-92681.herokuapp.com/api/books/' + id);
   if (!isLoaded) return true;
   if (isRedirect) return <Redirect to='/books/all'/>
-  console.dir({ book });
   const authorName = book.firstName + ' ' + book.lastName;
 
   const orderBook = () => {};
