@@ -38,13 +38,13 @@
     "/accounts/forgotPassword": {
       "$ref": "/routes/accounts/forgotPassword.json"
     },
-    "/accounts/updatePhoto": {
+    "/accounts/photo": {
       "$ref": "/routes/accounts/updatePhoto.json"
     },
     "/accounts/logout": {
       "$ref": "/routes/accounts/logout.json"
     },
-    "/accounts/updateProfile": {
+    "/accounts/Profile": {
       "$ref": "/routes/accounts/updateProfile.json"
     },
     "/accounts/changePassword": {
