@@ -64,6 +64,7 @@ const SignInForm = () => {
         />
         <div className='error'>{serverError}</div>
         <button type='submit' className='dark submit' disabled={Formik.isSubmitting}>Sign In</button>
+        <SectionTitle text='Forgot Password' to='/forgot-password'/>
       </Form>
     </Formik >
   );

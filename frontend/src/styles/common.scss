@@ -83,6 +83,12 @@ button.search {
   }
 }
 
+form {
+  .SectionTitle {
+    text-align: center;
+  }
+}
+
 /** React Components **/
 
 .Header {
@@ -118,6 +124,7 @@ button.search {
   background-color: $SecondaryColor;
   color: $SecondaryFontColor;
   border-radius: 0px;
+  margin: 5px 0;
 
   .container {
     padding: 10px;

@@ -6,7 +6,6 @@ const SignInPage = () => {
   return (
     <>
       <SignInForm/>
-      <SectionTitle text='Forgot Password' to='/forgot-password'/>
     </>
   )
 }
