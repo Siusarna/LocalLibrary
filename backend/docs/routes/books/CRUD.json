@@ -196,10 +196,10 @@
           "authorId": {
             "type": "number"
           },
-          "authorFirstName": {
+          "firstName": {
             "type": "string"
           },
-          "authorLastName": {
+          "lastName": {
             "type": "string"
           },
           "title": {
@@ -273,10 +273,10 @@
             "authorId": {
               "type": "number"
             },
-            "authorFirstName": {
+            "firstName": {
               "type": "string"
             },
-            "authorLastName": {
+            "lastName": {
               "type": "string"
             },
             "title": {
@@ -294,10 +294,10 @@
       "UpdateBook": {
         "type": "object",
         "properties": {
-          "authorFirstName": {
+          "firstName": {
             "type": "string"
           },
-          "authorLastName": {
+          "lastName": {
             "type": "string"
           },
           "title": {
@@ -329,10 +329,10 @@
           "authorId": {
             "type": "number"
           },
-          "authorFirstName": {
+          "firstName": {
             "type": "string"
           },
-          "authorLastName": {
+          "lastName": {
             "type": "string"
           },
           "title": {
