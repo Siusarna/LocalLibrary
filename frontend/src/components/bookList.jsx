@@ -11,8 +11,8 @@ const BookList = (props) => {
   return (
     <div className='BookList'>
       {rows.map((row, index) => <div className='bookRow' key={index}>
-        {row.map(bookID => (
-          <Book key={bookID} id={bookID}/>
+        {row.map((book, index) => (
+          <Book key={index} book={book}/>
         ))}
       </div>)}
     </div>
