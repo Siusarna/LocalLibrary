@@ -23,6 +23,10 @@
     {
       "name": "authors",
       "description": "Authors CRUD"
+    },
+    {
+      "name": "books",
+      "description": "Books CRUD"
     }
   ],
   "paths": {
@@ -55,6 +59,12 @@
     },
     "/authors/:id": {
       "$ref": "/routes/authors/getOne.json"
+    },
+    "/books": {
+      "$ref": "/routes/books/CRUD.json"
+    },
+    "/books/:id": {
+      "$ref": "/routes/books/getOne.json"
     }
   },
   "components": {

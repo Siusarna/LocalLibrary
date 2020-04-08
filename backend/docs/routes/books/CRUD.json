@@ -1,0 +1,375 @@
+{
+  "post": {
+    "summary": "Add a new book",
+    "tags": [
+      "books"
+    ],
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/Book"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Book adding success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/AddSuccess"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Book adding error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/AddFail"
+            }
+          }
+        }
+      }
+    }
+  },
+  "delete": {
+    "summary": "Delete exist book",
+    "tags": [
+      "books"
+    ],
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/Delete"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Book delete success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/DeleteResult"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Book delete error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/DeleteResult"
+            }
+          }
+        }
+      }
+    }
+  },
+  "get": {
+    "summary": "Get all books",
+    "tags": [
+      "books"
+    ],
+    "responses": {
+      "200": {
+        "description": "Get books success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BooksSuccess"
+            }
+          }
+        }
+      }
+    }
+  },
+  "put": {
+    "summary": "Update book",
+    "tags": [
+      "books"
+    ],
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/UpdateBook"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Book update success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UpdateSuccess"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Book update error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UpdateFail"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Book": {
+        "type": "object",
+        "properties": {
+          "authorFirstName": {
+            "type": "string"
+          },
+          "authorLastName": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "isbn": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          },
+          "yearOfPublishing": {
+            "type": "number"
+          },
+          "available": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "authorFirstName",
+          "authorLastName",
+          "yearOfPublishing",
+          "isbn",
+          "photo",
+          "description",
+          "title",
+          "available"
+        ]
+      },
+      "AddSuccess": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "authorId": {
+            "type": "number"
+          },
+          "authorFirstName": {
+            "type": "string"
+          },
+          "authorLastName": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "isbn": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          },
+          "yearOfPublishing": {
+            "type": "number"
+          },
+          "available": {
+            "type": "boolean"
+          },
+          "rating": {
+            "type": "number"
+          }
+        }
+      },
+      "AddFail": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "success": false,
+          "message": "Such book already exists!"
+        }
+      },
+      "Delete": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "DeleteResult": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "BooksSuccess": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "number"
+            },
+            "authorId": {
+              "type": "number"
+            },
+            "authorFirstName": {
+              "type": "string"
+            },
+            "authorLastName": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "photo": {
+              "type": "string"
+            },
+            "rating": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "UpdateBook": {
+        "type": "object",
+        "properties": {
+          "authorFirstName": {
+            "type": "string"
+          },
+          "authorLastName": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "isbn": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          },
+          "yearOfPublishing": {
+            "type": "number"
+          },
+          "available": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UpdateSuccess": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "authorId": {
+            "type": "number"
+          },
+          "authorFirstName": {
+            "type": "string"
+          },
+          "authorLastName": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "isbn": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          },
+          "yearOfPublishing": {
+            "type": "number"
+          },
+          "available": {
+            "type": "boolean"
+          },
+          "rating": {
+            "type": "number"
+          }
+        }
+      },
+      "UpdateFail": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
+
