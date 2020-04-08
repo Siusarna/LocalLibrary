@@ -4,11 +4,9 @@ import AuthContext from '../context/authContext';
 
 const PrivateRoute = ({component: Component, role, ...rest}) => {
   const { role: currentRole } = useContext(AuthContext);
-  console.dir(currentRole);
   const isAccessible = role ?
     (currentRole === role) :
-    (currentRole !== 'undefined');
-  console.dir({ currentRole, role, isAccessible });
+    (currentRole !== 'unauthorized');
   return (
     <Route {...rest} 
       render={props => (
