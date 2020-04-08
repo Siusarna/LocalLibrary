@@ -49,9 +49,9 @@ const ForgotPasswordForm = () => {
       <Form>
         <SectionTitle text='' />
         <TextInput
-          label="Email Address"
-          name="email"
-          type="email"
+          label='Email Address'
+          name='email'
+          type='email'
         />
         <div className='error'>{serverError}</div>
         <button type='submit' className='dark submit' disabled={Formik.isSubmitting}>Sign In</button>

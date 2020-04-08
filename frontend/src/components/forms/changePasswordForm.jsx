@@ -59,9 +59,9 @@ const SignUpForm = () => {
     >
       <Form>
         <SectionTitle text='' />
-        <TextInput type="password"  name="currentPassword"      label="Your password" />
-        <TextInput type="password"  name="newPassword"          label="New password" />
-        <TextInput type="password"  name="confirmNewPassword"   label="Confirm new password" />
+        <TextInput type='password'  name='currentPassword'      label='Your password' />
+        <TextInput type='password'  name='newPassword'          label='New password' />
+        <TextInput type='password'  name='confirmNewPassword'   label='Confirm new password' />
         <div className='error'>{serverError}</div>
         <button type='submit' className='dark submit' disabled={Formik.isSubmitting}>Change Password</button>
       </Form>

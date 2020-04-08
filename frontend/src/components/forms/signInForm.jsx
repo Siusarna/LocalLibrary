@@ -52,14 +52,14 @@ const SignInForm = () => {
       <Form>
         <SectionTitle text='' />
         <TextInput
-          label="Email Address"
-          name="email"
-          type="email"
+          label='Email Address'
+          name='email'
+          type='email'
         />
         <TextInput
-          label="Password"
-          name="password"
-          type="password"
+          label='Password'
+          name='password'
+          type='password'
         />
         <div className='error'>{serverError}</div>
         <button type='submit' className='dark submit' disabled={Formik.isSubmitting}>Sign In</button>

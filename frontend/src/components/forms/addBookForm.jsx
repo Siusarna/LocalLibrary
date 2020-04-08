@@ -72,12 +72,12 @@ const AddAuthorForm = () => {
     >
       <Form>
         <SectionTitle text='' />
-        <TextInput type="text" name="title"             label="Title" />
-        <TextInput type="text" name="authorFirstName"   label="Author First Name" />
-        <TextInput type="text" name="authorLastName"    label="Author Last Name" />
-        <TextInput type="text" name="isbn"              label="ISBN" />
-        <TextInput type="text" name="yearOfPublishing"  label="year of Publishing" />
-        <TextArea type="text" name="description"        label="Description" />
+        <TextInput type='text' name='title'             label='Title' />
+        <TextInput type='text' name='authorFirstName'   label='Author First Name' />
+        <TextInput type='text' name='authorLastName'    label='Author Last Name' />
+        <TextInput type='text' name='isbn'              label='ISBN' />
+        <TextInput type='text' name='yearOfPublishing'  label='year of Publishing' />
+        <TextArea type='text' name='description'        label='Description' />
         <FileInput name='photo' label='Cover' />
         <div className='error'>{serverError}</div>
         <button type='submit' className='dark submit' disabled={Formik.isSubmitting}>Add Book</button>

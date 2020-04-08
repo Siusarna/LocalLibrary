@@ -2,7 +2,7 @@ import React from 'react';
 import Router from './components/router';
 import './styles/normalize.scss';
 import './styles/common.scss';
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from 'react-router-dom';
 import AuthProvider from './components/authProvider';
 import Header from './components/header';
 

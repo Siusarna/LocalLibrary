@@ -73,12 +73,12 @@ const SignUpForm = () => {
     >
       <Form>
         <SectionTitle text='' />
-        <TextInput type="text"      name="firstName"        label="First Name" />
-        <TextInput type="text"      name="lastName"         label="Last Name" />
-        <TextInput type="text"      name="city"             label="City" />
-        <TextInput type="text"      name="address"          label="Address" />
-        <TextInput type="text"      name="age"              label="Age" />
-        <TextInput type="text"      name="phone"            label="Phone Number" />
+        <TextInput type='text'      name='firstName'        label='First Name' />
+        <TextInput type='text'      name='lastName'         label='Last Name' />
+        <TextInput type='text'      name='city'             label='City' />
+        <TextInput type='text'      name='address'          label='Address' />
+        <TextInput type='text'      name='age'              label='Age' />
+        <TextInput type='text'      name='phone'            label='Phone Number' />
         <div className='error'>{serverError}</div>
         <button type='submit' className='dark submit' disabled={Formik.isSubmitting}>Change Profile</button>
       </Form>
