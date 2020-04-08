@@ -25,10 +25,7 @@ const deleteAuthor = async (ctx) => {
 
 const getAllAuthors = async (ctx) => {
   try {
-    const authors = await Services.getAllAuthors();
-    ctx.body = {
-      data: authors,
-    };
+    ctx.body = await Services.getAllAuthors();
     return ctx;
   } catch (error) {
     return ctx.throw(400, error);
