@@ -1,7 +1,7 @@
 const {
   isEmail, matches, isLength, isMobilePhone,
 } = require('validator');
-const { checkPhoto } = require('./checkPhoto');
+const { checkPhoto } = require('../../utils/checkPhoto');
 
 const register = (ctx, next) => {
   const {

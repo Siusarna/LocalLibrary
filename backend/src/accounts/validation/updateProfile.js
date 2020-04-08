@@ -1,5 +1,5 @@
 const { isLength, isInt, isMobilePhone } = require('validator');
-const { checkPhoto } = require('./checkPhoto');
+const { checkPhoto } = require('../../utils/checkPhoto');
 
 
 const updateProfile = (ctx, next) => {
