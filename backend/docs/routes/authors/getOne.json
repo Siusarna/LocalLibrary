@@ -32,6 +32,9 @@
       "AuthorSuccess": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "number"
+          },
           "firstName": {
             "type": "string"
           },
