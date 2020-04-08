@@ -230,9 +230,11 @@ form {
   .title {
     padding: 5px;
   }
-  .linkBox {
-    padding: 5px;
-    font-size: 12px;
+  .ImageTextContainer {
+    .linkBox {
+      padding: 5px;
+      font-size: 12px;
+    }
   }
   button {
     width: 100%;
@@ -292,4 +294,8 @@ select {
 
 .starIcon {
   max-width:15px;
+}
+
+.center {
+  text-align: center;
 }

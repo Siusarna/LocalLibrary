@@ -4,6 +4,7 @@ import useFetch from '../hooks/useFetch';
 import AuthContext from '../context/authContext';
 import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import SectionTitle from './sectionTitle';
 
 
 
@@ -32,6 +33,9 @@ const ProfileInfo = () => {
       <button className='dark' onClick={logOut}>
         Log Out
       </button>
+      <SectionTitle text='Change Password' to='/change-password' className='center'/>
+      <SectionTitle text='Change Profile'  to='/change-profile'  className='center'/>
+      <SectionTitle text='Change Photo'    to='/change-photo'   className='center'/>
     </div>
   )
 }

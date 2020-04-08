@@ -10,6 +10,9 @@ import BookPage from "../pages/BookPage";
 import AuthorPage from "../pages/AuthorPage";
 import SignUpPage from "../pages/SignUpPage";
 import ForgotPasswordPage from "../pages/ForgotPasswordPage";
+import ChangePasswordPage from "../pages/ChangePasswordPage";
+import ChangeProfilePage from "../pages/ChangeProfilePage";
+import ChangePhotoPage from "../pages/ChangePhotoPage";
 
 
 const Router = () => (
@@ -21,6 +24,9 @@ const Router = () => (
     <Route path='/books/:id'        component={BookPage}/>
     <Route path='/authors/:id'      component={AuthorPage}/>
     <PrivateRoute path='/profile'   component={ProfilePage}/>
+    <PrivateRoute path='/change-password'   component={ChangePasswordPage}/>
+    <PrivateRoute path='/change-profile'    component={ChangeProfilePage}/>
+    <PrivateRoute path='/change-photo'      component={ChangePhotoPage}/>
   </Switch>
 );
 

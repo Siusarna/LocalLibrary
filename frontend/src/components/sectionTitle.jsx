@@ -1,22 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const SectionTitle = (props) => {
-  if (props.to) {
+const SectionTitle = ({ to, text, className, ...props}) => {
+  if (to) {
     return (
-      <Link to={props.to}>
-        <div className='SectionTitle'>
+      <Link to={to}>
+        <div className={'SectionTitle ' + className} {...props}>
           <div className='linkBox'>
-            {props.text}
+            {text}
           </div>
         </div>
       </Link>
     )
   }
   return (
-    <div className='SectionTitle'>
+    <div className={'SectionTitle ' + className} {...props}>
       <div className='container'>
-      {props.text}
+      {text}
       </div>
     </div>
   )
