@@ -50,10 +50,9 @@ const SignUpForm = () => {
           .matches(/^\+?[0-9]+$/, 'Wrong phone number format'),
       })}
       onSubmit={(values, { setSubmitting }) => {
-        fetch('https://fathomless-ravine-92681.herokuapp.com/api/accounts/updateProfile', {
+        fetch('https://fathomless-ravine-92681.herokuapp.com/api/accounts/profile', {
           headers: { 
             'Content-Type': 'application/json',
-            'Access': 'application/json',
           },
           method: 'PUT',
           credentials: 'include',

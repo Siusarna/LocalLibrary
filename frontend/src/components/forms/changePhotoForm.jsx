@@ -27,7 +27,7 @@ const SignUpForm = () => {
           .required('Required'),
       })}
       onSubmit={(values, { setSubmitting }) => {
-        fetch('https://fathomless-ravine-92681.herokuapp.com/api/accounts/updatePhoto', {
+        fetch('https://fathomless-ravine-92681.herokuapp.com/api/accounts/photo', {
           headers: { 
             'Content-Type': 'application/json',
           },
