@@ -37,7 +37,6 @@ const SignUpForm = () => {
         })
           .then((res) => {
             if (res.status === 200) {
-              updateAuth();
               setSuccess(true);
             }
             return res.json()
