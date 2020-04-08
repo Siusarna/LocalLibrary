@@ -37,8 +37,7 @@ const getAllAuthors = async (ctx) => {
 
 const getAuthor = async (ctx) => {
   try {
-    const [author] = await Services.getAuthor(ctx.params);
-    ctx.body = author;
+    ctx.body = await Services.getAuthor(ctx.params);
     return ctx;
   } catch (error) {
     return ctx.throw(400, error);

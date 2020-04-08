@@ -1,10 +1,9 @@
-const {
-  isLength,
-} = require('validator');
+const { isLength } = require('validator');
+const { checkPhoto } = require('./checkPhoto');
 
 const updateAuthor = (ctx, next) => {
   const {
-    firstName, lastName, yearOfBirthday, yearOfDeath,
+    firstName, lastName, yearOfBirthday, yearOfDeath, photo,
   } = ctx.request.body;
   if (firstName && !isLength(firstName, {
     min: 2,
@@ -23,6 +22,9 @@ const updateAuthor = (ctx, next) => {
   }
   if (yearOfDeath && yearOfDeath >= 2020) {
     return ctx.throw(400, 'Wrong year of death');
+  }
+  if (photo && !checkPhoto(photo)) {
+    return ctx.throw(400, 'Wrong photo');
   }
   return next();
 };
