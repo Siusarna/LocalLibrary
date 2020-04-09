@@ -66,7 +66,7 @@ const updateBook = async ({
       throw new Error('Book with this isbn already exists');
     }
   }
-  await queries.updateBookById(book.id, { ...newData });
+  await queries.updateBookById(book.id, { isbn, ...newData });
   return queries.getBookById(book.id);
 };
 
