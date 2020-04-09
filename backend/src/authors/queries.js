@@ -45,6 +45,10 @@ const getBooksByAuthorId = (id) => knex('book')
   .select('book.id', 'authorId', 'author.firstName', 'author.lastName', 'title', 'book.photo', 'rating')
   .where({ authorId: id });
 
+const updateBook = (id, newData) => knex('book')
+  .where({ id })
+  .update({ ...newData });
+
 module.exports = {
   getAuthorByName,
   addAuthor,
@@ -54,4 +58,5 @@ module.exports = {
   updateAuthorById,
   insertNewUser,
   getBooksByAuthorId,
+  updateBook,
 };
