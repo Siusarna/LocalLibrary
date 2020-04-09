@@ -79,17 +79,11 @@ describe('Authors CRUD', () => {
     await TestUtil.checkGettingResource(
       {
         url: '/api/authors',
-        headers: {
-          accessToken: token.accessToken,
-          refreshToken: token.refreshToken,
-        },
       },
-      [
-        {
-          name: 'data',
-          type: 'array',
-        },
-      ],
+      {
+        name: 'data',
+        type: 'array',
+      },
     );
   });
 
@@ -97,10 +91,6 @@ describe('Authors CRUD', () => {
     await TestUtil.checkGettingResource(
       {
         url: `/api/authors/${author[0].id}`,
-        headers: {
-          accessToken: token.accessToken,
-          refreshToken: token.refreshToken,
-        },
       },
       [
         {
@@ -132,6 +122,18 @@ describe('Authors CRUD', () => {
           type: 'string',
         },
       ],
+    );
+  });
+
+  it('should get all authors on /api/authors/:id/book', async () => {
+    await TestUtil.checkGettingResource(
+      {
+        url: `/api/authors/${author[0].id}/book`,
+      },
+      {
+        name: 'data',
+        type: 'array',
+      },
     );
   });
 
