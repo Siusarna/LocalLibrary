@@ -1,5 +1,5 @@
 const { isLength } = require('validator');
-const { checkPhoto } = require('./checkPhoto');
+const { checkPhoto } = require('../../utils/checkPhoto');
 
 const addAuthor = (ctx, next) => {
   const {

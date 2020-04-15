@@ -1,4 +1,4 @@
-const { checkPhoto } = require('./checkPhoto');
+const { checkPhoto } = require('../../utils/checkPhoto');
 
 const updatePhoto = (ctx, next) => {
   const { photo } = ctx.request.body;

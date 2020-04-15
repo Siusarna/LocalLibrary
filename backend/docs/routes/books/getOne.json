@@ -1,26 +1,26 @@
 {
   "get": {
-    "summary": "Get author by id",
+    "summary": "Get book by id",
     "tags": [
-      "authors"
+      "books"
     ],
     "responses": {
       "200": {
-        "description": "Get author success",
+        "description": "Get book success",
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/AuthorSuccess"
+              "$ref": "#/components/schemas/BookSuccess"
             }
           }
         }
       },
       "400": {
-        "description": "Get author fail",
+        "description": "Get book fail",
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/AuthorFail"
+              "$ref": "#/components/schemas/BookFail"
             }
           }
         }
@@ -29,33 +29,45 @@
   },
   "components": {
     "schemas": {
-      "AuthorSuccess": {
+      "BookSuccess": {
         "type": "object",
         "properties": {
           "id": {
             "type": "number"
           },
-          "firstName": {
+          "authorId": {
+            "type": "number"
+          },
+          "authorFirstName": {
             "type": "string"
           },
-          "lastName": {
+          "authorLastName": {
             "type": "string"
           },
-          "yearOfBirthday": {
+          "title": {
             "type": "string"
           },
-          "yearOfDeath": {
+          "description": {
+            "type": "string"
+          },
+          "isbn": {
             "type": "string"
           },
           "photo": {
             "type": "string"
           },
-          "description": {
-            "type": "string"
+          "yearOfPublishing": {
+            "type": "number"
+          },
+          "available": {
+            "type": "boolean"
+          },
+          "rating": {
+            "type": "number"
           }
         }
       },
-      "AuthorFail": {
+      "BookFail": {
         "type": "object",
         "properties": {
           "success": {

@@ -40,6 +40,15 @@ const insertNewUser = (user) => knex('users')
   .insert({ ...user })
   .returning(['id', 'firstName', 'lastName', 'photo', 'role']);
 
+const getBooksByAuthorId = (id) => knex('book')
+  .join('author', 'authorId', '=', 'author.id')
+  .select('book.id', 'authorId', 'author.firstName', 'author.lastName', 'title', 'book.photo', 'rating')
+  .where({ authorId: id });
+
+const updateBook = (id, newData) => knex('book')
+  .where({ id })
+  .update({ ...newData });
+
 module.exports = {
   getAuthorByName,
   addAuthor,
@@ -48,4 +57,6 @@ module.exports = {
   getAllAuthors,
   updateAuthorById,
   insertNewUser,
+  getBooksByAuthorId,
+  updateBook,
 };

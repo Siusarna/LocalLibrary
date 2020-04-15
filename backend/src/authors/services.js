@@ -24,6 +24,9 @@ const deleteAuthor = async ({ id }) => {
   if (!author) {
     throw new Error('This authors doesnt exist');
   }
+  const authorBooks = await queries.getBooksByAuthorId(author.id);
+  const promises = authorBooks.map(async (book) => queries.updateBook(book.id, { authorId: null }));
+  await Promise.all(promises);
   await queries.deleteAuthorById(id);
 };
 
@@ -36,6 +39,8 @@ const getAuthor = async ({ id }) => {
   }
   return author;
 };
+
+const getAllAuthorBooks = ({ id }) => queries.getBooksByAuthorId(id);
 
 const updateAuthor = async ({ id, ...newData }) => {
   const [author] = await queries.getAuthorById(id);
@@ -53,5 +58,6 @@ module.exports = {
   deleteAuthor,
   getAllAuthors,
   getAuthor,
+  getAllAuthorBooks,
   updateAuthor,
 };

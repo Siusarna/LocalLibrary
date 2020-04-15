@@ -25,10 +25,7 @@ const deleteAuthor = async (ctx) => {
 
 const getAllAuthors = async (ctx) => {
   try {
-    const authors = await Services.getAllAuthors();
-    ctx.body = {
-      data: authors,
-    };
+    ctx.body = await Services.getAllAuthors();
     return ctx;
   } catch (error) {
     return ctx.throw(400, error);
@@ -38,6 +35,15 @@ const getAllAuthors = async (ctx) => {
 const getAuthor = async (ctx) => {
   try {
     ctx.body = await Services.getAuthor(ctx.params);
+    return ctx;
+  } catch (error) {
+    return ctx.throw(400, error);
+  }
+};
+
+const getAllAuthorBooks = async (ctx) => {
+  try {
+    ctx.body = await Services.getAllAuthorBooks(ctx.params);
     return ctx;
   } catch (error) {
     return ctx.throw(400, error);
@@ -59,5 +65,6 @@ module.exports = {
   deleteAuthor,
   getAllAuthors,
   getAuthor,
+  getAllAuthorBooks,
   updateAuthor,
 };

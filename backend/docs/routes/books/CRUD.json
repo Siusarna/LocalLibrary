@@ -1,8 +1,8 @@
 {
   "post": {
-    "summary": "Register a new author",
+    "summary": "Add a new book",
     "tags": [
-      "authors"
+      "books"
     ],
     "security": [
       {
@@ -14,28 +14,28 @@
       "content": {
         "application/json": {
           "schema": {
-            "$ref": "#/components/schemas/User"
+            "$ref": "#/components/schemas/Book"
           }
         }
       }
     },
     "responses": {
       "200": {
-        "description": "Author registration success",
+        "description": "Book adding success",
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/RegisterSuccess"
+              "$ref": "#/components/schemas/AddSuccess"
             }
           }
         }
       },
       "400": {
-        "description": "Author registration error",
+        "description": "Book adding error",
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/RegisterFail"
+              "$ref": "#/components/schemas/AddFail"
             }
           }
         }
@@ -43,9 +43,9 @@
     }
   },
   "delete": {
-    "summary": "Delete exist author",
+    "summary": "Delete exist book",
     "tags": [
-      "authors"
+      "books"
     ],
     "security": [
       {
@@ -64,7 +64,7 @@
     },
     "responses": {
       "200": {
-        "description": "Author delete success",
+        "description": "Book delete success",
         "content": {
           "application/json": {
             "schema": {
@@ -74,7 +74,7 @@
         }
       },
       "400": {
-        "description": "Author delete error",
+        "description": "Book delete error",
         "content": {
           "application/json": {
             "schema": {
@@ -86,17 +86,17 @@
     }
   },
   "get": {
-    "summary": "Get all authors",
+    "summary": "Get all books",
     "tags": [
-      "authors"
+      "books"
     ],
     "responses": {
       "200": {
-        "description": "Get authors success",
+        "description": "Get books success",
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/AuthorsSuccess"
+              "$ref": "#/components/schemas/BooksSuccess"
             }
           }
         }
@@ -104,9 +104,9 @@
     }
   },
   "put": {
-    "summary": "Update author",
+    "summary": "Update book",
     "tags": [
-      "authors"
+      "books"
     ],
     "security": [
       {
@@ -118,14 +118,14 @@
       "content": {
         "application/json": {
           "schema": {
-            "$ref": "#/components/schemas/UpdateAuthor"
+            "$ref": "#/components/schemas/UpdateBook"
           }
         }
       }
     },
     "responses": {
       "200": {
-        "description": "Author update success",
+        "description": "Book update success",
         "content": {
           "application/json": {
             "schema": {
@@ -135,7 +135,7 @@
         }
       },
       "400": {
-        "description": "Author update error",
+        "description": "Book update error",
         "content": {
           "application/json": {
             "schema": {
@@ -148,69 +148,84 @@
   },
   "components": {
     "schemas": {
-      "User": {
+      "Book": {
         "type": "object",
         "properties": {
-          "firstName": {
+          "authorFirstName": {
             "type": "string"
           },
-          "lastName": {
+          "authorLastName": {
             "type": "string"
           },
-          "yearOfBirthday": {
+          "title": {
             "type": "string"
           },
-          "yearOfDeath": {
+          "description": {
+            "type": "string"
+          },
+          "isbn": {
             "type": "string"
           },
           "photo": {
             "type": "string"
           },
-          "description": {
-            "type": "string"
+          "yearOfPublishing": {
+            "type": "number"
+          },
+          "available": {
+            "type": "boolean"
           }
         },
         "required": [
-          "firstName",
-          "lastName",
-          "yearOfBirthday",
-          "yearOfDeath",
+          "authorFirstName",
+          "authorLastName",
+          "yearOfPublishing",
+          "isbn",
           "photo",
-          "description"
-        ],
-        "example": {
-          "firstName": "Dima",
-          "lastName": "Petruniak",
-          "yearOfBirthday": "2000",
-          "yearOfDeath": "-",
-          "photo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAMgCAMAAADsrvZaAAABfVBMVEU",
-          "description": "Lorem ipsum"
-        }
+          "description",
+          "title",
+          "available"
+        ]
       },
-      "RegisterSuccess": {
+      "AddSuccess": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "number"
+          },
+          "authorId": {
+            "type": "number"
+          },
           "firstName": {
             "type": "string"
           },
           "lastName": {
             "type": "string"
           },
-          "yearOfBirthday": {
+          "title": {
             "type": "string"
           },
-          "yearOfDeath": {
+          "description": {
+            "type": "string"
+          },
+          "isbn": {
             "type": "string"
           },
           "photo": {
             "type": "string"
           },
-          "description": {
-            "type": "string"
+          "yearOfPublishing": {
+            "type": "number"
+          },
+          "available": {
+            "type": "boolean"
+          },
+          "rating": {
+            "type": "number"
           }
         }
       },
-      "RegisterFail": {
+      "AddFail": {
         "type": "object",
         "properties": {
           "success": {
@@ -222,7 +237,7 @@
         },
         "example": {
           "success": false,
-          "message": "Such author already exists!"
+          "message": "Such book already exists!"
         }
       },
       "Delete": {
@@ -247,12 +262,15 @@
           }
         }
       },
-      "AuthorsSuccess": {
+      "BooksSuccess": {
         "type": "array",
         "items": {
           "type": "object",
           "properties": {
             "id": {
+              "type": "number"
+            },
+            "authorId": {
               "type": "number"
             },
             "firstName": {
@@ -261,19 +279,19 @@
             "lastName": {
               "type": "string"
             },
-            "yearOfBirthday": {
-              "type": "string"
-            },
-            "yearOfDeath": {
+            "title": {
               "type": "string"
             },
             "photo": {
+              "type": "string"
+            },
+            "rating": {
               "type": "string"
             }
           }
         }
       },
-      "UpdateAuthor": {
+      "UpdateBook": {
         "type": "object",
         "properties": {
           "firstName": {
@@ -282,48 +300,61 @@
           "lastName": {
             "type": "string"
           },
-          "yearOfBirthday": {
+          "title": {
             "type": "string"
           },
-          "yearOfDeath": {
+          "description": {
+            "type": "string"
+          },
+          "isbn": {
             "type": "string"
           },
           "photo": {
             "type": "string"
           },
-          "description": {
-            "type": "string"
+          "yearOfPublishing": {
+            "type": "number"
+          },
+          "available": {
+            "type": "boolean"
           }
-        },
-        "example": {
-          "firstName": "Dima",
-          "lastName": "Petruniak",
-          "yearOfBirthday": "2000",
-          "yearOfDeath": "-",
-          "photo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAMgCAMAAADsrvZaAAABfVBMVEU",
-          "description": "Lorem ipsum"
         }
       },
       "UpdateSuccess": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "number"
+          },
+          "authorId": {
+            "type": "number"
+          },
           "firstName": {
             "type": "string"
           },
           "lastName": {
             "type": "string"
           },
-          "yearOfBirthday": {
+          "title": {
             "type": "string"
           },
-          "yearOfDeath": {
+          "description": {
+            "type": "string"
+          },
+          "isbn": {
             "type": "string"
           },
           "photo": {
             "type": "string"
           },
-          "description": {
-            "type": "string"
+          "yearOfPublishing": {
+            "type": "number"
+          },
+          "available": {
+            "type": "boolean"
+          },
+          "rating": {
+            "type": "number"
           }
         }
       },
