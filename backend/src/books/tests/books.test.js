@@ -45,7 +45,6 @@ const credentialForChangingBook = {
   authorLastName: 'AuthorLastName',
   yearOfPublishing: '1821',
   title: 'Book test999',
-  available: 'false',
   isbn: '1234764281',
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut',
 };
@@ -57,7 +56,7 @@ const credentialForAddBook = {
   authorLastName: 'AuthorLastName',
   yearOfPublishing: '1814',
   title: 'Book test',
-  available: 'true',
+  amount: '10',
   isbn: '1234534281',
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut',
   photo: uriPhoto,
@@ -68,7 +67,7 @@ const credentialForAddBook2 = {
   authorLastName: 'AuthorLastName',
   yearOfPublishing: '1814',
   title: 'Book test',
-  available: 'true',
+  amount: '10',
   isbn: '123543523281',
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut',
   // eslint-disable-next-line max-len

@@ -2,7 +2,7 @@ const queries = require('./queries');
 const { uploadFile, deleteAllFileFromFolder } = require('../utils/s3-bucket');
 
 const addBook = async ({
-  authorFirstName, authorLastName, yearOfPublishing, photo, description, title, isbn, available,
+  authorFirstName, authorLastName, yearOfPublishing, photo, description, title, isbn, amount,
 }) => {
   const [author] = await queries.getAuthorByName(authorFirstName, authorLastName);
   if (!author) {
@@ -18,11 +18,14 @@ const addBook = async ({
     description,
     title,
     isbn,
-    available,
+    amount,
   });
   const photoUri = await uploadFile(photo, 'Books', newBook.id);
   await queries.updateBookById(newBook.id, { photo: photoUri });
-  return queries.getBookById(newBook.id);
+  const [result] = await queries.getBookById(newBook.id);
+  result.available = result.amount !== 0;
+  delete result.amount;
+  return [result];
 };
 
 const deleteBook = async ({ id }) => {
@@ -41,6 +44,8 @@ const getBook = async ({ id }) => {
   if (!book) {
     throw new Error('Book with this id doesnt exist');
   }
+  book.available = book.amount !== 0;
+  delete book.amount;
   return book;
 };
 
@@ -67,8 +72,10 @@ const updateBook = async ({
       throw new Error('Book with this isbn already exists');
     }
   }
-  await queries.updateBookById(book.id, { isbn, ...newData });
-  return queries.getBookById(book.id);
+  const [result] = await queries.getBookById(book.id);
+  result.available = result.amount !== 0;
+  delete result.amount;
+  return [result];
 };
 
 module.exports = {

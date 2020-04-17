@@ -1,9 +1,9 @@
-const { isLength } = require('validator');
+const { isLength, isInt } = require('validator');
 const { checkPhoto } = require('../../utils/checkPhoto');
 
 const addBook = (ctx, next) => {
   const {
-    authorFirstName, authorLastName, yearOfPublishing, photo, description, title, available, isbn,
+    authorFirstName, authorLastName, yearOfPublishing, photo, description, title, amount, isbn,
   } = ctx.request.body;
   if (!authorFirstName || !isLength(authorFirstName, {
     min: 2,
@@ -37,8 +37,8 @@ const addBook = (ctx, next) => {
   })) {
     return ctx.throw(400, 'Wrong isbn');
   }
-  if (!available) {
-    return ctx.throw(400, 'Available is require field');
+  if (!amount || !isInt(amount)) {
+    return ctx.throw(400, 'Amount is require field and its must be a number');
   }
   return next();
 };

@@ -11,7 +11,8 @@ async function start() {
     table.integer('yearOfPublishing');
     table.float('rating');
     table.string('photo');
-    table.boolean('available');
+    table.integer('generalAmount');
+    table.integer('amount');
   });
 }
 

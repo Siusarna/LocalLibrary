@@ -172,8 +172,8 @@
           "yearOfPublishing": {
             "type": "number"
           },
-          "available": {
-            "type": "boolean"
+          "amount": {
+            "type": "number"
           }
         },
         "required": [
@@ -315,8 +315,8 @@
           "yearOfPublishing": {
             "type": "number"
           },
-          "available": {
-            "type": "boolean"
+          "amount": {
+            "type": "number"
           }
         }
       },

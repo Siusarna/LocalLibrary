@@ -8,7 +8,7 @@ const getAuthorByName = (firstName, lastName) => knex('author')
   });
 
 const addBook = ({
-  authorId, yearOfPublishing, description, title, isbn, available,
+  authorId, yearOfPublishing, description, title, isbn, amount,
 }) => knex('book')
   .insert({
     authorId,
@@ -16,7 +16,8 @@ const addBook = ({
     description,
     title,
     isbn,
-    available,
+    generalAmount: amount,
+    amount,
   })
   .returning(['*']);
 
@@ -25,7 +26,7 @@ const getBookById = (id) => knex('book')
   .join('author', 'authorId', '=', 'author.id')
   .select('book.id', 'authorId', 'title',
     'book.photo', 'rating', 'book.description',
-    'available', 'isbn', 'yearOfPublishing', 'author.firstName', 'author.lastName');
+    'amount', 'isbn', 'yearOfPublishing', 'author.firstName', 'author.lastName');
 
 const deleteBookById = (id) => knex('book')
   .where({ id })
