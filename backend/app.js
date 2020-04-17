@@ -11,10 +11,12 @@ require('./src/middleware/index')(app);
 const accountsRouter = require('./src/accounts/router');
 const authorsRouter = require('./src/authors/router');
 const booksRouter = require('./src/books/router');
+const newsRouter = require('./src/news/router');
 
 router.use(accountsRouter.routes());
 router.use(authorsRouter.routes());
 router.use(booksRouter.routes());
+router.use(newsRouter.routes());
 app.use(router.routes());
 
 require('./src/schedule/deleteExpiredToken');

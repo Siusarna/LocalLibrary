@@ -27,6 +27,10 @@
     {
       "name": "books",
       "description": "Books CRUD"
+    },
+    {
+      "name": "news",
+      "description": "News CRUD"
     }
   ],
   "paths": {
@@ -68,6 +72,12 @@
     },
     "/books/:id": {
       "$ref": "/routes/books/getOne.json"
+    },
+    "/news": {
+      "$ref": "/routes/news/CRUD.json"
+    },
+    "/news/:id": {
+      "$ref": "/routes/news/getOne.json"
     }
   },
   "components": {

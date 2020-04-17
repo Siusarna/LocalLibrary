@@ -1,0 +1,307 @@
+{
+  "post": {
+    "summary": "Add a news",
+    "tags": [
+      "news"
+    ],
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/News"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "News adding success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/AddSuccess"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "News adding error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/AddFail"
+            }
+          }
+        }
+      }
+    }
+  },
+  "delete": {
+    "summary": "Delete exist news",
+    "tags": [
+      "news"
+    ],
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/Delete"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "News delete success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/DeleteResult"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "News delete error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/DeleteResult"
+            }
+          }
+        }
+      }
+    }
+  },
+  "get": {
+    "summary": "Get all news",
+    "tags": [
+      "news"
+    ],
+    "responses": {
+      "200": {
+        "description": "Get news success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/NewsSuccess"
+            }
+          }
+        }
+      }
+    }
+  },
+  "put": {
+    "summary": "Update news",
+    "tags": [
+      "news"
+    ],
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/UpdateNews"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "News update success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UpdateSuccess"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "News update error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UpdateFail"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "News": {
+        "type": "object",
+        "properties": {
+          "header": {
+            "type": "string"
+          },
+          "shortDescription": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "header",
+          "shortDescription",
+          "photo",
+          "description"
+        ]
+      },
+      "AddSuccess": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "header": {
+            "type": "string"
+          },
+          "shortDescription": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "createAt": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          }
+        }
+      },
+      "AddFail": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "Delete": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "DeleteResult": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "NewsSuccess": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "number"
+            },
+            "header": {
+              "type": "string"
+            },
+            "shortDescription": {
+              "type": "string"
+            },
+            "photo": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "UpdateNews": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "header": {
+            "type": "string"
+          },
+          "shortDescription": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateSuccess": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "header": {
+            "type": "string"
+          },
+          "shortDescription": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "createAt": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateFail": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
+
