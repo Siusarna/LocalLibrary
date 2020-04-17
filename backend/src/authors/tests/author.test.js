@@ -260,6 +260,7 @@ describe('Authors CRUD', () => {
     await queries.deleteTokenByUserId(user.id);
     await queries.deleteUserByEmail(credentialForRegisterLibrarian.email);
     await deleteAllFileFromFolder('User', user.id);
+    await deleteAllFileFromFolder('Author', author[0].id);
     await deleteAuthorById(author[0].id);
   });
 });

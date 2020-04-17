@@ -1,5 +1,5 @@
 const queries = require('./queries');
-const { uploadFile } = require('../utils/s3-bucket');
+const { uploadFile, deleteAllFileFromFolder } = require('../utils/s3-bucket');
 
 const addBook = async ({
   authorFirstName, authorLastName, yearOfPublishing, photo, description, title, isbn, available,
@@ -30,6 +30,7 @@ const deleteBook = async ({ id }) => {
   if (!book) {
     throw new Error('This book doesnt exist');
   }
+  await deleteAllFileFromFolder('Books', id);
   await queries.deleteBookById(id);
 };
 

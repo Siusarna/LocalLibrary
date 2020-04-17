@@ -297,7 +297,7 @@ describe('Books CRUD', () => {
     await queries.deleteTokenByUserId(user.id);
     await queries.deleteUserByEmail(credentialForRegisterLibrarian.email);
     await deleteAllFileFromFolder('User', user.id);
-    await deleteBookById(book[0].id);
+    await deleteAllFileFromFolder('Books', book[0].id);
     await deleteBookById(book[0].id + 1);
     await deleteAuthorById(author[0].id);
   });

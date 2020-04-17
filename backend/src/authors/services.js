@@ -1,5 +1,5 @@
 const queries = require('./queries');
-const { uploadFile } = require('../utils/s3-bucket');
+const { uploadFile, deleteAllFileFromFolder } = require('../utils/s3-bucket');
 
 const addAuthor = async ({
   firstName, lastName, yearOfBirthday, yearOfDeath, photo, description,
@@ -27,6 +27,7 @@ const deleteAuthor = async ({ id }) => {
   const authorBooks = await queries.getBooksByAuthorId(author.id);
   const promises = authorBooks.map(async (book) => queries.updateBook(book.id, { authorId: null }));
   await Promise.all(promises);
+  await deleteAllFileFromFolder('Author', id);
   await queries.deleteAuthorById(id);
 };
 
