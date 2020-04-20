@@ -40,6 +40,9 @@
     "/accounts/sign-in": {
       "$ref": "/routes/accounts/auth.json"
     },
+    "/accounts/facebook": {
+      "$ref": "/routes/accounts/facebook.json"
+    },
     "/accounts/profile": {
       "$ref": "/routes/accounts/profile.json"
     },

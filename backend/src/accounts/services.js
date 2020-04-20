@@ -1,5 +1,6 @@
 const generatePassword = require('generate-password');
 const config = require('config');
+const axios = require('axios');
 const { checkPassword, genSalt, genPassword } = require('../utils/password');
 const { createAndUpdateTokens } = require('../utils/jwtToken');
 const { uploadFile } = require('../utils/s3-bucket');
@@ -68,6 +69,52 @@ const forgotPasswordServices = async (email) => {
   await sendEmail(user.email, user.firstName, user.lastName, password);
 };
 
+const facebookServices = async ({ accessToken }) => {
+  const { data } = await axios({
+    url: 'https://graph.facebook.com/me',
+    method: 'get',
+    params: {
+      fields: ['id', 'email', 'first_name', 'last_name', 'hometown', 'birthday', 'picture.type(large)'].join(','),
+      access_token: accessToken,
+    },
+  });
+  if (!data.email) {
+    throw new Error(
+      'Your Facebook account haven\'t email. Please confirm email on Facebook or use other methods for sign-up',
+    );
+  }
+  const [user] = await queries.getUserByEmail(data.email);
+  if (user) {
+    const { accessToken: jwtAccessToken, refreshToken: jwtRefreshToken } = await createAndUpdateTokens(user.id);
+    return {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      photo: user.photo,
+      role: user.role,
+      accessToken: jwtAccessToken,
+      refreshToken: jwtRefreshToken,
+    };
+  }
+  const age = (new Date().getFullYear()) - data.birthday.substring(data.birthday.length - 4);
+  const [newUser] = await queries.insertNewUser({
+    email: data.email,
+    firstName: data.first_name,
+    lastName: data.last_name,
+    age,
+    city: data.hometown.name,
+    photo: data.picture.data.url,
+  });
+  const { accessToken: jwtAccessToken, refreshToken: jwtRefreshToken } = await createAndUpdateTokens(newUser.id);
+  return {
+    firstName: newUser.firstName,
+    lastName: newUser.lastName,
+    photo: data.picture.data.url,
+    role: newUser.role,
+    accessToken: jwtAccessToken,
+    refreshToken: jwtRefreshToken,
+  };
+};
+
 const changePasswordServices = async (user, { currentPassword, newPassword, confirmNewPassword }) => {
   if (!user || !checkPassword(currentPassword, user.password, user.salt)) {
     throw new Error('Incorrect current password ');
@@ -104,6 +151,7 @@ module.exports = {
   authServices,
   registerServices,
   forgotPasswordServices,
+  facebookServices,
   changePasswordServices,
   profileServices,
   updateProfileServices,
