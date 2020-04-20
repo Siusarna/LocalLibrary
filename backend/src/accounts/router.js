@@ -10,11 +10,13 @@ const router = new Router({
 router.post('/sign-in', validation.auth, accControllers.auth);
 router.post('/sign-up', validation.register, accControllers.register);
 router.post('/forgotPassword', validation.forgotPassword, accControllers.forgotPassword);
-router.put('/changePassword', checkAuth, validation.changePassword, accControllers.changePassword);
 
-router.get('/profile', checkAuth, accControllers.profile);
-router.put('/profile', checkAuth, validation.updateProfile, accControllers.updateProfile);
-router.put('/photo', checkAuth, validation.updatePhoto, accControllers.updatePhoto);
-router.get('/logout', checkAuth, accControllers.logout);
+router.use(checkAuth);
+
+router.put('/changePassword', validation.changePassword, accControllers.changePassword);
+router.get('/profile', accControllers.profile);
+router.put('/profile', validation.updateProfile, accControllers.updateProfile);
+router.put('/photo', validation.updatePhoto, accControllers.updatePhoto);
+router.get('/logout', accControllers.logout);
 
 module.exports = router;
