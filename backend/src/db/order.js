@@ -7,7 +7,7 @@ async function start() {
     table.foreign('bookId').references('book.id');
     table.integer('userId');
     table.foreign('userId').references('users.id');
-    table.text('status');
+    table.enum('status', ['In-progress', 'Ready-to-take', 'Cancel', 'Loaned', 'Finished']);
     table.timestamp('createAt')
       .defaultTo(knex.fn.now());
   });
