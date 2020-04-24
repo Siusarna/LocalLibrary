@@ -8,9 +8,13 @@ const router = new Router({
   prefix: '/orders',
 });
 
-router.post('/create', checkAuth, validation.create, ordersControllers.create);
-router.get('/', checkAuth, ordersControllers.getOrders);
-router.put('/confirm', checkAuth, checkAccess, ordersControllers.confirm);
-router.get('/confirmationCode', checkAuth, checkAccess, ordersControllers.sendConfirmationCode);
+router.use(checkAuth);
+router.post('/create', validation.create, ordersControllers.create);
+router.get('/', ordersControllers.getOrders);
+
+router.use(checkAccess);
+router.put('/confirm', validation.confirm, ordersControllers.confirm);
+router.post('/confirmationCode', validation.sendConfirmationCode, ordersControllers.sendConfirmationCode);
+router.post('/confirmCode', validation.confirmCode, ordersControllers.confirmCode);
 
 module.exports = router;
