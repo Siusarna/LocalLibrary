@@ -29,26 +29,42 @@ const getOrders = async ({ id, role }) => {
   return orders;
 };
 
-const confirm = async ({ id, confirmation, comment }) => {
-  const [order] = await queries.getOrderById(id);
+const confirm = async ({ orderId, confirmation, comment }) => {
+  const [order] = await queries.getOrderById(orderId);
   if (!order) {
     throw new Error('Order with this id not found');
   }
   if (confirmation) {
-    queries.updateOrderStatus(id, 'Completed', comment);
+    await queries.updateOrderStatus(orderId, 'Ready-to-take', comment);
   } else {
-    queries.updateOrderStatus(id, 'Cancel', comment);
+    await queries.updateOrderStatus(orderId, 'Cancel', comment);
   }
   // send notification
 };
 
-const sendConfirmationCode = async ({ id }) => {
-  const [user] = await queries.getUserById(id);
-  if (!user) {
-    throw new Error('User with this id not found');
+const sendConfirmationCode = async ({ orderId }) => {
+  const [order] = await queries.getOrderById(orderId);
+  if (!order) {
+    throw new Error('Order with this id not found');
+  }
+  if (order.status !== 'Ready-to-take') {
+    throw new Error('This order haven\'t status "Ready-to-take"');
   }
   const confirmationCode = Math.floor(Math.random() * (99999 - 10000)) + 10000;
-  await queries.addConfirmationCode(id, confirmationCode);
+  await queries.addConfirmationCode(orderId, confirmationCode);
+  // send notification
+};
+
+const confirmCode = async ({ orderId, code }) => {
+  const [confirmationCode] = await queries.getCodeByOrderId(orderId);
+  if (!confirmationCode) {
+    throw new Error('Confirmation code for this order id not found');
+  }
+  if (confirmationCode.code !== code) {
+    throw new Error('Incorrect code');
+  }
+  await queries.deleteConfirmationCode(orderId);
+  await queries.updateOrderStatus(orderId, 'Loaned');
 };
 
 module.exports = {
@@ -56,4 +72,5 @@ module.exports = {
   getOrders,
   confirm,
   sendConfirmationCode,
+  confirmCode,
 };

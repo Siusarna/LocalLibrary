@@ -46,11 +46,19 @@ const updateOrderStatus = (id, status, comment) => knex('order')
     comment,
   });
 
-const addConfirmationCode = (userId, code) => knex('confirmationCode')
+const addConfirmationCode = (orderId, code) => knex('confirmationCode')
   .insert({
     code,
-    userId,
+    orderId,
   });
+
+const getCodeByOrderId = (orderId) => knex('confirmationCode')
+  .select('*')
+  .where({ orderId });
+
+const deleteConfirmationCode = (orderId) => knex('confirmationCode')
+  .delete()
+  .where({ orderId });
 
 module.exports = {
   getBookById,
@@ -61,4 +69,6 @@ module.exports = {
   getOrderById,
   updateOrderStatus,
   addConfirmationCode,
+  getCodeByOrderId,
+  deleteConfirmationCode,
 };

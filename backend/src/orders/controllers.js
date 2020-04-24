@@ -48,9 +48,23 @@ const sendConfirmationCode = async (ctx) => {
   }
 };
 
+const confirmCode = async (ctx) => {
+  try {
+    await orderServices.confirmCode(ctx.request.body);
+    ctx.body = {
+      status: 'true',
+      message: 'Confirmation code successfully matched',
+    };
+    return ctx;
+  } catch (error) {
+    return ctx.throw(400, error);
+  }
+};
+
 module.exports = {
   create,
   getOrders,
   confirm,
   sendConfirmationCode,
+  confirmCode,
 };
