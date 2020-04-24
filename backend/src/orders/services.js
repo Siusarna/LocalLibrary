@@ -67,10 +67,23 @@ const confirmCode = async ({ orderId, code }) => {
   await queries.updateOrderStatus(orderId, 'Loaned');
 };
 
+const finish = async ({ orderId }) => {
+  const [order] = await queries.getOrderById(orderId);
+  if (!order) {
+    throw new Error('Order with this id not found');
+  }
+  if (order.status !== 'Loaned') {
+    throw new Error('This order can\'t finished, cause he isn\'t loaned');
+  }
+  const now = new Date();
+  await queries.updateOrderStatus(orderId, 'Finished', now.toDateString());
+};
+
 module.exports = {
   create,
   getOrders,
   confirm,
   sendConfirmationCode,
   confirmCode,
+  finish,
 };

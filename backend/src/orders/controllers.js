@@ -61,10 +61,24 @@ const confirmCode = async (ctx) => {
   }
 };
 
+const finish = async (ctx) => {
+  try {
+    await orderServices.finish(ctx.request.body);
+    ctx.body = {
+      status: 'true',
+      message: 'Order successfully finished',
+    };
+    return ctx;
+  } catch (error) {
+    return ctx.throw(400, error);
+  }
+};
+
 module.exports = {
   create,
   getOrders,
   confirm,
   sendConfirmationCode,
   confirmCode,
+  finish,
 };

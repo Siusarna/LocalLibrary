@@ -16,5 +16,6 @@ router.use(checkAccess);
 router.put('/confirm', validation.confirm, ordersControllers.confirm);
 router.post('/confirmationCode', validation.sendConfirmationCode, ordersControllers.sendConfirmationCode);
 router.post('/confirmCode', validation.confirmCode, ordersControllers.confirmCode);
+router.post('/finish', validation.finish, ordersControllers.finish);
 
 module.exports = router;
