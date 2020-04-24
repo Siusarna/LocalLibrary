@@ -1,0 +1,113 @@
+{
+  "get": {
+    "summary": "Get orders",
+    "tags": [
+      "orders"
+    ],
+    "responses": {
+      "200": {
+        "description": "Get orders for librarian success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/OrdersSuccess"
+            }
+          }
+        }
+      },
+      "201": {
+        "description": "Get orders for user success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserOrders"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "OrdersSuccess": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "number"
+            },
+            "bookId": {
+              "type": "number"
+            },
+            "authorId": {
+              "type": "number"
+            },
+            "userFirstName": {
+              "type": "string"
+            },
+            "userLastName": {
+              "type": "string"
+            },
+            "authorFirstName": {
+              "type": "string"
+            },
+            "authorLastName": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "createAt": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "comment": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "UserOrders": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "number"
+            },
+            "bookId": {
+              "type": "number"
+            },
+            "authorId": {
+              "type": "number"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "rating": {
+              "type": "number"
+            },
+            "createAt": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "comment": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

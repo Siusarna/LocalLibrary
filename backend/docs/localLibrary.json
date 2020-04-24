@@ -31,6 +31,10 @@
     {
       "name": "news",
       "description": "News CRUD"
+    },
+    {
+      "name": "orders",
+      "description": "Create, confirm, process and finish order"
     }
   ],
   "paths": {
@@ -81,6 +85,24 @@
     },
     "/news/:id": {
       "$ref": "/routes/news/getOne.json"
+    },
+    "/orders/create": {
+      "$ref": "/routes/order/create.json"
+    },
+    "/orders": {
+      "$ref": "/routes/order/getOrders.json"
+    },
+    "/orders/confirm": {
+      "$ref": "/routes/order/confirm.json"
+    },
+    "/orders/confirmationCode": {
+      "$ref": "/routes/order/confirmationCode.json"
+    },
+    "/orders/confirmCode": {
+      "$ref": "/routes/order/confirmCode.json"
+    },
+    "/orders/finish": {
+      "$ref": "/routes/order/finish.json"
     }
   },
   "components": {

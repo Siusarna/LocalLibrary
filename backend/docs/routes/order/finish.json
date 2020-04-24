@@ -1,0 +1,90 @@
+{
+  "post": {
+    "summary": "Finish order",
+    "tags": [
+      "orders"
+    ],
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/Order"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Orders finish success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/OrderSuccess"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Order finish error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/OrderFail"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Order": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "orderId"
+        ]
+      },
+      "OrderSuccess": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "success": true,
+          "message": "Order successfully finished"
+        }
+      },
+      "OrderFail": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "success": false,
+          "message": "This order can't finished, cause he isn't loaned"
+        }
+      }
+    }
+  }
+}
