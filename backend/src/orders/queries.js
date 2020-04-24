@@ -26,10 +26,12 @@ const getAllOrders = () => knex('order')
     knex.raw('users."lastName" as "userLastName"'),
     knex.raw('author."firstName" as "authorFirstName"'),
     knex.raw('author."lastName" as "authorLastName"'),
+    knex.raw('author.id as "authorId"'),
     'book.title',
     'status',
     'createAt',
-    'comment');
+    'comment',
+    'bookId');
 
 const getAllUsersOrders = (userId) => knex('order')
   .join('book', 'book.id', '=', 'order.bookId')
