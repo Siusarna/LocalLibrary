@@ -1,5 +1,5 @@
 {
-  "post": {
+  "put": {
     "summary": "Confirm new order",
     "tags": [
       "orders"
@@ -53,11 +53,14 @@
           "confirmation": {
             "type": "boolean"
           },
-          "required": [
-            "orderId",
-            "confirmation"
-          ]
-        }
+          "comment": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "orderId",
+          "confirmation"
+        ]
       },
       "OrderSuccess": {
         "type": "object",
