@@ -19,8 +19,8 @@ $SecondaryFontColor: rgb(251, 251, 251);
 /** Web Fonts **/
 
 @font-face {
-  font-family: 'for-logo';
-  src: url('fonts/for-logo.ttf') format('truetype');
+  font-family: "for-logo";
+  src: url("fonts/for-logo.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -71,7 +71,6 @@ button.search {
   border: 1px solid grey;
   border-radius: 80%;
   padding: 5px 10px;
-  
 
   img {
     width: 10px;
@@ -80,6 +79,10 @@ button.search {
   &:hover {
     background-color: $DarkerPrimaryColor;
     transition: background-color 0.15s;
+  }
+  &:disabled {
+    background-color: $DarkerPrimaryColor;
+    cursor: default;
   }
 }
 
@@ -96,12 +99,12 @@ form {
 
   background-color: $SecondaryColor;
   color: $SecondaryFontColor;
-  
+
   padding: 10px 40px;
 }
 
 .Logo {
-  font-family: 'for-logo';
+  font-family: "for-logo";
   font-size: 32px;
 
   flex: 1 1 460px;
@@ -111,13 +114,6 @@ form {
   @include flex;
 
   margin: 10px;
-
-  input {
-    border: 1px solid grey;
-    padding: 5px;
-    width: 90%;
-    border-radius: 50px;
-  }
 }
 
 .SectionTitle {
@@ -166,10 +162,10 @@ form {
     max-height: 100%;
   }
   .bookInfo,
-  .authorInfo{
+  .authorInfo {
     @include flex();
     flex-direction: column;
-    
+
     img {
       max-width: 10px;
     }
@@ -277,6 +273,13 @@ form {
   }
 }
 
+.OrderList {
+  .searchInput {
+    width: 100%;
+  }
+  margin: 10px;
+}
+
 /** Tables **/
 
 table {
@@ -284,7 +287,8 @@ table {
   margin: 5px auto;
 }
 
-td, th { 
+td,
+th {
   padding: 5px;
   text-align: center;
 }
@@ -346,7 +350,7 @@ textarea {
 }
 
 .starIcon {
-  max-width:15px;
+  max-width: 15px;
 }
 
 .center {
@@ -355,4 +359,20 @@ textarea {
 
 .searchForm {
   width: 100%;
+}
+
+.searchInput {
+  border: 1px solid grey;
+  padding: 5px;
+  width: 90%;
+  border-radius: 50px;
+}
+
+.button-container {
+  @include flex();
+  margin: 20px 0px;
+  button {
+    width: 100%;
+    margin: 10px;
+  }
 }
