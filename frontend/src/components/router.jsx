@@ -19,6 +19,7 @@ import AddBookPage from '../pages/AddBookPage';
 import AddAuthorPage from '../pages/AddAuthorPage';
 import UpdateBookPage from '../pages/UpdateBookPage';
 import UpdateAuthorPage from '../pages/UpdateAuthorPage';
+import Empty from './empty';
 
 
 const Router = () => (
@@ -40,6 +41,7 @@ const Router = () => (
     <PrivateRoute path='/authors/:id/update'    role='librarian'  component={UpdateAuthorPage}/>
     <Route path='/books/:id'        component={BookPage}/>
     <Route path='/authors/:id'      component={AuthorPage}/>
+    <Route path='/empty'      component={Empty}/>
   </Switch>
 );
 
