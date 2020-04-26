@@ -1,0 +1,94 @@
+{
+  "post": {
+    "summary": "Confirm code",
+    "tags": [
+      "orders"
+    ],
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/Order"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Confirm code success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ConfirmSuccess"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Confirm code error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ConfirmFail"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Order": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "number"
+          },
+          "code": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "orderId",
+          "code"
+        ]
+      },
+      "ConfirmSuccess": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "success": true,
+          "message": "Confirmation code successfully matched"
+        }
+      },
+      "ConfirmFail": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "success": false,
+          "message": "Incorrect code"
+        }
+      }
+    }
+  }
+}

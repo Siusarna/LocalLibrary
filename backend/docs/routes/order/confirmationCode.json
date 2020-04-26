@@ -1,0 +1,90 @@
+{
+  "post": {
+    "summary": "Send confirmation code for order",
+    "tags": [
+      "orders"
+    ],
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/Order"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Confirmation code send success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/SendSuccess"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Confirmation code send error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/SendFail"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Order": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "number"
+          },
+          "required": [
+            "orderId"
+          ]
+        }
+      },
+      "SendSuccess": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "success": true,
+          "message": "Confirmation code successfully sent"
+        }
+      },
+      "SendFail": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "success": false,
+          "message": "This order haven't status \"Ready-to-take\""
+        }
+      }
+    }
+  }
+}
