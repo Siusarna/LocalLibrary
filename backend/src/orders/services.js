@@ -5,10 +5,6 @@ const create = async (user, { bookId }) => {
   if (!book) {
     throw new Error('This book not found');
   }
-  const userOrders = await queries.getNotFinishedOrdersByUserId(user.id);
-  if (userOrders.length !== 0) {
-    throw new Error('You must finish all orders before create new');
-  }
   if (book.amount === 0) {
     throw new Error('This book is currently unavailable');
   }
@@ -30,15 +26,19 @@ const getOrders = async ({ id, role }) => {
 };
 
 const confirm = async ({ orderId, confirmation, comment }) => {
+  let result;
   const [order] = await queries.getOrderById(orderId);
   if (!order) {
     throw new Error('Order with this id not found');
   }
-  if (confirmation) {
+  if (confirmation === 'true') {
     await queries.updateOrderStatus(orderId, 'Ready-to-take', comment);
+    result = 'Order successfully confirmed';
   } else {
+    result = 'Order successfully canceled';
     await queries.updateOrderStatus(orderId, 'Cancel', comment);
   }
+  return result;
   // send notification
 };
 

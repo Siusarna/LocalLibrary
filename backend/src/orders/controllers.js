@@ -24,10 +24,10 @@ const getOrders = async (ctx) => {
 
 const confirm = async (ctx) => {
   try {
-    await orderServices.confirm(ctx.request.body);
+    const message = await orderServices.confirm(ctx.request.body);
     ctx.body = {
       status: 'true',
-      message: 'Order successfully confirmed',
+      message,
     };
     return ctx;
   } catch (error) {
