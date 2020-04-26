@@ -259,6 +259,23 @@ form {
   }
 }
 
+/** Tables **/
+
+table {
+  width: 100%;
+  margin: 5px auto;
+}
+
+td, th { 
+  padding: 5px;
+  text-align: center;
+}
+
+th {
+  background-color: $SecondaryColor;
+  color: $SecondaryFontColor;
+}
+
 /** Forms **/
 
 form {
