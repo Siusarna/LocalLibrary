@@ -5,7 +5,6 @@ import useFetch from '../hooks/useFetch';
 import Order from './order';
 import SectionTitle from './sectionTitle';
 import OrderStatusButton from './orderStatusButton';
-import OrderSearch from './orderSearch';
 
 const LOAN_PERIOD = 30; //days
 
