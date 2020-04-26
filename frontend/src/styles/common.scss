@@ -259,6 +259,24 @@ form {
   }
 }
 
+.Status {
+  width: 100%;
+  .In-progress {
+    color: yellow;
+  }
+  .Ready-to-take,
+  .Finished {
+    color: green;
+  }
+  .Cancel,
+  .Expired {
+    color: red;
+  }
+  .Loaned {
+    color: blue;
+  }
+}
+
 /** Tables **/
 
 table {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Status from './status';
 
 const Order = (props) => {
   const { id, bookId, title, createAt, returnAt, status, comment, 
@@ -11,7 +12,7 @@ const Order = (props) => {
     <td><Link to={`/books/${bookId}`}>{title}</Link></td>
     <td>{createAt}</td>
     {returnAt && <td>{returnAt}</td>}
-    <td>{status}</td>
+    <td><Status status={status} returnAt={returnAt}/></td>
     {props.role === 'librarian' && <td>action</td>}
     <td>{comment}</td>
   </tr>
