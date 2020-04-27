@@ -50,6 +50,7 @@ const sendConfirmationCode = async ({ orderId }) => {
   if (order.status !== 'Ready-to-take') {
     throw new Error('This order haven\'t status "Ready-to-take"');
   }
+  await queries.deleteConfirmationCode(orderId);
   const confirmationCode = Math.floor(Math.random() * (99999 - 10000)) + 10000;
   await queries.addConfirmationCode(orderId, confirmationCode);
   // send notification
