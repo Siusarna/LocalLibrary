@@ -42,10 +42,10 @@ const BookInfo = (props) => {
   if (!isBookLoaded || !isOrderLoaded) return null;
   if (isRedirect) return <Redirect to='/books/all' />
 
-  console.dir({ book });
-  console.dir({ orders });
-  book.available = book.available && !orders.some((order) => order.bookId === id);
-  console.dir({ av: book.available });
+  const isOrdered = orders.some((order) => {
+    return order.bookId === book.id && order.status !== 'Cancel' && order.status !== 'Finished'
+  });
+
   const authorName = book.firstName + ' ' + book.lastName;
 
   return (
@@ -55,7 +55,7 @@ const BookInfo = (props) => {
           <LeftRightContainer
             left={book.title}
             right={book.rating && <>
-              <img src='/star.png' className='starIcon' />
+              <img src='/star.png' className='starIcon' alt='rating star'/>
               {book.rating}
             </>}
           />
@@ -68,7 +68,7 @@ const BookInfo = (props) => {
       {role === 'librarian' && <button className='dark' onClick={deleteBook(id, setRedirect)}>Delete Book</button>}
       {role === 'librarian' && <SectionTitle text='Update Book' className='center' to={'/books/' + id + '/update'} />}
       {role === 'customer' && (book.available ?
-        <OrderBookButton book={book} /> :
+        (!isOrdered && <OrderBookButton book={book} />) :
         <FollowBookButton book={book} />
       )}
     </div>
