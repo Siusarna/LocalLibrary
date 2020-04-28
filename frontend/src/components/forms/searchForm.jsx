@@ -32,7 +32,6 @@ const SearchForm = (props) => {
             })
             .then((json) => {
               if (!success) {
-                console.log('wtf');
                 const error = json.message || 'Server Error';
                 setServerError(error);
               } else {
