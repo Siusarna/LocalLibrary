@@ -1,6 +1,7 @@
 const Router = require('koa-router');
 const Koa = require('koa');
 const config = require('config');
+const knex = require('./src/libs/knex');
 
 const app = new Koa();
 const router = new Router({
@@ -25,9 +26,10 @@ router.use(orderRouter.routes());
 router.use(subscriptionRouter.routes());
 app.use(router.routes());
 
-require('./src/schedule/deleteExpiredToken');
+// require('./src/schedule/deleteExpiredToken');
 
-module.exports = app.listen(config.port, () => {
+module.exports = app.listen(config.port, async () => {
   // eslint-disable-next-line no-console
+  console.log(await knex.raw('select 1+1 as dbResult'));
   console.log(`SERVER is listening on port: ${config.port}`);
 });

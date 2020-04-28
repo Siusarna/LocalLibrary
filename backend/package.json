@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha  --exit --timeout 30000 src/**/*.test.js",
+    "test": "./node_modules/.bin/mocha  --exit --timeout 300000 src/**/*.test.js",
     "lint": "eslint app.js & eslint ./src/**/*.js",
     "start": "node app.js",
     "server": "nodemon app.js"

@@ -25,8 +25,8 @@ const SignInForm = () => {
           .required('Required'),
       })}
       onSubmit={(values, { setSubmitting }) => {
-        fetch('https://fathomless-ravine-92681.herokuapp.com/api/accounts/sign-in', {
-          headers: { 
+        fetch('http://10.24.15.236/api/accounts/sign-in', {
+          headers: {
             'Content-Type': 'application/json',
           },
           method: 'POST',
@@ -45,7 +45,7 @@ const SignInForm = () => {
               const error = json.message || 'Server Error';
               setServerError(error);
             }
-            setSubmitting(false); 
+            setSubmitting(false);
           })
       }}
     >
