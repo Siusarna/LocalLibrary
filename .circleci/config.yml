@@ -9,8 +9,7 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: ls
-            - run: cd ./frontend
+            - run: cd frontend
             - run: pwd
             - run: npm install
             - run: cd ..
@@ -21,7 +20,7 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: cd ./backend
+            - run: cd backend
             - run: pwd
             - run: npm install
             - run: npm test
