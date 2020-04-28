@@ -13,6 +13,16 @@ const createSubscription = async (ctx) => {
   }
 };
 
+const getSubscription = async (ctx) => {
+  try {
+    ctx.body = await subscriptionServices.getSubscription(ctx.state.user);
+    return ctx;
+  } catch (error) {
+    return ctx.throw(400, error);
+  }
+};
+
 module.exports = {
   createSubscription,
+  getSubscription,
 };

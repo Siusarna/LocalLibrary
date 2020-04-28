@@ -15,6 +15,9 @@ const createSubscription = async (user, { bookId }) => {
   await queries.createSubscription(user.id, bookId);
 };
 
+const getSubscription = async ({ id }) => queries.getSubscriptionsByUserId(id);
+
 module.exports = {
   createSubscription,
+  getSubscription,
 };

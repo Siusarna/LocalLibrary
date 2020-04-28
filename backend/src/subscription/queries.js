@@ -17,8 +17,15 @@ const getSubscriptionsByBookIdAndUserId = (userId, bookId) => knex('subscription
     bookId,
   });
 
+const getSubscriptionsByUserId = (userId) => knex('subscriptions')
+  .join('book', 'bookId', 'book.id')
+  .join('author', 'book.authorId', 'author.id')
+  .select('book.title', 'author.firstName', 'author.lastName', 'subscriptions.createAt')
+  .where({ userId });
+
 module.exports = {
   getBookById,
   createSubscription,
   getSubscriptionsByBookIdAndUserId,
+  getSubscriptionsByUserId,
 };
