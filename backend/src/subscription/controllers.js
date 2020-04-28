@@ -22,7 +22,21 @@ const getSubscription = async (ctx) => {
   }
 };
 
+const deleteSubscription = async (ctx) => {
+  try {
+    await subscriptionServices.deleteSubscription(ctx.state.user, ctx.request.body);
+    ctx.body = {
+      status: 'true',
+      message: 'Subscription successfully deleted',
+    };
+    return ctx;
+  } catch (error) {
+    return ctx.throw(400, error);
+  }
+};
+
 module.exports = {
   createSubscription,
   getSubscription,
+  deleteSubscription,
 };

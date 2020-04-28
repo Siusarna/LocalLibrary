@@ -9,6 +9,6 @@ const router = new Router({
 router.use(checkAuth);
 router.post('/', subscriptionControllers.createSubscription);
 router.get('/', subscriptionControllers.getSubscription);
-// router.delete('/', subscriptionControllers.deleteSubscription);
+router.delete('/', subscriptionControllers.deleteSubscription);
 
 module.exports = router;

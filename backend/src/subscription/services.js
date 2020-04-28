@@ -17,7 +17,16 @@ const createSubscription = async (user, { bookId }) => {
 
 const getSubscription = async ({ id }) => queries.getSubscriptionsByUserId(id);
 
+const deleteSubscription = async ({ id }, { bookId }) => {
+  const [subscription] = await queries.getSubscriptionsByBookIdAndUserId(id, bookId);
+  if (!subscription) {
+    throw new Error('This subscription not found');
+  }
+  await queries.deleteSubscription(id, bookId);
+};
+
 module.exports = {
   createSubscription,
   getSubscription,
+  deleteSubscription,
 };
