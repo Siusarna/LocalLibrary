@@ -35,6 +35,10 @@
     {
       "name": "orders",
       "description": "Create, confirm, process and finish order"
+    },
+    {
+      "name": "subscription",
+      "description": "Create, get and delete subscription"
     }
   ],
   "paths": {
@@ -103,6 +107,9 @@
     },
     "/orders/finish": {
       "$ref": "/routes/order/finish.json"
+    },
+    "/subscription": {
+      "$ref": "/routes/subscription/CRD.json"
     }
   },
   "components": {

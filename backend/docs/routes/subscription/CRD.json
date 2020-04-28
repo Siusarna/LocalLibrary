@@ -1,0 +1,11 @@
+{
+  "post": {
+    "$ref": "./create.json"
+  },
+  "delete": {
+    "$ref": "./delete.json"
+  },
+  "get": {
+    "$ref": "./get.json"
+  }
+}
