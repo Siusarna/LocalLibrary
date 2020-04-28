@@ -1,0 +1,30 @@
+version: 2.1
+orbs:
+  node: circleci/node@1.1.6
+jobs:
+  build-client:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: cd ./frontend
+            - run: npm install
+  build-and-test-server:
+    executor:
+      name: node/default
+      steps:
+        - checkout
+        - node/with-cache:
+            steps:
+              - run: cd ./backend
+              - run: npm install
+              - run: npm test
+workflows:
+  client:
+    jobs:
+      - build-client
+  server:
+    jobs:
+      - build-and-test-server
