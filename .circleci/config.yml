@@ -7,12 +7,7 @@ jobs:
       name: node/default
     steps:
       - checkout
-      - run: cd frontend
-        "node/with-cache:
-          steps:
-            - run: pwd
-            - run: npm install
-            - run: cd .."
+      - run: cd frontend && npm install
   build-and-test-server:
     executor:
       name: node/default
@@ -20,11 +15,7 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: cd backend
-            - run: pwd
-            - run: npm install
-            - run: npm test
-            - run: cd ..
+            - run: cd backend && npm install && npm test
 workflows:
   client:
     jobs:
