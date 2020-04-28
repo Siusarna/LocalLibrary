@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 
 const useFetch = (url) => {
+  const [shouldUpdate, setShouldUpdate] = useState(true);
   const [fetchResult, setFetchResult] = useState({ isLoaded: false, error: null });
 
   useEffect(() => {
+    if (!shouldUpdate) return;
     const newFetchResult = {};
     fetch(url, {credentials: 'include'})
       .then(result => {
@@ -19,10 +21,11 @@ const useFetch = (url) => {
       })
       .then(() => {
         setFetchResult(newFetchResult);
+        setShouldUpdate(false);
       });
-  }, [])
+  }, [shouldUpdate])
 
-  return fetchResult;
+  return Object.assign({}, fetchResult, { update: () => { setShouldUpdate(true) }});
 }
 
 export default useFetch;

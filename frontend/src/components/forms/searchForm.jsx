@@ -20,7 +20,7 @@ const SearchForm = (props) => {
         })}
         onSubmit={(values, { setSubmitting }) => {
           setServerError('');
-          fetch('http://localhost:3000/api/search/' + values.query, {
+          fetch('https://fathomless-ravine-92681.herokuapp.com/api/search/' + values.query, {
             credentials: 'include',
           })
             .then((res) => {
@@ -32,7 +32,6 @@ const SearchForm = (props) => {
             })
             .then((json) => {
               if (!success) {
-                console.log('wtf');
                 const error = json.message || 'Server Error';
                 setServerError(error);
               } else {

@@ -2,7 +2,9 @@ import React from 'react';
 import ProfileInfo from '../components/profileInfo';
 
 const ProfilePage = () => (
-  <ProfileInfo/>
+  <>
+    <ProfileInfo />
+  </>
 )
 
 export default ProfilePage;

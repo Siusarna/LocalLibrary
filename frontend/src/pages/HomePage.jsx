@@ -1,6 +1,4 @@
 import React from 'react';
-import { Link, Switch, Route } from 'react-router-dom';
-import BookSearch from '../components/bookSearch';
 import Recommendations from '../components/recommendations';
 import NewsList from '../components/newsList';
 import SectionTitle from '../components/sectionTitle';
@@ -18,6 +16,7 @@ const HomePage = () => {
       <SearchForm onResult={(books) => { setBooks(books) }} />
       {!books ?
         <>
+          {role === 'librarian' && <SectionTitle text='Work Page' to='/work'/>}
           <Recommendations />
           <NewsList />
           <SectionTitle text='All Books' to='/books/all' />
