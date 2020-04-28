@@ -20,7 +20,7 @@ const getSubscriptionsByBookIdAndUserId = (userId, bookId) => knex('subscription
 const getSubscriptionsByUserId = (userId) => knex('subscriptions')
   .join('book', 'bookId', 'book.id')
   .join('author', 'book.authorId', 'author.id')
-  .select('book.title', 'book.id', 'authorId', 'author.firstName', 'author.lastName', 'subscriptions.createAt')
+  .select('book.title', 'book.id as bookId', 'authorId', 'author.firstName', 'author.lastName', 'subscriptions.createAt')
   .where({ userId });
 
 const deleteSubscription = (userId, bookId) => knex('subscriptions')
