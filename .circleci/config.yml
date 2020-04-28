@@ -14,13 +14,13 @@ jobs:
   build-and-test-server:
     executor:
       name: node/default
-      steps:
-        - checkout
-        - node/with-cache:
-            steps:
-              - run: cd ./backend
-              - run: npm install
-              - run: npm test
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: cd ./backend
+            - run: npm install
+            - run: npm test
 workflows:
   client:
     jobs:
