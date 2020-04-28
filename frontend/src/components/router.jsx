@@ -21,6 +21,8 @@ import UpdateBookPage from '../pages/UpdateBookPage';
 import UpdateAuthorPage from '../pages/UpdateAuthorPage';
 import WorkPage from '../pages/WorkPage';
 import Empty from './empty';
+import RejectOrderPage from '../pages/RejectOrderPage';
+import ConfirmationCodePage from '../pages/ConfirmationCodePage';
 
 
 const Router = () => (
@@ -41,6 +43,8 @@ const Router = () => (
     <PrivateRoute path='/books/:id/update'      role='librarian'  component={UpdateBookPage}/>
     <PrivateRoute path='/authors/:id/update'    role='librarian'  component={UpdateAuthorPage}/>
     <PrivateRoute path='/work'                  role='librarian'  component={WorkPage}/>
+    <PrivateRoute path='/orders/reject/:id'     role='librarian'  component={RejectOrderPage}/>
+    <PrivateRoute path='/orders/ccode/:id'      role='librarian'  component={ConfirmationCodePage}/>
     <Route path='/books/:id'        component={BookPage}/>
     <Route path='/authors/:id'      component={AuthorPage}/>
     <Route path='/empty'      component={Empty}/>
