@@ -1,0 +1,88 @@
+{
+  "summary": "Delete subscription",
+  "tags": [
+    "subscription"
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "content": {
+      "application/json": {
+        "schema": {
+          "$ref": "#/components/schemas/Subscription"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "Subscription delete success",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/SubscriptionSuccess"
+          }
+        }
+      }
+    },
+    "400": {
+      "description": "Subscription delete error",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/SubscriptionFail"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Subscription": {
+        "type": "object",
+        "properties": {
+          "bookId": {
+            "type": "number"
+          },
+          "required": [
+            "bookId"
+          ]
+        }
+      },
+      "SubscriptionSuccess": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "success": true,
+          "message": "Subscription successfully deleted"
+        }
+      },
+      "SubscriptionFail": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "success": false,
+          "message": "This subscription not found"
+        }
+      }
+    }
+  }
+}

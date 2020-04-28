@@ -1,0 +1,48 @@
+{
+  "summary": "Get user subscription",
+  "tags": [
+    "subscription"
+  ],
+  "responses": {
+    "200": {
+      "description": "Get subscription success",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/SubscriptionSuccess"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SubscriptionSuccess": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "bookId": {
+              "type": "number"
+            },
+            "authorId": {
+              "type": "number"
+            },
+            "authorFirstName": {
+              "type": "string"
+            },
+            "authorLastName": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "createAt": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
