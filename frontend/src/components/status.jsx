@@ -1,14 +1,14 @@
 import React from 'react';
 
 const checkReturnDate = (returnAt) => {
-  const [date, month, year] = returnAt.split('.');
+  const [date, month, year] = returnAt.split(/[. :]/g);
   const returnDate = new Date(+year, +month, +date);
   return new Date() > returnDate;
 }
 
 const Status = (props) => {
   let { status, returnAt } = props;
-  if (status === 'Loaned' && !checkReturnDate(returnAt)) {
+  if (status === 'Loaned' && returnAt && !checkReturnDate(returnAt)) {
     status = 'Expired'
   } 
   return (
