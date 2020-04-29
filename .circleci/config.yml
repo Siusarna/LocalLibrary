@@ -37,4 +37,4 @@ workflows:
   server:
     jobs:
       - build
-      - build-and-test-server
+      - server
