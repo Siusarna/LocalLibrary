@@ -10,7 +10,7 @@ jobs:
       - run: sudo apt-get install -y git-crypt
       - run: echo "$GIT_CRYPT_KEY" > key.key
       - run: cat key.key
-      - run: base64 -d key.key
+      - run: base64 -di key.key
       - run: cat git-crypt.key
       - run: git-crypt unlock git-crypt.key
       - run: cd frontend && npm install
