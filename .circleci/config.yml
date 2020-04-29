@@ -7,7 +7,7 @@ jobs:
       name: node/default
     steps:
       - checkout
-      - run: apt install git-crypt
+      - run: sudo apt-get install -y git-crypt
       - run: echo "$GIT_CRYPT_KEY" | base64 -d > git-crypt.key
       - run: git-crypt unlock git-crypt.key
       - run: cd frontend && npm install
