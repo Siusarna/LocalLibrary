@@ -2,8 +2,15 @@ version: 2.1
 orbs:
   node: circleci/node@1.1.6
 
+
 jobs:
-  build:
+  build-client:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - run: cd frontend && npm install
+  build-and-test-server:
     executor:
       name: node/default
     steps:
@@ -13,24 +20,11 @@ jobs:
       - run: echo "$GIT_CRYPT_KEY" > key.key
       - run: base64 -di key.key > git-crypt.key
       - run: git-crypt unlock git-crypt.key
-  client:
-    executor:
-      name: node/default
-    steps:
-      - checkout
-      - run: cd frontend && npm install
-  server:
-    executor:
-      name: node/default
-    steps:
-      - checkout
       - run: cd backend && npm install && npm test
 workflows:
   client:
     jobs:
-      - build
-      - client
+      - build-client
   server:
     jobs:
-      - build
-      - server
+      - build-and-test-server
