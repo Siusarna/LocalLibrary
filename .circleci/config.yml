@@ -1,27 +1,36 @@
 version: 2.1
 orbs:
   node: circleci/node@1.1.6
+references:
+  container_config: &container_config
+    docker:
+      - image: circleci/postgres:9.6-alpine
+    working_directory: ~/circleci/project
 jobs:
-  build-client:
+  build:
+    <<: *container_config
+    - run: sudo apt-get install -y git-crypt
+    - run: echo "$GIT_CRYPT_KEY" > key.key
+    - run: base64 -di key.key > git-crypt.key
+    - run: git-crypt unlock git-crypt.key
+  client:
     executor:
       name: node/default
     steps:
       - checkout
       - run: cd frontend && npm install
-  build-and-test-server:
+  server:
     executor:
       name: node/default
     steps:
       - checkout
-      - run: sudo apt-get install -y git-crypt
-      - run: echo "$GIT_CRYPT_KEY" > key.key
-      - run: base64 -di key.key > git-crypt.key
-      - run: git-crypt unlock git-crypt.key
       - run: cd backend && npm install && npm test
 workflows:
   client:
     jobs:
-      - build-client
+      - build
+      - client
   server:
     jobs:
+      - build
       - build-and-test-server
