@@ -7,10 +7,6 @@ jobs:
       name: node/default
     steps:
       - checkout
-      - run: sudo apt-get install -y git-crypt
-      - run: echo "$GIT_CRYPT_KEY" > key.key
-      - run: base64 -di key.key > git-crypt.key
-      - run: git-crypt unlock git-crypt.key
       - run: cd frontend && npm install
   build-and-test-server:
     executor:
@@ -19,6 +15,10 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
+            - run: sudo apt-get install -y git-crypt
+            - run: echo "$GIT_CRYPT_KEY" > key.key
+            - run: base64 -di key.key > git-crypt.key
+            - run: git-crypt unlock git-crypt.key
             - run: cd backend && npm install && npm test
 workflows:
   client:
