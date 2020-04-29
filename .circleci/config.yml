@@ -4,6 +4,8 @@ orbs:
 
 jobs:
   build:
+    executor:
+      name: machine
     steps:
       - checkout
       - run: sudo apt-get install postgresql
