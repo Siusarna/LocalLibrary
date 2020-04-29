@@ -10,6 +10,13 @@ jobs:
     steps:
       - checkout
       - run: cd frontend && npm install
+      - run:
+          name: Deploy to Docker Cloud
+          command: |
+            cd frontend
+            docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+            docker build -t $DOCKER_LOGIN/$CIRCLE_PROJECT_REPONAME-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM .
+            docker push $DOCKER_LOGIN/$CIRCLE_PROJECT_REPONAME-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
   build-and-test-server:
     executor:
       name: node/default
@@ -20,11 +27,63 @@ jobs:
       - run: echo "$GIT_CRYPT_KEY" > key.key
       - run: base64 -di key.key > git-crypt.key
       - run: git-crypt unlock git-crypt.key
-      - run: cd backend && npm install && npm test
+      - run: cd backend && npm install
+  deploy-server:
+    executor:
+      name: node/default
+    steps:
+      - run:
+          name: Deploy to Docker Cloud server
+          command: |
+            cd backend
+            docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+            docker build -t $DOCKER_LOGIN/$CIRCLE_PROJECT_REPONAME-server:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM .
+            docker push $DOCKER_LOGIN/$CIRCLE_PROJECT_REPONAME-server:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
+      - run:
+          name: Install kubectl
+          command: |
+            curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+            chmod +x kubectl
+            sudo mv kubectl /usr/local/bin/
+      - run:
+          name: Deliver to Kubernetes
+          command: |
+            kubectl config set-cluster local-library --certificate-authority="${KUBE_CA_PEM}" --server=$KUBE_URL
+            kubectl config set-credentials admin --username="${KUBE_USERNAME}" --password="${KUBE_PASSWORD}"
+            kubectl config set-context default --cluster="local-library" --user=${KUBE_USERNAME}
+            kubectl config use-context default
+            kubectl set image deployment/default "local-library"=$DOCKER_LOGIN/$CIRCLE_PROJECT_REPONAME-server:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
+  deploy-client:
+    executor:
+      name: node/default
+    steps:
+      - run:
+          name: Deploy to Docker Cloud server
+          command: |
+            cd backend
+            docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+            docker build -t $DOCKER_LOGIN/$CIRCLE_PROJECT_REPONAME-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM .
+            docker push $DOCKER_LOGIN/$CIRCLE_PROJECT_REPONAME-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
+      - run:
+          name: Install kubectl
+          command: |
+            curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+            chmod +x kubectl
+            sudo mv kubectl /usr/local/bin/
+      - run:
+          name: Deliver to Kubernetes
+          command: |
+            kubectl config set-cluster local-library --certificate-authority="${KUBE_CA_PEM}" --server=$KUBE_URL
+            kubectl config set-credentials admin --username="${KUBE_USERNAME}" --password="${KUBE_PASSWORD}"
+            kubectl config set-context default --cluster="local-library" --user=${KUBE_USERNAME}
+            kubectl config use-context default
+            kubectl set image deployment/default "local-library"=$DOCKER_LOGIN/$CIRCLE_PROJECT_REPONAME-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
 workflows:
   client:
     jobs:
       - build-client
+      - deploy-client
   server:
     jobs:
       - build-and-test-server
+      - deploy-server
