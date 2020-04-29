@@ -7,6 +7,7 @@ chai.should();
 
 const server = require('../../../app');
 const queries = require('../queries');
+const knex = require('../../libs/knex');
 const TestUtil = require('../../utils/test')(server);
 const { deleteAllFileFromFolder } = require('../../utils/s3-bucket');
 
@@ -14,6 +15,11 @@ const credentials = {
   email: 'siusarnasite@gmail.com',
   password: '1234567a',
 };
+
+const fun = async () => console.log(await knex.raw('select 1+1 as dbResult'));
+
+fun();
+
 
 const credentialForRegister = {
   email: 'siusarnasite@gmail.com',
