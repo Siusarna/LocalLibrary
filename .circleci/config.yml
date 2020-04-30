@@ -64,7 +64,7 @@ jobs:
     docker:
       - image: google/cloud-sdk
     environment:
-      - PROJECT_NAME: "LocalLibrary-KPI"
+      - PROJECT_NAME: "local-library-kpi"
       - GOOGLE_PROJECT_ID: "locallibrary-kpi"
       - GOOGLE_COMPUTE_REGION: "europe-west3"
       - GOOGLE_CLUSTER_NAME: "cloudl"
