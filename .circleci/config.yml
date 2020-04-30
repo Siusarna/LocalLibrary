@@ -5,10 +5,15 @@ orbs:
 
 references:
 
-  restore_npm_cache: &restore_npm_cache
+  restore_npm_cache_frontend: &restore_npm_cache
     restore_cache:
       name: Restore npm cache
-      key: dependency-npm-{{ .Branch }}-{{ checksum "package.json" }}
+      key: dependency-npm-{{ .Branch }}-{{ checksum "./frontend/package.json" }}
+
+  restore_npm_cache_backend: &restore_npm_cache
+    restore_cache:
+      name: Restore npm cache
+      key: dependency-npm-{{ .Branch }}-{{ checksum "./backend/package.json" }}
 
   restore_repo: &restore_repo_cache
     restore_cache:
@@ -21,13 +26,13 @@ jobs:
       name: node/default
     steps:
       - checkout
-      - *restore_npm_cache
+      - *restore_npm_cache_frontend
       - run: cd frontend && npm install
       - save_cache:
           name: Save npm cache
-          key: dependency-npm-{{ .Branch }}-{{ checksum "package.json" }}
+          key: dependency-npm-{{ .Branch }}-{{ checksum "./frontend/package.json" }}
           paths:
-            - 'node_modules'
+            - './frontend/node_modules'
       - save_cache:
           name: Save repo cache
           key: repo-{{ .Branch }}-{{ .Revision }}
@@ -38,7 +43,7 @@ jobs:
       name: node/default
     steps:
       - checkout
-      - *restore_npm_cache
+      - cd backend && *restore_npm_cache
       - run: sudo apt-get install postgresql
       - run: sudo apt-get install -y git-crypt
       - run: echo "$GIT_CRYPT_KEY" > key.key
@@ -47,9 +52,9 @@ jobs:
       - run: cd backend && npm install
       - save_cache:
           name: Save npm cache
-          key: dependency-npm-{{ .Branch }}-{{ checksum "package.json" }}
+          key: dependency-npm-{{ .Branch }}-{{ checksum "./backend/package.json" }}
           paths:
-            - 'node_modules'
+            - './backend/node_modules'
       - save_cache:
           name: Save repo cache
           key: repo-{{ .Branch }}-{{ .Revision }}
@@ -63,7 +68,8 @@ jobs:
       - run: ls
       - run:
           name: Deploy to Docker Cloud server
-          command: cd backend |
+          command: |
+            cd backend
             docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
             docker build -t $DOCKER_LOGIN/local-library-server:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM .
             docker push $DOCKER_LOGIN/local-library-server:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
@@ -75,7 +81,8 @@ jobs:
             sudo mv kubectl /usr/local/bin/
       - run:
           name: Deliver to Kubernetes
-          command: cd backend |
+          command: |
+            cd backend
             kubectl config set-cluster local-library --certificate-authority="${KUBE_CA_PEM}" --server=$KUBE_URL
             kubectl config set-credentials admin --username="${KUBE_USERNAME}" --password="${KUBE_PASSWORD}"
             kubectl config set-context default --cluster="local-library" --user=${KUBE_USERNAME}
@@ -88,8 +95,8 @@ jobs:
       - *restore_repo_cache
       - run:
           name: Deploy to Docker Cloud server
-          command: cd frontend
-            |
+          command: |
+            cd frontend
             docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
             docker build -t $DOCKER_LOGIN/local-library-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM .
             docker push $DOCKER_LOGIN/local-library-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
@@ -101,8 +108,8 @@ jobs:
             sudo mv kubectl /usr/local/bin/
       - run:
           name: Deliver to Kubernetes
-          command: cd frontend
-            |
+          command: |
+            cd frontend
             kubectl config set-cluster local-library --certificate-authority="${KUBE_CA_PEM}" --server=$KUBE_URL
             kubectl config set-credentials admin --username="${KUBE_USERNAME}" --password="${KUBE_PASSWORD}"
             kubectl config set-context default --cluster="local-library" --user=${KUBE_USERNAME}
