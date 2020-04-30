@@ -69,7 +69,7 @@ jobs:
       - GOOGLE_COMPUTE_ZONE: "europe-west3-a"
       - GOOGLE_CLUSTER_NAME: "local-library"
     steps:
-      - *restore_repo_cache
+      - checkout
       - setup_remote_docker
       - run:
           name: Deploy to Docker Cloud server
