@@ -117,6 +117,7 @@ jobs:
             kubectl config set-credentials admin --username="${KUBE_USERNAME}" --password="${KUBE_PASSWORD}"
             kubectl config set-context default --cluster="local-library" --user=${KUBE_USERNAME}
             kubectl config use-context default
+            kubectl get pods
             kubectl set image deployment/default "local-library"=$DOCKER_LOGIN/local-library-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
 workflows:
   client:
