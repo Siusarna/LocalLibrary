@@ -84,7 +84,7 @@ jobs:
           command: |
             cd backend
             echo "${KUBE_CA_PEM}" > cerf.txt
-            kubectl config set-cluster local-library --certificate-authority=cerf.txt --server=$KUBE_URL
+            kubectl config set-cluster local-library --insecure-skip-tls-verify=true --server=$KUBE_URL
             kubectl config set-credentials admin --username="${KUBE_USERNAME}" --password="${KUBE_PASSWORD}"
             kubectl config set-context default --cluster="local-library" --user=${KUBE_USERNAME}
             kubectl config use-context default
@@ -113,7 +113,7 @@ jobs:
           command: |
             cd frontend
             echo "${KUBE_CA_PEM}" > cerf.txt
-            kubectl config set-cluster local-library --certificate-authority=cerf.txt --server=$KUBE_URL
+            kubectl config set-cluster local-library --insecure-skip-tls-verify=true --server=$KUBE_URL
             kubectl config set-credentials admin --username="${KUBE_USERNAME}" --password="${KUBE_PASSWORD}"
             kubectl config set-context default --cluster="local-library" --user=${KUBE_USERNAME}
             kubectl config use-context default
