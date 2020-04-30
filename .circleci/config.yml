@@ -43,7 +43,7 @@ jobs:
       name: node/default
     steps:
       - checkout
-      - cd backend && *restore_npm_cache
+      - *restore_npm_cache_backend
       - run: sudo apt-get install postgresql
       - run: sudo apt-get install -y git-crypt
       - run: echo "$GIT_CRYPT_KEY" > key.key
