@@ -80,8 +80,10 @@ jobs:
       - GOOGLE_PROJECT_ID: "locallibrary-kpi"
       - GOOGLE_COMPUTE_REGION: "europe-west3"
       - GOOGLE_CLUSTER_NAME: "cloudl"
+      - CIRCLE_BUILD_NUM_MINUS_ONE: echo "$(($CIRCLE_BUILD_NUM - 1))"
     steps:
       - checkout
+      - run: echo $CIRCLE_BUILD_NUM_MINUS_ONE
       - run:
           name: Setup Google Cloud SDK
           command: |
@@ -148,4 +150,3 @@ workflows:
       - deploy-server:
           requires:
             - build-and-test-server
-            
