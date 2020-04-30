@@ -10,13 +10,6 @@ jobs:
     steps:
       - checkout
       - run: cd frontend && npm install
-      - run:
-          name: Deploy to Docker Cloud
-          command: |
-            cd frontend
-            docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-            docker build -t $DOCKER_LOGIN/$CIRCLE_PROJECT_REPONAME-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM .
-            docker push $DOCKER_LOGIN/$CIRCLE_PROJECT_REPONAME-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
   build-and-test-server:
     executor:
       name: node/default
@@ -34,7 +27,7 @@ jobs:
     steps:
       - run:
           name: Deploy to Docker Cloud server
-          command: cd backend && |
+          command: cd backend |
             docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
             docker build -t $DOCKER_LOGIN/local-library-server:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM .
             docker push $DOCKER_LOGIN/local-library-server:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
@@ -46,7 +39,7 @@ jobs:
             sudo mv kubectl /usr/local/bin/
       - run:
           name: Deliver to Kubernetes
-          command: |
+          command: cd backend |
             kubectl config set-cluster local-library --certificate-authority="${KUBE_CA_PEM}" --server=$KUBE_URL
             kubectl config set-credentials admin --username="${KUBE_USERNAME}" --password="${KUBE_PASSWORD}"
             kubectl config set-context default --cluster="local-library" --user=${KUBE_USERNAME}
@@ -58,7 +51,8 @@ jobs:
     steps:
       - run:
           name: Deploy to Docker Cloud server
-          command: cd client && |
+          command: cd client
+            |
             docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
             docker build -t $DOCKER_LOGIN/local-library-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM .
             docker push $DOCKER_LOGIN/local-library-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
@@ -70,7 +64,8 @@ jobs:
             sudo mv kubectl /usr/local/bin/
       - run:
           name: Deliver to Kubernetes
-          command: |
+          command: cd client 
+            |
             kubectl config set-cluster local-library --certificate-authority="${KUBE_CA_PEM}" --server=$KUBE_URL
             kubectl config set-credentials admin --username="${KUBE_USERNAME}" --password="${KUBE_PASSWORD}"
             kubectl config set-context default --cluster="local-library" --user=${KUBE_USERNAME}
