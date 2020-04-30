@@ -65,7 +65,7 @@ jobs:
       - image: google/cloud-sdk
     environment:
       - PROJECT_NAME: "LocalLibrary-KPI"
-      - GOOGLE_PROJECT_ID: "203569845652"
+      - GOOGLE_PROJECT_ID: "locallibrary-kpi"
       - GOOGLE_COMPUTE_ZONE: "europe-west3-a"
       - GOOGLE_CLUSTER_NAME: "local-library"
     steps:
