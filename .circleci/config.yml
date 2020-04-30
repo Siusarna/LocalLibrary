@@ -79,12 +79,6 @@ jobs:
             docker build -t $DOCKER_LOGIN/local-library-server:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM .
             docker push $DOCKER_LOGIN/local-library-server:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
       - run:
-          name: Install kubectl
-          command: |
-            curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-            chmod +x kubectl
-            sudo mv kubectl /usr/local/bin/
-      - run:
           name: Setup Google Cloud SDK
           command: |
             apt-get install -qq -y gettext
