@@ -91,7 +91,7 @@ jobs:
           name: Deploy to Kubernetes
           command: |
             envsubst < ${HOME}/project/backend/k8s.yml > ${HOME}/backend/patched_k8s.yml
-            kubectl apply -f ${HOME}/backend/patched_k8s.yml
+            kubectl apply -f ${HOME}/project/backend/patched_k8s.yml
             kubectl rollout status deployment/${PROJECT_NAME}
   deploy-client:
     executor:
