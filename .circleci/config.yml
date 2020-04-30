@@ -37,6 +37,7 @@ jobs:
             curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
             chmod +x kubectl
             sudo mv kubectl /usr/local/bin/
+      - run: ls
       - run:
           name: Deliver to Kubernetes
           command: cd backend |
@@ -51,7 +52,7 @@ jobs:
     steps:
       - run:
           name: Deploy to Docker Cloud server
-          command: cd client
+          command: cd frontend
             |
             docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
             docker build -t $DOCKER_LOGIN/local-library-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM .
@@ -64,7 +65,7 @@ jobs:
             sudo mv kubectl /usr/local/bin/
       - run:
           name: Deliver to Kubernetes
-          command: cd client 
+          command: cd frontend
             |
             kubectl config set-cluster local-library --certificate-authority="${KUBE_CA_PEM}" --server=$KUBE_URL
             kubectl config set-credentials admin --username="${KUBE_USERNAME}" --password="${KUBE_PASSWORD}"
@@ -75,8 +76,12 @@ workflows:
   client:
     jobs:
       - build-client
-      - deploy-client
+      - deploy-client:
+          requires:
+            build-client
   server:
     jobs:
       - build-and-test-server
-      - deploy-server
+      - deploy-server:
+          requires:
+            build-and-test-server
