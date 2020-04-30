@@ -4,7 +4,7 @@ metadata:
   name: local-library-server-service
 spec:
   ports:
-    - port: 5000
+    - port: 3000
       protocol: TCP
   selector:
     app: local-library-server
