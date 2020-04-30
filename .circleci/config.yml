@@ -67,7 +67,7 @@ jobs:
       - PROJECT_NAME: "LocalLibrary-KPI"
       - GOOGLE_PROJECT_ID: "locallibrary-kpi"
       - GOOGLE_COMPUTE_ZONE: "europe-west3-a"
-      - GOOGLE_CLUSTER_NAME: "local-library"
+      - GOOGLE_CLUSTER_NAME: "cloudl"
     steps:
       - checkout
       - setup_remote_docker
