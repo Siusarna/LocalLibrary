@@ -52,11 +52,13 @@ jobs:
             base64 -di key.key > git-crypt.key
             git-crypt unlock git-crypt.key
             cd backend && npm install
+            cat ./config/default.js
       - setup_remote_docker
       - run:
           name: Deploy to Docker Cloud server
           command: |
             cd backend
+            cat ./config/default.js
             docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
             docker build -t $DOCKER_LOGIN/local-library-server:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM .
             docker push $DOCKER_LOGIN/local-library-server:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
