@@ -86,7 +86,7 @@ jobs:
             gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
             gcloud --quiet config set compute/region ${GOOGLE_COMPUTE_REGION}
-            gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
+            gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME} --region=$GOOGLE_COMPUTE_REGION
       - run:
           name: Deploy to Kubernetes
           command: |
