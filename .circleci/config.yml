@@ -44,10 +44,10 @@ jobs:
     steps:
       - checkout
       - *restore_npm_cache_backend
+      - run: sudo apt-get install -y git-crypt
       - run:
           name: Build project and run test
           command: |
-            sudo apt-get install -y git-crypt
             echo "$GIT_CRYPT_KEY" > key.key
             base64 -di key.key > git-crypt.key
             git-crypt unlock git-crypt.key
@@ -72,15 +72,15 @@ jobs:
       - GOOGLE_CLUSTER_NAME: "cloudl"
     steps:
       - checkout
+      - setup_remote_docker
+      - run: sudo apt-get install -y git-crypt
       - run:
           name: Build project and run test
           command: |
-            sudo apt-get install -y git-crypt
             echo "$GIT_CRYPT_KEY" > key.key
             base64 -di key.key > git-crypt.key
             git-crypt unlock git-crypt.key
             cd backend && npm install
-      - setup_remote_docker
       - run:
           name: Deploy to Docker Cloud server
           command: |
