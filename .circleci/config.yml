@@ -5,12 +5,12 @@ orbs:
 
 references:
 
-  restore_npm_cache_frontend: &restore_npm_cache
+  restore_npm_cache_frontend: &restore_npm_cache_frontend
     restore_cache:
       name: Restore npm cache
       key: dependency-npm-{{ .Branch }}-{{ checksum "./frontend/package.json" }}
 
-  restore_npm_cache_backend: &restore_npm_cache
+  restore_npm_cache_backend: &restore_npm_cache_backend
     restore_cache:
       name: Restore npm cache
       key: dependency-npm-{{ .Branch }}-{{ checksum "./backend/package.json" }}
