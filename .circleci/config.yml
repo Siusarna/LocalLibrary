@@ -65,7 +65,7 @@ jobs:
       name: node/default
     steps:
       - *restore_repo_cache
-      - run: ls
+      - setup_remote_docker
       - run:
           name: Deploy to Docker Cloud server
           command: |
@@ -93,6 +93,7 @@ jobs:
       name: node/default
     steps:
       - *restore_repo_cache
+      - setup_remote_docker
       - run:
           name: Deploy to Docker Cloud server
           command: |
