@@ -52,16 +52,6 @@ jobs:
             base64 -di key.key > git-crypt.key
             git-crypt unlock git-crypt.key
             cd backend && npm install
-            cat ./config/default.js
-      - setup_remote_docker
-      - run:
-          name: Deploy to Docker Cloud server
-          command: |
-            cd backend
-            cat ./config/default.js
-            docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-            docker build -t $DOCKER_LOGIN/local-library-server:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM .
-            docker push $DOCKER_LOGIN/local-library-server:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
       - save_cache:
           name: Save npm cache
           key: dependency-npm-{{ .Branch }}-{{ checksum "./backend/package.json" }}
@@ -82,8 +72,22 @@ jobs:
       - GOOGLE_CLUSTER_NAME: "cloudl"
     steps:
       - checkout
-      - run: $(($CIRCLE_BUILD_NUM - 1)) > $CIRCLE_BUILD_NUM_MINUS_ONE
-      - run: echo $CIRCLE_BUILD_NUM_MINUS_ONE
+      - run:
+          name: Build project and run test
+          command: |
+            apt-get install -y git-crypt
+            echo "$GIT_CRYPT_KEY" > key.key
+            base64 -di key.key > git-crypt.key
+            git-crypt unlock git-crypt.key
+            cd backend && npm install
+      - setup_remote_docker
+      - run:
+          name: Deploy to Docker Cloud server
+          command: |
+            cd backend
+            docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+            docker build -t $DOCKER_LOGIN/local-library-server:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM .
+            docker push $DOCKER_LOGIN/local-library-server:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
       - run:
           name: Setup Google Cloud SDK
           command: |
