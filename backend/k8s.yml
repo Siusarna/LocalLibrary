@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: ${PROJECT_NAME}
-        image: $DOCKER_LOGIN/local-library-server:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
+        image: $DOCKER_LOGIN/local-library-server:$CIRCLE_BRANCH-{{ $CIRCLE_BUILD_NUM - 1 }}
         ports:
         - name: http
           containerPort: 3000
