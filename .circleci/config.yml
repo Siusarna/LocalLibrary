@@ -75,13 +75,21 @@ jobs:
 workflows:
   client:
     jobs:
-      - build-client
+      - build-client:
+          filters:
+            branches:
+              only:
+                - deploy
       - deploy-client:
           requires:
-            build-client
+            - build-client
   server:
     jobs:
-      - build-and-test-server
+      - build-and-test-server:
+          filters:
+            branches:
+              only:
+                - deploy
       - deploy-server:
           requires:
-            build-and-test-server
+            - build-and-test-server
