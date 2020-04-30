@@ -34,9 +34,7 @@ jobs:
     steps:
       - run:
           name: Deploy to Docker Cloud server
-          command: |
-            ls
-            cd backend
+          command: cd backend && |
             docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
             docker build -t $DOCKER_LOGIN/local-library-server:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM .
             docker push $DOCKER_LOGIN/local-library-server:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
@@ -60,9 +58,7 @@ jobs:
     steps:
       - run:
           name: Deploy to Docker Cloud server
-          command: |
-            ls
-            cd client
+          command: cd client && |
             docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
             docker build -t $DOCKER_LOGIN/local-library-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM .
             docker push $DOCKER_LOGIN/local-library-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
