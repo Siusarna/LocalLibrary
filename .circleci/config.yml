@@ -137,7 +137,7 @@ workflows:
           filters:
             branches:
               only:
-                - deploy
+                - dev
       - deploy-client:
           requires:
             - build-client
@@ -147,7 +147,7 @@ workflows:
           filters:
             branches:
               only:
-                - deploy
+                - dev
       - deploy-server:
           requires:
             - build-and-test-server
