@@ -32,5 +32,5 @@ spec:
         image: $DOCKER_LOGIN/local-library-server:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
         ports:
         - name: http
-          containerPort: 80
+          containerPort: 3000
           protocol: TCP
