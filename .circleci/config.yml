@@ -1,30 +1,153 @@
 version: 2.1
 orbs:
   node: circleci/node@1.1.6
+
+
+references:
+
+  restore_npm_cache_frontend: &restore_npm_cache_frontend
+    restore_cache:
+      name: Restore npm cache
+      key: dependency-npm-{{ .Branch }}-{{ checksum "./frontend/package.json" }}
+
+  restore_npm_cache_backend: &restore_npm_cache_backend
+    restore_cache:
+      name: Restore npm cache
+      key: dependency-npm-{{ .Branch }}-{{ checksum "./backend/package.json" }}
+
 jobs:
   build-client:
     executor:
       name: node/default
     steps:
       - checkout
-      - node/with-cache:
-          steps:
-            - run: cd ./frontend
-            - run: npm install
+      - *restore_npm_cache_frontend
+      - run: cd frontend && npm install
+      - save_cache:
+          name: Save npm cache
+          key: dependency-npm-{{ .Branch }}-{{ checksum "./frontend/package.json" }}
+          paths:
+            - './frontend/node_modules'
+      - save_cache:
+          name: Save repo cache
+          key: repo-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - .
   build-and-test-server:
     executor:
       name: node/default
-      steps:
-        - checkout
-        - node/with-cache:
-            steps:
-              - run: cd ./backend
-              - run: npm install
-              - run: npm test
+    steps:
+      - checkout
+      - *restore_npm_cache_backend
+      - run:
+          name: Build project and run test
+          command: |
+            sudo apt-get install -y git-crypt
+            echo "$GIT_CRYPT_KEY" > key.key
+            base64 -di key.key > git-crypt.key
+            git-crypt unlock git-crypt.key
+            cd backend && npm install
+      - save_cache:
+          name: Save npm cache
+          key: dependency-npm-{{ .Branch }}-{{ checksum "./backend/package.json" }}
+          paths:
+            - './backend/node_modules'
+      - save_cache:
+          name: Save repo cache
+          key: repo-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - .
+  deploy-server:
+    docker:
+      - image: google/cloud-sdk
+    environment:
+      - PROJECT_NAME: "local-library-kpi"
+      - GOOGLE_PROJECT_ID: "locallibrary-kpi"
+      - GOOGLE_COMPUTE_REGION: "europe-west3"
+      - GOOGLE_CLUSTER_NAME: "cloudl"
+    steps:
+      - checkout
+      - run:
+          name: Build project and run test
+          command: |
+            apt-get install -y git-crypt
+            echo "$GIT_CRYPT_KEY" > key.key
+            base64 -di key.key > git-crypt.key
+            git-crypt unlock git-crypt.key
+      - setup_remote_docker
+      - run:
+          name: Deploy to Docker Cloud server
+          command: |
+            cd backend
+            docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+            docker build -t $DOCKER_LOGIN/local-library-server:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM .
+            docker push $DOCKER_LOGIN/local-library-server:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
+      - run:
+          name: Setup Google Cloud SDK
+          command: |
+            apt-get install -qq -y gettext
+            echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+            gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+            gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+            gcloud --quiet config set compute/region ${GOOGLE_COMPUTE_REGION}
+            gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME} --region=$GOOGLE_COMPUTE_REGION
+      - run:
+          name: Deploy to Kubernetes
+          command: |
+            envsubst < ${HOME}/project/backend/k8s.yml > ${HOME}/project/backend/patched_k8s.yml
+            kubectl apply -f ${HOME}/project/backend/patched_k8s.yml
+            kubectl rollout status deployment/${PROJECT_NAME}
+  deploy-client:
+    docker:
+      - image: google/cloud-sdk
+    environment:
+      - PROJECT_NAME: "local-library-kpi"
+      - GOOGLE_PROJECT_ID: "locallibrary-kpi"
+      - GOOGLE_COMPUTE_REGION: "europe-west3"
+      - GOOGLE_CLUSTER_NAME: "cloudl"
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Deploy to Docker Cloud server
+          command: |
+            cd frontend
+            docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+            docker build -t $DOCKER_LOGIN/local-library-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM .
+            docker push $DOCKER_LOGIN/local-library-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
+      - run:
+          name: Setup Google Cloud SDK
+          command: |
+            apt-get install -qq -y gettext
+            echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+            gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+            gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+            gcloud --quiet config set compute/region ${GOOGLE_COMPUTE_REGION}
+            gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME} --region=$GOOGLE_COMPUTE_REGION
+      - run:
+          name: Deploy to Kubernetes
+          command: |
+            envsubst < ${HOME}/project/frontend/k8s.yml > ${HOME}/project/frontend/patched_k8s.yml
+            kubectl apply -f ${HOME}/project/frontend/patched_k8s.yml
+            kubectl rollout status deployment/${PROJECT_NAME}
 workflows:
   client:
     jobs:
-      - build-client
+      - build-client:
+          filters:
+            branches:
+              only:
+                - deploy
+      - deploy-client:
+          requires:
+            - build-client
   server:
     jobs:
-      - build-and-test-server
+      - build-and-test-server:
+          filters:
+            branches:
+              only:
+                - deploy
+      - deploy-server:
+          requires:
+            - build-and-test-server

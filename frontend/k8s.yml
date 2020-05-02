@@ -1,0 +1,35 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ${PROJECT_NAME}-frontend
+spec:
+  selector:
+    app: ${PROJECT_NAME}-frontend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: http-port
+  type: LoadBalancer
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: ${PROJECT_NAME}-frontend
+  labels:
+    app: ${PROJECT_NAME}-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${PROJECT_NAME}-frontend
+  template:
+    metadata:
+      labels:
+        app: ${PROJECT_NAME}-frontend
+    spec:
+      containers:
+      - name: ${PROJECT_NAME}-frontend
+        image: $DOCKER_LOGIN/local-library-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
+        ports:
+          - containerPort: 80
+            name: http-port
