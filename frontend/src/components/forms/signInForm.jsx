@@ -16,7 +16,7 @@ const SignInForm = () => {
     return <Redirect to='/' />
   }
 
-  const fetchAuth = url => (values, { setSubmitting }) => {
+  const fetchAuth = url => (values) => {
     fetch(url, {
       headers: {
         'Content-Type': 'application/json',
@@ -37,7 +37,6 @@ const SignInForm = () => {
           const error = json.message || 'Server Error';
           setServerError(error);
         }
-        if (setSubmitting) setSubmitting(false);
       })
   }
 
