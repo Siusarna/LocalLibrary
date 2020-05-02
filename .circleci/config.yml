@@ -136,16 +136,16 @@ jobs:
             kubectl apply -f ${HOME}/project/frontend/patched_k8s.yml
             kubectl rollout status deployment/${PROJECT_NAME}
 workflows:
-   client:
-     jobs:
-       - build-client:
-           filters:
-             branches:
-               only:
-                 - deploy
-       - deploy-client:
-           requires:
-             - build-client
+  client:
+    jobs:
+      - build-client:
+          filters:
+            branches:
+              only:
+                - deploy
+      - deploy-client:
+          requires:
+            - build-client
   server:
     jobs:
       - build-and-test-server:
