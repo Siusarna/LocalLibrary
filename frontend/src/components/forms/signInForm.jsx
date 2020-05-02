@@ -25,7 +25,7 @@ const SignInForm = () => {
           .required('Required'),
       })}
       onSubmit={(values, { setSubmitting }) => {
-        fetch('/api/accounts/sign-in', {
+        fetch('http://10.24.15.236/api/accounts/sign-in', {
           headers: {
             'Content-Type': 'application/json',
           },
