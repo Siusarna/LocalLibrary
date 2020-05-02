@@ -7,9 +7,9 @@ spec:
     app: ${PROJECT_NAME}
   ports:
   - protocol: TCP
-    port: 3000
-    targetPort: 3000
-  type: ClusterIP
+    port: 80
+    targetPort: http-port
+  type: LoadBalancer
 ---
 apiVersion: apps/v1beta1
 kind: Deployment
