@@ -65,6 +65,11 @@ const deleteConfirmationCode = (orderId) => knex('confirmationCode')
   .delete()
   .where({ orderId });
 
+const getUserByOrderId = (id) => knex('order')
+  .join('users', 'order.userId', 'users.id')
+  .select('*')
+  .where('order.id', id);
+
 module.exports = {
   getBookById,
   getNotFinishedOrdersByUserId,
@@ -76,4 +81,5 @@ module.exports = {
   addConfirmationCode,
   getCodeByOrderId,
   deleteConfirmationCode,
+  getUserByOrderId,
 };

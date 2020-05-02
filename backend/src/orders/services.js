@@ -1,4 +1,5 @@
 const queries = require('./queries');
+const { sendNotification } = require('../utils/sendNotificationToTelegram');
 
 const create = async (user, { bookId }) => {
   const [book] = await queries.getBookById(bookId);
@@ -53,7 +54,8 @@ const sendConfirmationCode = async ({ orderId }) => {
   await queries.deleteConfirmationCode(orderId);
   const confirmationCode = Math.floor(Math.random() * (99999 - 10000)) + 10000;
   await queries.addConfirmationCode(orderId, confirmationCode);
-  // send notification
+  const [customer] = await queries.getUserByOrderId(orderId);
+  await sendNotification(customer.telegramId, `Your confirmation code = ${confirmationCode}`);
 };
 
 const confirmCode = async ({ orderId, code }) => {
