@@ -107,16 +107,11 @@ jobs:
       - GOOGLE_CLUSTER_NAME: "cloudl"
     steps:
       - checkout
-      - run:
-          name: Build project
-          command: |
-            cd frontend
-            npm install
       - setup_remote_docker
       - run:
           name: Deploy to Docker Cloud server
           command: |
-            cd backend
+            cd frontend
             docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
             docker build -t $DOCKER_LOGIN/local-library-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM .
             docker push $DOCKER_LOGIN/local-library-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
