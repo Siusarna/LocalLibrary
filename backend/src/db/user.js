@@ -13,6 +13,7 @@ async function start() {
     table.string('address');
     table.integer('age');
     table.string('phone');
+    table.integer('telegramId');
     table.enum('role', ['customer', 'librarian'])
       .defaultTo('customer');
     table.timestamp('createdAt')

@@ -11,6 +11,7 @@ router.post('/sign-in', validation.auth, accControllers.auth);
 router.post('/sign-up', validation.register, accControllers.register);
 router.post('/forgotPassword', validation.forgotPassword, accControllers.forgotPassword);
 router.post('/facebook', accControllers.facebook);
+router.post('/telegram', accControllers.telegram);
 
 router.use(checkAuth);
 

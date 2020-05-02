@@ -1,6 +1,7 @@
 const generatePassword = require('generate-password');
 const config = require('config');
 const axios = require('axios');
+const crypto = require('crypto');
 const { checkPassword, genSalt, genPassword } = require('../utils/password');
 const { createAndUpdateTokens } = require('../utils/jwtToken');
 const { uploadFile } = require('../utils/s3-bucket');
@@ -115,6 +116,47 @@ const facebookServices = async ({ accessToken }) => {
   };
 };
 
+const telegramServices = async (data) => {
+  const checkHash = data.hash;
+  delete data.hash;
+  const dataCheck = [];
+  Object.keys(data)
+    .forEach((key) => dataCheck.push(`${key}=${data[key]}`));
+  const secretKey = crypto.createHash('sha256')
+    .update(config.telegram.botToken);
+  const hash = crypto.createHmac('sha256', dataCheck.join('\n'), secretKey);
+  if (hash !== checkHash) {
+    throw new Error('Invalid data');
+  }
+  const [user] = await queries.getUserByTelegramId(data.id);
+  if (user) {
+    const { accessToken, refreshToken } = await createAndUpdateTokens(user.id);
+    return {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      photo: user.photo,
+      role: user.role,
+      accessToken,
+      refreshToken,
+    };
+  }
+  const [newUser] = await queries.insertNewUser({
+    firstName: data.first_name,
+    lastName: data.last_name,
+    photo: data.photo_url,
+    telegramId: data.id,
+  });
+  const { accessToken: jwtAccessToken, refreshToken: jwtRefreshToken } = await createAndUpdateTokens(newUser.id);
+  return {
+    firstName: newUser.firstName,
+    lastName: newUser.lastName,
+    photo: data.photo_url,
+    role: newUser.role,
+    accessToken: jwtAccessToken,
+    refreshToken: jwtRefreshToken,
+  };
+};
+
 const changePasswordServices = async (user, { currentPassword, newPassword, confirmNewPassword }) => {
   if (!user || !checkPassword(currentPassword, user.password, user.salt)) {
     throw new Error('Incorrect current password ');
@@ -152,6 +194,7 @@ module.exports = {
   registerServices,
   forgotPasswordServices,
   facebookServices,
+  telegramServices,
   changePasswordServices,
   profileServices,
   updateProfileServices,

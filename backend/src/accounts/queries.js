@@ -39,6 +39,10 @@ const deleteTokenByUserEmail = (email) => knex('users')
       .del();
   });
 
+const getUserByTelegramId = (telegramId) => knex('users')
+  .select('*')
+  .where({ telegramId });
+
 module.exports = {
   getUserByEmail,
   insertNewUser,
@@ -48,4 +52,5 @@ module.exports = {
   deleteTokenByUserId,
   deleteUserByEmail,
   deleteTokenByUserEmail,
+  getUserByTelegramId,
 };

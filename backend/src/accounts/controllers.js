@@ -52,6 +52,18 @@ const facebook = async (ctx) => {
   }
 };
 
+const telegram = async (ctx) => {
+  try {
+    const { accessToken, refreshToken, ...rest } = await Services.telegramServices(ctx.request.body);
+    ctx.cookies.set('accessToken', accessToken, { maxAge: parseTimeFromConfig(config.jwt.tokens.access.expiresIn) });
+    ctx.cookies.set('refreshToken', refreshToken, { maxAge: parseTimeFromConfig(config.jwt.tokens.refresh.expiresIn) });
+    ctx.body = rest;
+    return ctx;
+  } catch (error) {
+    return ctx.throw(400, error);
+  }
+};
+
 const changePassword = async (ctx) => {
   try {
     await Services.changePasswordServices(ctx.state.user, ctx.request.body);
@@ -112,6 +124,7 @@ module.exports = {
   register,
   forgotPassword,
   facebook,
+  telegram,
   changePassword,
   profile,
   updateProfile,
