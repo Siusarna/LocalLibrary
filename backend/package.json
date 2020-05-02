@@ -23,7 +23,7 @@
     "jimp": "^0.9.6",
     "jsonwebtoken": "^8.5.1",
     "kcors": "^2.2.2",
-    "knex": "^0.20.11",
+    "knex": "^0.21.1",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^8.0.8",
