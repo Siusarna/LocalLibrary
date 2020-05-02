@@ -15,11 +15,6 @@ references:
       name: Restore npm cache
       key: dependency-npm-{{ .Branch }}-{{ checksum "./backend/package.json" }}
 
-  restore_repo: &restore_repo_cache
-    restore_cache:
-      name: Restore code cache
-      key: repo-{{ .Branch }}-{{ .Revision }}
-
 jobs:
   build-client:
     executor:
@@ -103,46 +98,54 @@ jobs:
             kubectl apply -f ${HOME}/project/backend/patched_k8s.yml
             kubectl rollout status deployment/${PROJECT_NAME}
   deploy-client:
-    executor:
-      name: node/default
-    steps:
-      - *restore_repo_cache
-      - setup_remote_docker
-      - run:
-          name: Deploy to Docker Cloud server
-          command: |
-            cd frontend
-            docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-            docker build -t $DOCKER_LOGIN/local-library-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM .
-            docker push $DOCKER_LOGIN/local-library-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
-      - run:
-          name: Install kubectl
-          command: |
-            curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-            chmod +x kubectl
-            sudo mv kubectl /usr/local/bin/
-      - run:
-          name: Deliver to Kubernetes
-          command: |
-            cd frontend
-            echo "${KUBE_CA_PEM}" > cerf.txt
-            kubectl config set-cluster local-library --certificate-authority="$KUBE_CA_PEM" --server=$KUBE_URL
-            kubectl config set-credentials admin --username="${KUBE_USERNAME}" --password="${KUBE_PASSWORD}"
-            kubectl config set-context default --cluster="local-library" --user=${KUBE_USERNAME}
-            kubectl config use-context default
-            kubectl get pods
-            kubectl set image deployment/default "local-library"=$DOCKER_LOGIN/local-library-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
+    docker:
+      - image: google/cloud-sdk
+      environment:
+        - PROJECT_NAME: "local-library-kpi"
+        - GOOGLE_PROJECT_ID: "locallibrary-kpi"
+        - GOOGLE_COMPUTE_REGION: "europe-west3"
+        - GOOGLE_CLUSTER_NAME: "cloudl"
+      steps:
+        - checkout
+        - run:
+            name: Build project
+            command: |
+              cd frontend
+              npm install
+        - setup_remote_docker
+        - run:
+            name: Deploy to Docker Cloud server
+            command: |
+              cd backend
+              docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+              docker build -t $DOCKER_LOGIN/local-library-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM .
+              docker push $DOCKER_LOGIN/local-library-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
+        - run:
+            name: Setup Google Cloud SDK
+            command: |
+              apt-get install -qq -y gettext
+              echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+              gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+              gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+              gcloud --quiet config set compute/region ${GOOGLE_COMPUTE_REGION}
+              gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME} --region=$GOOGLE_COMPUTE_REGION
+        - run:
+            name: Deploy to Kubernetes
+            command: |
+              envsubst < ${HOME}/project/frontend/k8s.yml > ${HOME}/project/frontend/patched_k8s.yml
+              kubectl apply -f ${HOME}/project/frontend/patched_k8s.yml
+              kubectl rollout status deployment/${PROJECT_NAME}
 workflows:
-  # client:
-  #   jobs:
-  #     - build-client:
-  #         filters:
-  #           branches:
-  #             only:
-  #               - deploy
-  #     - deploy-client:
-  #         requires:
-  #           - build-client
+   client:
+     jobs:
+       - build-client:
+           filters:
+             branches:
+               only:
+                 - deploy
+       - deploy-client:
+           requires:
+             - build-client
   server:
     jobs:
       - build-and-test-server:
