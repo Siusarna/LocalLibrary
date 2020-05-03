@@ -69,6 +69,9 @@
     "/accounts/changePassword": {
       "$ref": "/routes/accounts/changePassword.json"
     },
+    "/accounts/connectTelegram": {
+      "$ref": "/routes/accounts/connectTelegram.json"
+    },
     "/authors": {
       "$ref": "/routes/authors/CRUD.json"
     },

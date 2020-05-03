@@ -1,0 +1,102 @@
+{
+  "put": {
+    "summary": "Connect account to telegram",
+    "tags": [
+      "settings"
+    ],
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/connectTelegram"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Connect success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ConnectSuccess"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Connect error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Unauthorized"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "connectTelegram": {
+        "type": "object",
+        "properties": {
+          "auth_date": {
+            "type": "number"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "hash": {
+            "type": "string"
+          },
+          "id": {
+            "type": "number"
+          },
+          "photo_url": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "auth_date",
+          "first_name",
+          "hash",
+          "id",
+          "photo_url",
+          "username"
+        ]
+      },
+      "ConnectSuccess": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "Unauthorized": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
