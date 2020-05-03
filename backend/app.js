@@ -26,6 +26,7 @@ router.use(subscriptionRouter.routes());
 app.use(router.routes());
 
 require('./src/schedule/deleteExpiredToken');
+require('./src/schedule/processingSubscription');
 
 module.exports = app.listen(config.port, async () => {
   // eslint-disable-next-line no-console
