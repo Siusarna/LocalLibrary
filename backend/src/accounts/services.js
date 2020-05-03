@@ -173,6 +173,14 @@ const updatePhotoServices = async (id, photo) => {
   return { photo: urlPhoto };
 };
 
+const connectTelegramServices = async (user, { id }) => {
+  const [userFromDb] = await queries.getUserByTelegramId(id);
+  if (userFromDb) {
+    throw new Error('User with this telegram already exist');
+  }
+  return queries.updateUserById(user.id, { telegramId: id });
+};
+
 const logoutServices = async (id) => {
   await queries.deleteTokenByUserId(id);
 };
@@ -187,5 +195,6 @@ module.exports = {
   profileServices,
   updateProfileServices,
   updatePhotoServices,
+  connectTelegramServices,
   logoutServices,
 };

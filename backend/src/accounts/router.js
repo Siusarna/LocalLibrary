@@ -19,6 +19,7 @@ router.put('/changePassword', validation.changePassword, accControllers.changePa
 router.get('/profile', accControllers.profile);
 router.put('/profile', validation.updateProfile, accControllers.updateProfile);
 router.put('/photo', validation.updatePhoto, accControllers.updatePhoto);
+router.put('/connectTelegram', accControllers.connectTelegram);
 router.get('/logout', accControllers.logout);
 
 module.exports = router;

@@ -104,6 +104,19 @@ const updatePhoto = async (ctx) => {
   }
 };
 
+const connectTelegram = async (ctx) => {
+  try {
+    await Services.connectTelegramServices(ctx.state.user, ctx.request.body);
+    ctx.body = {
+      success: 'true',
+      message: 'Telegram successfully connected',
+    };
+    return ctx;
+  } catch (error) {
+    return ctx.throw(400, error);
+  }
+};
+
 const logout = async (ctx) => {
   try {
     await Services.logoutServices(ctx.state.user.id);
@@ -129,5 +142,6 @@ module.exports = {
   profile,
   updateProfile,
   updatePhoto,
+  connectTelegram,
   logout,
 };
