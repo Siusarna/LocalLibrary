@@ -2,6 +2,9 @@ const queries = require('./queries');
 
 const createSubscription = async (user, { bookId }) => {
   const [book] = await queries.getBookById(bookId);
+  if (!user.telegramId) {
+    throw new Error('In order to create subscription you must connect this account with our telegram bot');
+  }
   if (!book) {
     throw new Error('Book with this id not found');
   }
