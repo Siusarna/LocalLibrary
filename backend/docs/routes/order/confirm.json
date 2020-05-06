@@ -1,0 +1,97 @@
+{
+  "put": {
+    "summary": "Confirm new order",
+    "tags": [
+      "orders"
+    ],
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/Order"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Orders confirm success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/OrderSuccess"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Order confirm error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/OrderFail"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Order": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "number"
+          },
+          "confirmation": {
+            "type": "boolean"
+          },
+          "comment": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "orderId",
+          "confirmation"
+        ]
+      },
+      "OrderSuccess": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "success": true,
+          "message": "Order successfully confirmed"
+        }
+      },
+      "OrderFail": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "success": false,
+          "message": "Order with this id not found"
+        }
+      }
+    }
+  }
+}

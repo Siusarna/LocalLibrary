@@ -1,0 +1,85 @@
+{
+  "put": {
+    "summary": "Update photo of the user",
+    "tags": [
+      "settings"
+    ],
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/Photo"
+          }
+        }
+      }
+    },
+    "responses": {
+      "201": {
+        "description": "Photo successfully updated",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/PhotoSuccess"
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/PhotoFail"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Photo": {
+        "type": "object",
+        "properties": {
+          "photo": {
+            "type": "string",
+            "description": "(base64)"
+          }
+        },
+        "required": [
+          "photo"
+        ]
+      },
+      "PhotoSuccess": {
+        "type": "object",
+        "properties": {
+          "photo": {
+            "type": "string",
+            "description": "(url)"
+          }
+        }
+      },
+      "PhotoFail": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "success": "false",
+          "message": "Unauthorized"
+        }
+      }
+    }
+  }
+}

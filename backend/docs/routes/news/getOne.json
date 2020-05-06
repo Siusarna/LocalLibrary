@@ -1,0 +1,68 @@
+{
+  "get": {
+    "summary": "Get news by id",
+    "tags": [
+      "news"
+    ],
+    "responses": {
+      "200": {
+        "description": "Get news success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/NewsSuccess"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Get news fail",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/NewsFail"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "NewsSuccess": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "header": {
+            "type": "string"
+          },
+          "shortDescription": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "createAt": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          }
+        }
+      },
+      "NewsFail": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

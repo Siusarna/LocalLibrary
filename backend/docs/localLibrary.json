@@ -1,0 +1,128 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "LocalLibrary API",
+    "description": "REST API for our university project",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api",
+      "description": "Local server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "auth",
+      "description": "User authorization & registration"
+    },
+    {
+      "name": "settings",
+      "description": "User settings"
+    },
+    {
+      "name": "authors",
+      "description": "Authors CRUD"
+    },
+    {
+      "name": "books",
+      "description": "Books CRUD"
+    },
+    {
+      "name": "news",
+      "description": "News CRUD"
+    },
+    {
+      "name": "orders",
+      "description": "Create, confirm, process and finish order"
+    },
+    {
+      "name": "subscription",
+      "description": "Create, get and delete subscription"
+    }
+  ],
+  "paths": {
+    "/accounts/sign-up": {
+      "$ref": "/routes/accounts/register.json"
+    },
+    "/accounts/sign-in": {
+      "$ref": "/routes/accounts/auth.json"
+    },
+    "/accounts/facebook": {
+      "$ref": "/routes/accounts/facebook.json"
+    },
+    "/accounts/profile": {
+      "$ref": "/routes/accounts/profile.json"
+    },
+    "/accounts/forgotPassword": {
+      "$ref": "/routes/accounts/forgotPassword.json"
+    },
+    "/accounts/photo": {
+      "$ref": "/routes/accounts/updatePhoto.json"
+    },
+    "/accounts/logout": {
+      "$ref": "/routes/accounts/logout.json"
+    },
+    "/accounts/Profile": {
+      "$ref": "/routes/accounts/updateProfile.json"
+    },
+    "/accounts/changePassword": {
+      "$ref": "/routes/accounts/changePassword.json"
+    },
+    "/accounts/connectTelegram": {
+      "$ref": "/routes/accounts/connectTelegram.json"
+    },
+    "/authors": {
+      "$ref": "/routes/authors/CRUD.json"
+    },
+    "/authors/:id": {
+      "$ref": "/routes/authors/getOne.json"
+    },
+    "/authors/:id/book": {
+      "$ref": "/routes/authors/getAllBookByAuthorId.json"
+    },
+    "/books": {
+      "$ref": "/routes/books/CRUD.json"
+    },
+    "/books/:id": {
+      "$ref": "/routes/books/getOne.json"
+    },
+    "/news": {
+      "$ref": "/routes/news/CRUD.json"
+    },
+    "/news/:id": {
+      "$ref": "/routes/news/getOne.json"
+    },
+    "/orders/create": {
+      "$ref": "/routes/order/create.json"
+    },
+    "/orders": {
+      "$ref": "/routes/order/getOrders.json"
+    },
+    "/orders/confirm": {
+      "$ref": "/routes/order/confirm.json"
+    },
+    "/orders/confirmationCode": {
+      "$ref": "/routes/order/confirmationCode.json"
+    },
+    "/orders/confirmCode": {
+      "$ref": "/routes/order/confirmCode.json"
+    },
+    "/orders/finish": {
+      "$ref": "/routes/order/finish.json"
+    },
+    "/subscription": {
+      "$ref": "/routes/subscription/CRD.json"
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {}
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "get": {
+    "summary": "Get author by id",
+    "tags": [
+      "authors"
+    ],
+    "responses": {
+      "200": {
+        "description": "Get author success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/AuthorSuccess"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Get author fail",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/AuthorFail"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AuthorSuccess": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "yearOfBirthday": {
+            "type": "string"
+          },
+          "yearOfDeath": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "AuthorFail": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "success": false,
+          "message": "This author doesnt exists!"
+        }
+      }
+    }
+  }
+}

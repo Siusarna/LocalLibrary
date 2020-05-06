@@ -1,0 +1,378 @@
+/** Variables **/
+
+$PrimaryColor: white;
+$SecondaryColor: rgb(22, 22, 22);
+
+$AccentColor: rgb(173, 58, 58);
+$DarkerPrimaryColor: rgb(223, 223, 223);
+
+$PrimaryFontColor: rgb(51, 48, 48);
+$SecondaryFontColor: rgb(251, 251, 251);
+
+/** Mixins **/
+@mixin flex {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/** Web Fonts **/
+
+@font-face {
+  font-family: "for-logo";
+  src: url("fonts/for-logo.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/** HTML elements **/
+
+body {
+  max-width: 760px;
+  width: 100%;
+  margin: 0px auto;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+p {
+  padding: 5px;
+  font-size: 12px;
+  margin: 2px 0;
+}
+
+button {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+button.dark {
+  border: none;
+  background-color: $SecondaryColor;
+  color: $SecondaryFontColor;
+  padding: 10px;
+
+  &:hover {
+    background-color: $AccentColor;
+    transition: background-color 0.15s;
+  }
+}
+
+button.search {
+  background-color: $PrimaryColor;
+  border: 1px solid grey;
+  border-radius: 80%;
+  padding: 5px 10px;
+
+  img {
+    width: 10px;
+    height: 10px;
+  }
+  &:hover {
+    background-color: $DarkerPrimaryColor;
+    transition: background-color 0.15s;
+  }
+  &:disabled {
+    background-color: $DarkerPrimaryColor;
+    cursor: default;
+  }
+}
+
+form {
+  .SectionTitle {
+    text-align: center;
+  }
+}
+
+/** React Components **/
+
+.Header {
+  @include flex();
+
+  background-color: $SecondaryColor;
+  color: $SecondaryFontColor;
+
+  padding: 10px 40px;
+}
+
+.Logo {
+  font-family: "for-logo";
+  font-size: 32px;
+
+  flex: 1 1 460px;
+}
+
+.BookSearch {
+  @include flex;
+
+  margin: 10px;
+}
+
+.SectionTitle {
+  background-color: $SecondaryColor;
+  color: $SecondaryFontColor;
+  border-radius: 0px;
+  margin: 5px 0;
+
+  .container {
+    padding: 10px;
+  }
+}
+
+.BookList,
+.AuthorList {
+  .bookRow,
+  .authorRow {
+    @include flex();
+    flex-direction: row;
+
+    background-color: $PrimaryColor;
+    color: $PrimaryFontColor;
+  }
+}
+
+.LeftRightContainer {
+  width: 100%;
+  @include flex;
+  .left,
+  .right {
+    width: 100%;
+  }
+  .right {
+    text-align: right;
+  }
+}
+
+.Book,
+.Author {
+  width: 20%;
+  margin: 5px;
+  padding: 5px;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .bookInfo,
+  .authorInfo {
+    @include flex();
+    flex-direction: column;
+
+    img {
+      max-width: 10px;
+    }
+    .title,
+    .name {
+      width: 100%;
+      font-size: 13px;
+      color: $PrimaryFontColor;
+    }
+    .LeftRightContainer,
+    .life {
+      font-size: 10px;
+      color: rgb(53, 53, 53);
+    }
+    .life {
+      text-align: left;
+      width: 100%;
+    }
+  }
+  &:hover {
+    background-color: $DarkerPrimaryColor;
+    transition: background-color 0.15s;
+  }
+}
+
+.News {
+  background-color: $SecondaryColor;
+  color: $SecondaryFontColor;
+
+  padding: 1px;
+  margin: 30px;
+
+  .LeftRightContainer {
+    .left,
+    .right {
+      padding: 5px;
+    }
+  }
+  .content {
+    p {
+      margin: 0;
+    }
+    background-color: $PrimaryColor;
+    color: $PrimaryFontColor;
+    margin: 0;
+    padding: 10px;
+  }
+}
+
+.ImageTextContainer {
+  display: flex;
+
+  margin: 20px 0px;
+  img {
+    width: 25%;
+  }
+  .content {
+    width: 100%;
+  }
+
+  background-color: $SecondaryColor;
+  color: $SecondaryFontColor;
+}
+
+.ProfileInfo,
+.BookInfo {
+  .title {
+    padding: 5px;
+  }
+  .ImageTextContainer {
+    .linkBox {
+      padding: 5px;
+      font-size: 12px;
+    }
+  }
+  button {
+    width: 100%;
+  }
+}
+
+.AuthorInfo {
+  .name {
+    padding: 5px;
+  }
+  button {
+    width: 100%;
+  }
+}
+
+.Status {
+  width: 100%;
+  .In-progress {
+    color: rgb(202, 202, 1);
+  }
+  .Ready-to-take,
+  .Finished {
+    color: green;
+  }
+  .Cancel,
+  .Expired {
+    color: red;
+  }
+  .Loaned {
+    color: blue;
+  }
+}
+
+.OrderList {
+  .searchInput {
+    width: 100%;
+  }
+  margin: 10px;
+}
+
+/** Tables **/
+
+table {
+  width: 100%;
+  margin: 5px auto;
+}
+
+td,
+th {
+  padding: 5px;
+  text-align: center;
+}
+
+th {
+  background-color: $SecondaryColor;
+  color: $SecondaryFontColor;
+}
+
+/** Forms **/
+
+form {
+  width: 80%;
+  min-width: 180px;
+  margin: 20px auto;
+}
+
+label {
+  margin-top: 10px;
+  display: block;
+}
+
+input {
+  width: 99%;
+}
+
+.error {
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: red;
+}
+
+select {
+  display: block;
+}
+
+.submit {
+  width: 100%;
+  margin-top: 10px;
+}
+
+textarea {
+  width: 100%;
+  height: 200px;
+  resize: none;
+}
+
+/** Other **/
+
+.linkBox {
+  background-color: $SecondaryColor;
+  color: $SecondaryFontColor;
+  padding: 10px;
+
+  &:hover {
+    background-color: $AccentColor;
+    transition: background-color 0.15s;
+  }
+}
+
+.starIcon {
+  max-width: 15px;
+}
+
+.center {
+  text-align: center;
+}
+
+.searchForm {
+  width: 100%;
+}
+
+.searchInput {
+  border: 1px solid grey;
+  padding: 5px;
+  width: 90%;
+  border-radius: 50px;
+}
+
+.button-container {
+  @include flex();
+  margin: 20px 0px;
+  button {
+    width: 100%;
+    margin: 10px;
+  }
+}

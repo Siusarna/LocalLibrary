@@ -1,0 +1,78 @@
+{
+  "get": {
+    "summary": "Get all book by author id",
+    "tags": [
+      "authors"
+    ],
+    "responses": {
+      "200": {
+        "description": "Get book success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BookSuccess"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Get book fail",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BookFail"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BookSuccess": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "number"
+            },
+            "authorId": {
+              "type": "number"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "rating": {
+              "type": "number"
+            },
+            "photo": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "BookFail": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "success": false,
+          "message": "This author doesnt exists!"
+        }
+      }
+    }
+  }
+}

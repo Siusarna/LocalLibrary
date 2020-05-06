@@ -1,0 +1,122 @@
+{
+  "put": {
+    "summary": "Update profile",
+    "description": "Update profile of the user",
+    "tags": [
+      "settings"
+    ],
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/Settings"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Update profile success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/SettingsSuccess"
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/SettingsFail"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Settings": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string",
+            "description": "(url)"
+          },
+          "city": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "age": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          }
+        }
+      },
+      "SettingsSuccess": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string",
+            "description": "(url)"
+          },
+          "role": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "age": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          }
+        }
+      },
+      "SettingsFail": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "success": "false",
+          "message": "Unauthorized"
+        }
+      }
+    }
+  }
+}
