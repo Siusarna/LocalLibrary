@@ -18,7 +18,6 @@ const SignInForm = () => {
   }
 
   const fetchAuth = (url) => (values) => {
-    console.log(url);
     fetch(url, {
       headers: {
         'Content-Type': 'application/json',
