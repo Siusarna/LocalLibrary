@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import ImageTextContainer from '../layout/imageTextContainer';
-import useFetch from '../../hooks/useFetch';
-import AuthContext from '../../context/authContext';
+import ImageTextContainer from '../layout/imageTextContainer.jsx';
+import useFetch from '../../hooks/useFetch.jsx';
+import AuthContext from '../../context/authContext.jsx';
 
-import SectionTitle from '../layout/sectionTitle';
-import OrderList from '../orders/orderList';
+import SectionTitle from '../layout/sectionTitle.jsx';
+import OrderList from '../orders/orderList.jsx';
 
 
 const ProfileInfo = () => {
