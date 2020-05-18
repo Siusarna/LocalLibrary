@@ -15,6 +15,9 @@ const newsRouter = require('./src/news/router');
 const searchRouter = require('./src/search/router');
 const orderRouter = require('./src/orders/router');
 const subscriptionRouter = require('./src/subscription/router');
+const ratingRouter = require('./src/rating/router');
+const reviewRouter = require('./src/reviews/router');
+
 
 router.use(accountsRouter.routes());
 router.use(authorsRouter.routes());
@@ -23,6 +26,8 @@ router.use(newsRouter.routes());
 router.use(searchRouter.routes());
 router.use(orderRouter.routes());
 router.use(subscriptionRouter.routes());
+router.use(ratingRouter.routes());
+router.use(reviewRouter.routes());
 app.use(router.routes());
 
 require('./src/schedule/deleteExpiredToken');
