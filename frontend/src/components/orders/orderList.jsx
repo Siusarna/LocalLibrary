@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { useContext } from 'react';
-import AuthContext from '../../context/authContext';
-import useFetch from '../../hooks/useFetch';
-import Order from './order';
-import SectionTitle from '../layout/sectionTitle';
-import OrderStatusButton from './orderStatusButton';
+import React, { useState, useEffect, useContext } from 'react';
 
-const LOAN_PERIOD = 30; //days
+import AuthContext from '../../context/authContext.jsx';
+import useFetch from '../../hooks/useFetch.jsx';
+import Order from './order.jsx';
+import SectionTitle from '../layout/sectionTitle.jsx';
+import OrderStatusButton from './orderStatusButton.jsx';
+
+const LOAN_PERIOD = 30; // days
 
 const pad2 = (int) => {
-  if (int / 10 < 1) return '0' + int.toString();
+  if (int / 10 < 1) return `0${int.toString()}`;
   return int.toString();
-}
+};
 
 const formatDate = (date) => {
   if (typeof date === 'string') return date;
@@ -23,53 +23,51 @@ const formatDate = (date) => {
   const minutes = pad2(date.getMinutes());
   const seconds = pad2(date.getSeconds());
 
-  return `${dateNum}.${month}.${year} ${hours}:${minutes}:${seconds}`
-}
-
-const statusType = {
-  'Finished': 'Finished',
-  'Cancel': 'Finished',
-  'Loaned': 'Loaned',
-  'Expired': 'Loaned',
-  'Ready-to-take': 'Active',
-  'In-progress': 'Active',
-}
-
-const filter = (statusFilter, idFilter) => (orders) => {
-  return orders.filter((order) => {
-    let result = true;
-    if (statusType[order.status] !== statusFilter) {
-      result = false;
-    }
-    const checkStartId = new RegExp('^' + idFilter + '.*');
-    if (!order.id.toString().match(checkStartId)) {
-      result = false;
-    }
-    return result;
-  });
+  return `${dateNum}.${month}.${year} ${hours}:${minutes}:${seconds}`;
 };
 
-const OrderList = (props) => {
+const statusType = {
+  Finished: 'Finished',
+  Cancel: 'Finished',
+  Loaned: 'Loaned',
+  Expired: 'Loaned',
+  'Ready-to-take': 'Active',
+  'In-progress': 'Active',
+};
+
+const filter = (statusFilter, idFilter) => (orders) => orders.filter((order) => {
+  let result = true;
+  if (statusType[order.status] !== statusFilter) {
+    result = false;
+  }
+  const checkStartId = new RegExp(`^${idFilter}.*`);
+  if (!order.id.toString().match(checkStartId)) {
+    result = false;
+  }
+  return result;
+});
+
+const OrderList = () => {
   const { role } = useContext(AuthContext);
-  const [statusFilter, setStatusFilter] = useState('Active') //other options are active and loaned
+  const [statusFilter, setStatusFilter] = useState('Active'); // other options are active and loaned
   const [idFilter, setIdFilter] = useState('');
 
-  const { isLoaded, data: orders, update } =
-    useFetch('https://fathomless-ravine-92681.herokuapp.com/api/orders');
+  const { isLoaded, data: orders, update } = useFetch('https://fathomless-ravine-92681.herokuapp.com/api/orders');
 
   const UPDATE_INTERVAL = 5000;
   useEffect(() => {
     const timer = setInterval(() => {
       if (update) update();
-    }, UPDATE_INTERVAL)
-    return () => { clearInterval(timer) };
-  })
+    }, UPDATE_INTERVAL);
+    return () => { clearInterval(timer); };
+  });
 
   if (!isLoaded) return <div></div>;
 
   const sortedOrders = orders
     .map((order) => {
-      const date = new Date(order.createAt)
+      const date = new Date(order.createAt);
+      // eslint-disable-next-line no-restricted-globals
       order.createAt = !isNaN(date) ? date : order.createAt;
       return order;
     })
@@ -80,9 +78,9 @@ const OrderList = (props) => {
         returnAt.setDate(returnAt.getDate() + LOAN_PERIOD);
         order.returnAt = formatDate(returnAt);
       }
-      order.createAt = formatDate(order.createAt)
+      order.createAt = formatDate(order.createAt);
       return order;
-    })
+    });
 
   const curFilter = filter(statusFilter, idFilter);
 
@@ -111,18 +109,16 @@ const OrderList = (props) => {
           </tr>
         </thead>
         <tbody>
-          {(curFilter(sortedOrders)).map(order =>
-            <Order
+          {(curFilter(sortedOrders)).map((order) => <Order
               key={order.id}
               order={order}
               role={role}
               setStatus={update}
-            />
-          )}
+            />)}
         </tbody>
       </table>
     </div>
-  )
+  );
 };
 
 export default OrderList;

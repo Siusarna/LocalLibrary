@@ -1,10 +1,8 @@
 import React from 'react';
-import RejectOrderForm from '../components/forms/rejectOrderForm';
+import RejectOrderForm from '../components/forms/rejectOrderForm.jsx';
 
-const RejectOrderPage = () => {
-  return (
+const RejectOrderPage = () => (
     <RejectOrderForm/>
-  )
-}
+);
 
 export default RejectOrderPage;

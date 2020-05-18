@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import TextInput from '../inputs/textInput';
 import { Redirect, useParams } from 'react-router-dom';
+import TextInput from '../inputs/textInput.jsx';
 
 const RejectOrderForm = () => {
   const { id } = useParams();
@@ -10,7 +10,7 @@ const RejectOrderForm = () => {
   const [success, setSuccess] = useState(false);
 
   if (success) {
-    return <Redirect to='/work'/>
+    return <Redirect to='/work'/>;
   }
 
   return (
@@ -18,12 +18,12 @@ const RejectOrderForm = () => {
       <Formik
         initialValues={{ query: 'comment' }}
         validationSchema={Yup.object({
-          comment: Yup.string()
+          comment: Yup.string(),
         })}
         onSubmit={(values, { setSubmitting }) => {
           setServerError('');
           fetch('https://fathomless-ravine-92681.herokuapp.com/api/orders/confirm', {
-            headers: { 
+            headers: {
               'Content-Type': 'application/json',
             },
             method: 'PUT',
@@ -31,19 +31,18 @@ const RejectOrderForm = () => {
             body: JSON.stringify({
               comment: values.comment,
               confirmation: 'false',
-              orderId: id
+              orderId: id,
             }),
-  
+
           })
             .then((res) => {
-              console.dir({ res });
               if (res.status === 200) {
                 setSuccess(true);
               } else {
                 setServerError('Server error');
               }
               setSubmitting(false);
-            })
+            });
         }}
       >
         <Form>

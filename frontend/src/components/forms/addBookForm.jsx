@@ -2,17 +2,17 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import TextInput from '../inputs/textInput';
-import TextArea from '../inputs/textArea';
-import SectionTitle from '../layout/sectionTitle';
 import { Redirect } from 'react-router-dom';
-import FileInput from '../inputs/fileInput';
+import TextInput from '../inputs/textInput.jsx';
+import TextArea from '../inputs/textArea.jsx';
+import SectionTitle from '../layout/sectionTitle.jsx';
+import FileInput from '../inputs/fileInput.jsx';
 
 const AddAuthorForm = () => {
   const [serverError, setServerError] = useState('');
   const [success, setSuccess] = useState(false);
   if (success) {
-    return <Redirect to='/books/all' />
+    return <Redirect to='/books/all' />;
   }
 
   return (
@@ -67,17 +67,17 @@ const AddAuthorForm = () => {
               setServerError(error);
             }
             setSubmitting(false);
-          })
+          });
       }}
     >
       <Form>
         <SectionTitle text='' />
-        <TextInput type='text' name='title'             label='Title' />
-        <TextInput type='text' name='authorFirstName'   label='Author First Name' />
-        <TextInput type='text' name='authorLastName'    label='Author Last Name' />
-        <TextInput type='text' name='isbn'              label='ISBN' />
-        <TextInput type='text' name='yearOfPublishing'  label='year of Publishing' />
-        <TextArea type='text' name='description'        label='Description' />
+        <TextInput type='text' name='title' label='Title' />
+        <TextInput type='text' name='authorFirstName' label='Author First Name' />
+        <TextInput type='text' name='authorLastName' label='Author Last Name' />
+        <TextInput type='text' name='isbn' label='ISBN' />
+        <TextInput type='text' name='yearOfPublishing' label='year of Publishing' />
+        <TextArea type='text' name='description' label='Description' />
         <FileInput name='photo' label='Cover' />
         <div className='error'>{serverError}</div>
         <button type='submit' className='dark submit' disabled={Formik.isSubmitting}>Add Book</button>

@@ -4,10 +4,10 @@
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:jsx-a11y/recommended",
-    'plugin:react/recommended'
   ],
+    "plugins": 
+        ["react", "jsx-a11y"],
   "rules": {
-    "react/prop-types": 0,
     "linebreak-style": 0,
     "no-underscore-dangle": "off",
     "max-len": [
@@ -20,9 +20,6 @@
         "props": false
       }
     ],
-    "no-useless-escape": "off",
-    "jsx-a11y/aria-role": [ 2, {
-        "ignoreNonDOM": true
-    }],
+    "no-useless-escape": "off"
   }
 }

@@ -9,6 +9,6 @@ const LeftRightContainer = (props) => (
       {props.right}
     </div>
   </div>
-)
+);
 
 export default LeftRightContainer;

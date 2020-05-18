@@ -1,10 +1,8 @@
 import React from 'react';
-import ConfirmationCodeForm from '../components/forms/confirmationCodeForm';
+import ConfirmationCodeForm from '../components/forms/confirmationCodeForm.jsx';
 
-const ConfirmationCodePage = () => {
-  return (
+const ConfirmationCodePage = () => (
     <ConfirmationCodeForm/>
-  )
-}
+);
 
 export default ConfirmationCodePage;

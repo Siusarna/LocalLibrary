@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-const Logo = (props) => {
+const Logo = () => {
   const { pathname } = useLocation();
   return <div className='Logo'>
     <Link to={pathname === '/' ? '/empty' : '/'}>Local Library</Link>
-  </div>
+  </div>;
 };
 
 export default Logo;

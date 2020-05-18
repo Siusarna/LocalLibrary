@@ -2,21 +2,21 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import TextInput from '../inputs/textInput';
-import TextArea from '../inputs/textArea';
-import SectionTitle from '../layout/sectionTitle';
 import { Redirect, useParams } from 'react-router-dom';
-import FileInput from '../inputs/fileInput';
-import useFetch from '../../hooks/useFetch';
+import TextInput from '../inputs/textInput.jsx';
+import TextArea from '../inputs/textArea.jsx';
+import SectionTitle from '../layout/sectionTitle.jsx';
+import FileInput from '../inputs/fileInput.jsx';
+import useFetch from '../../hooks/useFetch.jsx';
 
 const AddAuthorForm = () => {
   const { id } = useParams();
-  const { data: author, isLoaded } = useFetch('https://fathomless-ravine-92681.herokuapp.com/api/authors/' + id);
+  const { data: author, isLoaded } = useFetch(`https://fathomless-ravine-92681.herokuapp.com/api/authors/${id}`);
   const [serverError, setServerError] = useState('');
   const [success, setSuccess] = useState(false);
   if (!isLoaded) return true;
   if (success) {
-    return <Redirect to={'/authors/' + id}/>
+    return <Redirect to={`/authors/${id}`}/>;
   }
 
   return (
@@ -66,7 +66,7 @@ const AddAuthorForm = () => {
               setServerError(error);
             }
             setSubmitting(false);
-          })
+          });
       }}
     >
       <Form>

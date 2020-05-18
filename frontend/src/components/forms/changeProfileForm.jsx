@@ -1,21 +1,20 @@
 
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import TextInput from '../inputs/textInput';
-import SectionTitle from '../layout/sectionTitle';
-import AuthContext from '../../context/authContext';
 import { Redirect } from 'react-router-dom';
-import useFetch from '../../hooks/useFetch';
+import TextInput from '../inputs/textInput.jsx';
+import SectionTitle from '../layout/sectionTitle.jsx';
+import useFetch from '../../hooks/useFetch.jsx';
 
 const SignUpForm = () => {
   const { data: user, isLoaded } = useFetch('https://fathomless-ravine-92681.herokuapp.com/api/accounts/profile');
   const [serverError, setServerError] = useState('');
   const [success, setSuccess] = useState(false);
-  const { updateAuth } = useContext(AuthContext);
+
   if (!isLoaded) return true;
   if (success) {
-    return <Redirect to='/profile' />
+    return <Redirect to='/profile' />;
   }
   return (
     <Formik
@@ -49,7 +48,7 @@ const SignUpForm = () => {
       })}
       onSubmit={(values, { setSubmitting }) => {
         fetch('https://fathomless-ravine-92681.herokuapp.com/api/accounts/profile', {
-          headers: { 
+          headers: {
             'Content-Type': 'application/json',
           },
           method: 'PUT',
@@ -60,25 +59,25 @@ const SignUpForm = () => {
             if (res.status === 200) {
               setSuccess(true);
             }
-            return res.json()
+            return res.json();
           })
           .then((json) => {
             if (!success) {
               const error = json.message || 'Server Error';
               setServerError(error);
             }
-            setSubmitting(false); 
-          })
+            setSubmitting(false);
+          });
       }}
     >
       <Form>
         <SectionTitle text='' />
-        <TextInput type='text'      name='firstName'        label='First Name' />
-        <TextInput type='text'      name='lastName'         label='Last Name' />
-        <TextInput type='text'      name='city'             label='City' />
-        <TextInput type='text'      name='address'          label='Address' />
-        <TextInput type='text'      name='age'              label='Age' />
-        <TextInput type='text'      name='phone'            label='Phone Number' />
+        <TextInput type='text' name='firstName' label='First Name' />
+        <TextInput type='text' name='lastName' label='Last Name' />
+        <TextInput type='text' name='city' label='City' />
+        <TextInput type='text' name='address' label='Address' />
+        <TextInput type='text' name='age' label='Age' />
+        <TextInput type='text' name='phone' label='Phone Number' />
         <div className='error'>{serverError}</div>
         <button type='submit' className='dark submit' disabled={Formik.isSubmitting}>Change Profile</button>
       </Form>

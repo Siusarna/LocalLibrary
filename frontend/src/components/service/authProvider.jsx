@@ -1,38 +1,37 @@
-import AuthContext from '../../context/authContext';
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import AuthContext from '../../context/authContext.jsx';
 
 const AuthProvider = (props) => {
   const [role, setRole] = useState('unauthorized');
   const [isValid, setValid] = useState('false');
 
   useEffect(() => {
-    if(isValid) return;
+    if (isValid) return;
 
-    fetch('https://fathomless-ravine-92681.herokuapp.com/api/accounts/profile', 
-      {credentials: 'include'}
-    )    
-      .then(res => {
+    fetch('https://fathomless-ravine-92681.herokuapp.com/api/accounts/profile',
+      { credentials: 'include' })
+      .then((res) => {
         setValid(res.ok);
         if (res.status === 401) {
           setRole('unauthorized');
         }
         return res.json();
       })
-      .then(data =>{
+      .then((data) => {
         if (['customer', 'librarian'].includes(data.role)) {
           setRole(data.role);
         }
       });
-  }, [isValid])
+  }, [isValid]);
 
-  const updateAuth = () => { setValid(false) };
+  const updateAuth = () => { setValid(false); };
 
-  return(
+  return (
     <AuthContext.Provider value={{ role, updateAuth }}>
       {props.children}
     </AuthContext.Provider>
-  )
+  );
 };
 
 export default AuthProvider;

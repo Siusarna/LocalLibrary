@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import Logo from './logo';
-import AuthContext from '../../context/authContext';
 import { Link } from 'react-router-dom';
+import Logo from './logo.jsx';
+import AuthContext from '../../context/authContext.jsx';
 
-const Header = (props) => {
-  const { role } = useContext(AuthContext)
+const Header = () => {
+  const { role } = useContext(AuthContext);
   return (
     <div className='Header'>
       <Logo />
@@ -25,7 +25,7 @@ const Header = (props) => {
         </>
       )}
     </div>
-  )
+  );
 };
 
 export default Header;

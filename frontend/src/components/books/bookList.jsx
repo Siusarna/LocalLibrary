@@ -1,5 +1,5 @@
 import React from 'react';
-import Book from './book';
+import Book from './book.jsx';
 
 const BookList = (props) => {
   const { books } = props;
@@ -10,13 +10,13 @@ const BookList = (props) => {
 
   return (
     <div className='BookList'>
-      {rows.map((row, index) => <div className='bookRow' key={index}>
-        {row.map((book, index) => (
-          <Book key={index} book={book}/>
+      {rows.map((row, i) => <div className='bookRow' key={i}>
+        {row.map((book, j) => (
+          <Book key={j} book={book}/>
         ))}
       </div>)}
     </div>
-  )
+  );
 };
 
 export default BookList;

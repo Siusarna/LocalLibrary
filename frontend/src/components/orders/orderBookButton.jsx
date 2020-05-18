@@ -1,5 +1,5 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
+
 
 const order = (book, setSuccess) => () => {
   fetch('https://fathomless-ravine-92681.herokuapp.com/api/orders/create', {
@@ -13,11 +13,9 @@ const order = (book, setSuccess) => () => {
     .then((res) => {
       if (res.ok) {
         setSuccess(true);
-      } else {
-        console.dir({ res });
       }
-    })
-}
+    });
+};
 
 const OrderBookButton = (props) => {
   const [success, setSuccess] = useState(props.success);
@@ -25,7 +23,7 @@ const OrderBookButton = (props) => {
     <button className='dark' disabled={success} onClick={order(props.book, setSuccess)}>
       {!success ? 'Order' : 'Ordered successfully'}
     </button>
-  )
-}
+  );
+};
 
 export default OrderBookButton;

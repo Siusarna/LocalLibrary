@@ -2,17 +2,17 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import TextInput from '../inputs/textInput';
-import TextArea from '../inputs/textArea';
-import SectionTitle from '../layout/sectionTitle';
 import { Redirect } from 'react-router-dom';
-import FileInput from '../inputs/fileInput';
+import TextInput from '../inputs/textInput.jsx';
+import TextArea from '../inputs/textArea.jsx';
+import SectionTitle from '../layout/sectionTitle.jsx';
+import FileInput from '../inputs/fileInput.jsx';
 
 const AddAuthorForm = () => {
   const [serverError, setServerError] = useState('');
   const [success, setSuccess] = useState(false);
   if (success) {
-    return <Redirect to='/authors/all' />
+    return <Redirect to='/authors/all' />;
   }
 
   return (
@@ -61,7 +61,7 @@ const AddAuthorForm = () => {
               setServerError(error);
             }
             setSubmitting(false);
-          })
+          });
       }}
     >
       <Form>

@@ -2,21 +2,21 @@
 import React, { useState, useContext } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import TextInput from '../inputs/textInput';
-import SectionTitle from '../layout/sectionTitle';
-import AuthContext from '../../context/authContext';
 import { Redirect } from 'react-router-dom';
 import TelegramLoginButton from 'react-telegram-login';
+import TextInput from '../inputs/textInput.jsx';
+import SectionTitle from '../layout/sectionTitle.jsx';
+import AuthContext from '../../context/authContext.jsx';
 
 const SignInForm = () => {
   const [serverError, setServerError] = useState('');
   const [success, setSuccess] = useState(false);
   const { updateAuth } = useContext(AuthContext);
   if (success) {
-    return <Redirect to='/' />
+    return <Redirect to='/' />;
   }
 
-  const fetchAuth = url => (values) => {
+  const fetchAuth = (url) => (values) => {
     fetch(url, {
       headers: {
         'Content-Type': 'application/json',
@@ -30,15 +30,15 @@ const SignInForm = () => {
           updateAuth();
           setSuccess(true);
         }
-        return res.json()
+        return res.json();
       })
       .then((json) => {
         if (!success) {
           const error = json.message || 'Server Error';
           setServerError(error);
         }
-      })
-  }
+      });
+  };
 
   return (
     <Formik
@@ -66,7 +66,11 @@ const SignInForm = () => {
         <div className='error'>{serverError}</div>
         <button type='submit' className='dark submit' disabled={Formik.isSubmitting}>Sign In</button>
         <SectionTitle text='Forgot Password' to='/forgot-password' />
-        <TelegramLoginButton dataOnauth={fetchAuth('http://35.242.202.122:3000/api/accounts/telegram')} botName='teenLibraryBot'/>
+        <TelegramLoginButton
+          dataOnauth={fetchAuth('http://35.242.202.122:3000/api/accounts/telegram')}
+          botName='teenLibraryBot'
+          data-userpic='false'
+        />
       </Form>
     </Formik >
   );

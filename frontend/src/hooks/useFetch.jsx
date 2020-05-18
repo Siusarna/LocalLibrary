@@ -7,25 +7,25 @@ const useFetch = (url) => {
   useEffect(() => {
     if (!shouldUpdate) return;
     const newFetchResult = {};
-    fetch(url, {credentials: 'include'})
-      .then(result => {
+    fetch(url, { credentials: 'include' })
+      .then((result) => {
         newFetchResult.status = result.status;
         newFetchResult.isLoaded = result.ok;
         return result.json();
       })
-      .then(data => {
+      .then((data) => {
         newFetchResult.data = data;
       })
-      .catch(error => {
+      .catch((error) => {
         newFetchResult.error = error;
       })
       .then(() => {
         setFetchResult(newFetchResult);
         setShouldUpdate(false);
       });
-  }, [shouldUpdate])
+  }, [shouldUpdate]);
 
-  return Object.assign({}, fetchResult, { update: () => { setShouldUpdate(true) }});
-}
+  return { ...fetchResult, update: () => { setShouldUpdate(true); } };
+};
 
 export default useFetch;

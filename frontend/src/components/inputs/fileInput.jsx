@@ -1,11 +1,11 @@
 import React from 'react';
 import { useField, useFormikContext } from 'formik';
-import toBase64 from '../../helpers/toBase64';
+import toBase64 from '../../helpers/toBase64.jsx';
 
 
 const FileInput = ({ label, ...props }) => {
   const { setFieldValue } = useFormikContext();
-  const [field, meta] = useField(props);
+  const [, meta] = useField(props);
   return (
     <>
       <label htmlFor={props.id || props.name}>{label}</label>

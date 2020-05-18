@@ -16,29 +16,28 @@ const SearchForm = (props) => {
       <Formik
         initialValues={{ query: '' }}
         validationSchema={Yup.object({
-          query: Yup.string()
+          query: Yup.string(),
         })}
         onSubmit={(values, { setSubmitting }) => {
           setServerError('');
-          fetch('https://fathomless-ravine-92681.herokuapp.com/api/search/' + values.query, {
+          fetch(`https://fathomless-ravine-92681.herokuapp.com/api/search/${values.query}`, {
             credentials: 'include',
           })
             .then((res) => {
-              console.dir({ res });
               if (res.status === 200) {
                 success = true;
               }
-              return res.json()
+              return res.json();
             })
             .then((json) => {
               if (!success) {
                 const error = json.message || 'Server Error';
                 setServerError(error);
               } else {
-                setResult(json)
+                setResult(json);
               }
               setSubmitting(false);
-            })
+            });
         }}
       >
         <Form className='searchForm'>

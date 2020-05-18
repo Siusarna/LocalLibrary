@@ -1,5 +1,5 @@
 import React from 'react';
-import Author from './author';
+import Author from './author.jsx';
 
 const AuthorList = (props) => {
   const { authors } = props;
@@ -9,13 +9,13 @@ const AuthorList = (props) => {
   }
   return (
     <div className='AuthorList'>
-      {rows.map((row, index) => <div className='authorRow' key={index}>
-        {row.map((author, index) => (
-          <Author key={index} author={author}/>
+      {rows.map((row, i) => <div className='authorRow' key={i}>
+        {row.map((author, j) => (
+          <Author key={j} author={author}/>
         ))}
       </div>)}
     </div>
-  )
+  );
 };
 
 export default AuthorList;

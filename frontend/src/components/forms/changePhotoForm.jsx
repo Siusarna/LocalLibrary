@@ -1,24 +1,23 @@
 
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import SectionTitle from '../layout/sectionTitle';
-import AuthContext from '../../context/authContext';
 import { Redirect } from 'react-router-dom';
-import FileInput from '../inputs/fileInput';
+import SectionTitle from '../layout/sectionTitle.jsx';
+import FileInput from '../inputs/fileInput.jsx';
 
 const SignUpForm = () => {
   const [serverError, setServerError] = useState('');
   const [success, setSuccess] = useState(false);
-  const { updateAuth } = useContext(AuthContext);
+
   if (success) {
-    return <Redirect to='/profile' />
+    return <Redirect to='/profile' />;
   }
 
   return (
     <Formik
       initialValues={{
-        photo: ''
+        photo: '',
       }}
       validationSchema={Yup.object({
         photo: Yup.string()
@@ -26,7 +25,7 @@ const SignUpForm = () => {
       })}
       onSubmit={(values, { setSubmitting }) => {
         fetch('https://fathomless-ravine-92681.herokuapp.com/api/accounts/photo', {
-          headers: { 
+          headers: {
             'Content-Type': 'application/json',
           },
           method: 'PUT',
@@ -37,15 +36,15 @@ const SignUpForm = () => {
             if (res.status === 200) {
               setSuccess(true);
             }
-            return res.json()
+            return res.json();
           })
           .then((json) => {
             if (!success) {
               const error = json.message || 'Server Error';
               setServerError(error);
             }
-            setSubmitting(false); 
-          })
+            setSubmitting(false);
+          });
       }}
     >
       <Form>

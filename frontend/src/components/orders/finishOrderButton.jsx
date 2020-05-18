@@ -1,5 +1,5 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
+
 
 const confirm = (id, setSuccess) => () => {
   fetch('https://fathomless-ravine-92681.herokuapp.com/api/orders/finish', {
@@ -10,13 +10,13 @@ const confirm = (id, setSuccess) => () => {
     credentials: 'include',
     body: JSON.stringify({
       orderId: id,
-    })
+    }),
   })
     .then((res) => {
       if (res.ok) {
         setSuccess(true);
       }
-    })
+    });
 };
 
 const FinnishOrderButton = (props) => {
@@ -26,7 +26,7 @@ const FinnishOrderButton = (props) => {
     <button className='dark' disabled={success} onClick={confirm(props.id, setSuccess)}>
      Finish
     </button>
-  )
-}
+  );
+};
 
 export default FinnishOrderButton;

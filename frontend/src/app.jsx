@@ -1,10 +1,10 @@
 import React from 'react';
-import Router from './components/service/router';
+import { BrowserRouter } from 'react-router-dom';
+import Router from './components/service/router.jsx';
 import './styles/normalize.scss';
 import './styles/common.scss';
-import { BrowserRouter } from 'react-router-dom';
-import AuthProvider from './components/service/authProvider';
-import Header from './components/layout/header';
+import AuthProvider from './components/service/authProvider.jsx';
+import Header from './components/layout/header.jsx';
 
 const App = () => (
   <React.StrictMode>
@@ -15,6 +15,6 @@ const App = () => (
       </BrowserRouter>
     </AuthProvider>
   </React.StrictMode>
-)
+);
 
 export default App;

@@ -2,18 +2,18 @@
 import React, { useState, useContext } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import TextInput from '../inputs/textInput';
-import SectionTitle from '../layout/sectionTitle';
-import AuthContext from '../../context/authContext';
 import { Redirect } from 'react-router-dom';
-import FileInput from '../inputs/fileInput';
+import TextInput from '../inputs/textInput.jsx';
+import SectionTitle from '../layout/sectionTitle.jsx';
+import AuthContext from '../../context/authContext.jsx';
+import FileInput from '../inputs/fileInput.jsx';
 
 const SignUpForm = () => {
   const [serverError, setServerError] = useState('');
   const [success, setSuccess] = useState(false);
   const { updateAuth } = useContext(AuthContext);
   if (success) {
-    return <Redirect to='/' />
+    return <Redirect to='/' />;
   }
 
   return (
@@ -28,7 +28,7 @@ const SignUpForm = () => {
         address: '',
         age: '',
         phone: '',
-        photo: ''
+        photo: '',
       }}
       validationSchema={Yup.object({
         email: Yup.string()
@@ -64,7 +64,7 @@ const SignUpForm = () => {
       })}
       onSubmit={(values, { setSubmitting }) => {
         fetch('https://fathomless-ravine-92681.herokuapp.com/api/accounts/sign-up', {
-          headers: { 
+          headers: {
             'Content-Type': 'application/json',
           },
           method: 'POST',
@@ -76,28 +76,28 @@ const SignUpForm = () => {
               updateAuth();
               setSuccess(true);
             }
-            return res.json()
+            return res.json();
           })
           .then((json) => {
             if (!success) {
               const error = json.message || 'Server Error';
               setServerError(error);
             }
-            setSubmitting(false); 
-          })
+            setSubmitting(false);
+          });
       }}
     >
       <Form>
         <SectionTitle text='' />
-        <TextInput type='email'     name='email'            label='Email' />
-        <TextInput type='password'  name='password'         label='Password' />
-        <TextInput type='password'  name='confirmPassword'  label='Confirm password' />
-        <TextInput type='text'      name='firstName'        label='First Name' />
-        <TextInput type='text'      name='lastName'         label='Last Name' />
-        <TextInput type='text'      name='city'             label='City' />
-        <TextInput type='text'      name='address'          label='Address' />
-        <TextInput type='text'      name='age'              label='Age' />
-        <TextInput type='text'      name='phone'            label='Phone Number' />
+        <TextInput type='email' name='email' label='Email' />
+        <TextInput type='password' name='password' label='Password' />
+        <TextInput type='password' name='confirmPassword' label='Confirm password' />
+        <TextInput type='text' name='firstName' label='First Name' />
+        <TextInput type='text' name='lastName' label='Last Name' />
+        <TextInput type='text' name='city' label='City' />
+        <TextInput type='text' name='address' label='Address' />
+        <TextInput type='text' name='age' label='Age' />
+        <TextInput type='text' name='phone' label='Phone Number' />
         <FileInput name='photo' label='Photo' />
         <div className='error'>{serverError}</div>
         <button type='submit' className='dark submit' disabled={Formik.isSubmitting}>Sign Up</button>

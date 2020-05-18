@@ -6,7 +6,7 @@ const OrderStatusButton = (props) => {
     <button className='dark' onClick={() => props.onClick(status)} disabled={status === curStatus}>
       {status}
     </button>
-  )
-}
+  );
+};
 
 export default OrderStatusButton;

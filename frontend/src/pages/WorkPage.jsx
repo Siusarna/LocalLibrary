@@ -1,10 +1,8 @@
 import React from 'react';
-import OrderList from '../components/orders/orderList';
+import OrderList from '../components/orders/orderList.jsx';
 
-const WorkPage = () => {
-  return (
+const WorkPage = () => (
     <OrderList/>
-  )
-}
+);
 
 export default WorkPage;
