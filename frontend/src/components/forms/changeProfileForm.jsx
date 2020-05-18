@@ -6,9 +6,10 @@ import { Redirect } from 'react-router-dom';
 import TextInput from '../inputs/textInput.jsx';
 import SectionTitle from '../layout/sectionTitle.jsx';
 import useFetch from '../../hooks/useFetch.jsx';
+import api from '../../config/api.jsx';
 
 const SignUpForm = () => {
-  const { data: user, isLoaded } = useFetch('https://fathomless-ravine-92681.herokuapp.com/api/accounts/profile');
+  const { data: user, isLoaded } = useFetch(api.accounts.profile());
   const [serverError, setServerError] = useState('');
   const [success, setSuccess] = useState(false);
 
@@ -47,7 +48,7 @@ const SignUpForm = () => {
           .matches(/^\+?[0-9]+$/, 'Wrong phone number format'),
       })}
       onSubmit={(values, { setSubmitting }) => {
-        fetch('https://fathomless-ravine-92681.herokuapp.com/api/accounts/profile', {
+        fetch(api.accounts.profile(), {
           headers: {
             'Content-Type': 'application/json',
           },

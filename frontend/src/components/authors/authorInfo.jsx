@@ -4,14 +4,14 @@ import ImageTextContainer from '../layout/imageTextContainer.jsx';
 import SectionTitle from '../layout/sectionTitle.jsx';
 import BookList from '../books/bookList.jsx';
 import useFetch from '../../hooks/useFetch.jsx';
-
+import api from '../../config/api.jsx';
 import AuthContext from '../../context/authContext.jsx';
 
 const deleteAuthor = (id, setRedirect) => () => {
   // eslint-disable-next-line no-alert
   const isConfirmed = window.confirm('Do you really want to delete this Author ?');
   if (isConfirmed) {
-    fetch('https://fathomless-ravine-92681.herokuapp.com/api/authors', {
+    fetch(api.authors(), {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -30,12 +30,8 @@ const AuthorInfo = () => {
   const [isRedirect, setRedirect] = useState(false);
   const { role } = useContext(AuthContext);
   const { id } = useParams();
-  const { data: author, isLoaded: isAuthorLoaded } = useFetch(
-    `https://fathomless-ravine-92681.herokuapp.com/api/authors/${id}`,
-  );
-  const { data: books, isLoaded: isBooksLoaded } = useFetch(
-    `https://fathomless-ravine-92681.herokuapp.com/api/authors/${id}/book`,
-  );
+  const { data: author, isLoaded: isAuthorLoaded } = useFetch(api.authors(id));
+  const { data: books, isLoaded: isBooksLoaded } = useFetch(api.authors.books(id));
 
   if (!isAuthorLoaded) return true;
   if (!isBooksLoaded) return true;

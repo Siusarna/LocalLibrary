@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import AuthContext from '../../context/authContext.jsx';
 
+import api from '../../config/api.jsx';
+
 const AuthProvider = (props) => {
   const [role, setRole] = useState('unauthorized');
   const [isValid, setValid] = useState('false');
@@ -9,7 +11,7 @@ const AuthProvider = (props) => {
   useEffect(() => {
     if (isValid) return;
 
-    fetch('https://fathomless-ravine-92681.herokuapp.com/api/accounts/profile',
+    fetch(api.accounts.profile(),
       { credentials: 'include' })
       .then((res) => {
         setValid(res.ok);

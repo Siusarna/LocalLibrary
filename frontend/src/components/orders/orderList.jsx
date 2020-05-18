@@ -5,6 +5,7 @@ import useFetch from '../../hooks/useFetch.jsx';
 import Order from './order.jsx';
 import SectionTitle from '../layout/sectionTitle.jsx';
 import OrderStatusButton from './orderStatusButton.jsx';
+import api from '../../config/api.jsx';
 
 const LOAN_PERIOD = 30; // days
 
@@ -52,7 +53,7 @@ const OrderList = () => {
   const [statusFilter, setStatusFilter] = useState('Active'); // other options are active and loaned
   const [idFilter, setIdFilter] = useState('');
 
-  const { isLoaded, data: orders, update } = useFetch('https://fathomless-ravine-92681.herokuapp.com/api/orders');
+  const { isLoaded, data: orders, update } = useFetch(api.orders());
 
   const UPDATE_INTERVAL = 5000;
   useEffect(() => {

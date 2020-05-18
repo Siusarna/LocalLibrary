@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import api from '../../config/api.jsx';
 
 const SearchForm = (props) => {
   const [serverError, setServerError] = useState('');
@@ -20,7 +21,7 @@ const SearchForm = (props) => {
         })}
         onSubmit={(values, { setSubmitting }) => {
           setServerError('');
-          fetch(`https://fathomless-ravine-92681.herokuapp.com/api/search/${values.query}`, {
+          fetch(api.search(values.query), {
             credentials: 'include',
           })
             .then((res) => {

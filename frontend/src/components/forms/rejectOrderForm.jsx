@@ -3,6 +3,7 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { Redirect, useParams } from 'react-router-dom';
 import TextInput from '../inputs/textInput.jsx';
+import api from '../../config/api.jsx';
 
 const RejectOrderForm = () => {
   const { id } = useParams();
@@ -22,7 +23,7 @@ const RejectOrderForm = () => {
         })}
         onSubmit={(values, { setSubmitting }) => {
           setServerError('');
-          fetch('https://fathomless-ravine-92681.herokuapp.com/api/orders/confirm', {
+          fetch(api.orders.confirm(), {
             headers: {
               'Content-Type': 'application/json',
             },

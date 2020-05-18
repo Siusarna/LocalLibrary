@@ -8,10 +8,11 @@ import TextArea from '../inputs/textArea.jsx';
 import SectionTitle from '../layout/sectionTitle.jsx';
 import FileInput from '../inputs/fileInput.jsx';
 import useFetch from '../../hooks/useFetch.jsx';
+import api from '../../config/api.jsx';
 
 const AddAuthorForm = () => {
   const { id } = useParams();
-  const { data: author, isLoaded } = useFetch(`https://fathomless-ravine-92681.herokuapp.com/api/authors/${id}`);
+  const { data: author, isLoaded } = useFetch(api.authors(id));
   const [serverError, setServerError] = useState('');
   const [success, setSuccess] = useState(false);
   if (!isLoaded) return true;
@@ -46,7 +47,7 @@ const AddAuthorForm = () => {
       })}
       onSubmit={(values, { setSubmitting }) => {
         values.id = id;
-        fetch('https://fathomless-ravine-92681.herokuapp.com/api/authors', {
+        fetch(api.authors, {
           headers: {
             'Content-Type': 'application/json',
           },

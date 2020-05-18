@@ -7,13 +7,15 @@ import AuthContext from '../../context/authContext.jsx';
 import SectionTitle from '../layout/sectionTitle.jsx';
 import OrderList from '../orders/orderList.jsx';
 
+import api from '../../config/api.jsx';
+
 
 const ProfileInfo = () => {
-  const { isLoaded, data: user } = useFetch('https://fathomless-ravine-92681.herokuapp.com/api/accounts/profile');
+  const { isLoaded, data: user } = useFetch(api.accounts.profile());
   const { updateAuth } = useContext(AuthContext);
   const [redirect, setRedirect] = useState(false);
   const logOut = () => {
-    fetch('https://fathomless-ravine-92681.herokuapp.com/api/accounts/logout', {
+    fetch(api.accounts.logout(), {
       credentials: 'include',
     }).then(() => { updateAuth(); setRedirect(true); });
   };

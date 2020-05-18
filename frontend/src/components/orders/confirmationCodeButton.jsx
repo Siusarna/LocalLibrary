@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-
 import { Redirect } from 'react-router-dom';
+import api from '../../config/api.jsx';
+
 
 const confirm = (id, setSuccess) => () => {
-  fetch('https://fathomless-ravine-92681.herokuapp.com/api/orders/confirmationCode', {
+  fetch(api.orders.confirmationCode(), {
     headers: {
       'Content-Type': 'application/json',
     },

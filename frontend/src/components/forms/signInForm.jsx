@@ -7,6 +7,7 @@ import TelegramLoginButton from 'react-telegram-login';
 import TextInput from '../inputs/textInput.jsx';
 import SectionTitle from '../layout/sectionTitle.jsx';
 import AuthContext from '../../context/authContext.jsx';
+import api from '../../config/api.jsx';
 
 const SignInForm = () => {
   const [serverError, setServerError] = useState('');
@@ -17,6 +18,7 @@ const SignInForm = () => {
   }
 
   const fetchAuth = (url) => (values) => {
+    console.log(url);
     fetch(url, {
       headers: {
         'Content-Type': 'application/json',
@@ -49,7 +51,7 @@ const SignInForm = () => {
         password: Yup.string()
           .required('Required'),
       })}
-      onSubmit={fetchAuth('http://35.242.202.122:3000/api/accounts/sign-in')}
+      onSubmit={fetchAuth(api.accounts.signIn())}
     >
       <Form>
         <SectionTitle text='' />
@@ -67,7 +69,7 @@ const SignInForm = () => {
         <button type='submit' className='dark submit' disabled={Formik.isSubmitting}>Sign In</button>
         <SectionTitle text='Forgot Password' to='/forgot-password' />
         <TelegramLoginButton
-          dataOnauth={fetchAuth('http://35.242.202.122:3000/api/accounts/telegram')}
+          dataOnauth={fetchAuth(api.accounts.telegram())}
           botName='teenLibraryBot'
           data-userpic='false'
         />

@@ -6,6 +6,8 @@ import SectionTitle from '../layout/sectionTitle.jsx';
 import useFetch from '../../hooks/useFetch.jsx';
 import AuthContext from '../../context/authContext.jsx';
 
+import api from '../../config/api.jsx';
+
 import OrderBookButton from '../orders/orderBookButton.jsx';
 import FollowBookButton from '../orders/followBookButton.jsx';
 
@@ -13,7 +15,7 @@ const deleteBook = (id, setRedirect) => () => {
   // eslint-disable-next-line no-alert
   const isConfirmed = window.confirm('Do you really want to delete this book ?');
   if (isConfirmed) {
-    fetch('https://fathomless-ravine-92681.herokuapp.com/api/books', {
+    fetch(api.books(), {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -35,8 +37,8 @@ const BookInfo = () => {
   const { role } = useContext(AuthContext);
   const { id } = useParams();
 
-  const { data: book, isLoaded: isBookLoaded } = useFetch(`https://fathomless-ravine-92681.herokuapp.com/api/books/${id}`);
-  const { data: orders, isLoaded: isOrderLoaded } = useFetch('https://fathomless-ravine-92681.herokuapp.com/api/orders');
+  const { data: book, isLoaded: isBookLoaded } = useFetch(api.books(id));
+  const { data: orders, isLoaded: isOrderLoaded } = useFetch(api.orders());
 
   if (!isBookLoaded || !isOrderLoaded) return null;
   if (isRedirect) return <Redirect to='/books/all' />;

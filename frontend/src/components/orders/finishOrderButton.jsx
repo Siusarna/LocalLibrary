@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import api from '../../config/api.jsx';
 
 
 const confirm = (id, setSuccess) => () => {
-  fetch('https://fathomless-ravine-92681.herokuapp.com/api/orders/finish', {
+  fetch(api.orders.finish(), {
     headers: {
       'Content-Type': 'application/json',
     },

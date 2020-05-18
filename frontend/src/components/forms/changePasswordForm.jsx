@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { Redirect } from 'react-router-dom';
 import TextInput from '../inputs/textInput.jsx';
 import SectionTitle from '../layout/sectionTitle.jsx';
+import api from '../../config/api.jsx';
 
 const SignUpForm = () => {
   const [serverError, setServerError] = useState('');
@@ -33,7 +34,7 @@ const SignUpForm = () => {
           .oneOf([Yup.ref('newPassword'), null], 'Passwords must match'),
       })}
       onSubmit={(values, { setSubmitting }) => {
-        fetch('https://fathomless-ravine-92681.herokuapp.com/api/accounts/changePassword', {
+        fetch(api.account.changePassword(), {
           headers: {
             'Content-Type': 'application/json',
           },

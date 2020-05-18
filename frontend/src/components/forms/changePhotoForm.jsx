@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { Redirect } from 'react-router-dom';
 import SectionTitle from '../layout/sectionTitle.jsx';
 import FileInput from '../inputs/fileInput.jsx';
+import api from '../../config/api.jsx';
 
 const SignUpForm = () => {
   const [serverError, setServerError] = useState('');
@@ -24,7 +25,7 @@ const SignUpForm = () => {
           .required('Required'),
       })}
       onSubmit={(values, { setSubmitting }) => {
-        fetch('https://fathomless-ravine-92681.herokuapp.com/api/accounts/photo', {
+        fetch(api.accounts.photo(), {
           headers: {
             'Content-Type': 'application/json',
           },

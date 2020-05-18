@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { Redirect } from 'react-router-dom';
 import TextInput from '../inputs/textInput.jsx';
 import SectionTitle from '../layout/sectionTitle.jsx';
+import api from '../../config/api.jsx';
 
 const ForgotPasswordForm = () => {
   const [serverError, setServerError] = useState('');
@@ -21,7 +22,7 @@ const ForgotPasswordForm = () => {
           .required('Required'),
       })}
       onSubmit={(values, { setSubmitting }) => {
-        fetch('https://fathomless-ravine-92681.herokuapp.com/api/accounts/forgotPassword', {
+        fetch(api.accounts.forgotPassword(), {
           headers: {
             'Content-Type': 'application/json',
           },

@@ -7,6 +7,7 @@ import TextInput from '../inputs/textInput.jsx';
 import SectionTitle from '../layout/sectionTitle.jsx';
 import AuthContext from '../../context/authContext.jsx';
 import FileInput from '../inputs/fileInput.jsx';
+import api from '../../config/api.jsx';
 
 const SignUpForm = () => {
   const [serverError, setServerError] = useState('');
@@ -63,7 +64,7 @@ const SignUpForm = () => {
           .required('Required'),
       })}
       onSubmit={(values, { setSubmitting }) => {
-        fetch('https://fathomless-ravine-92681.herokuapp.com/api/accounts/sign-up', {
+        fetch(api.signUp(), {
           headers: {
             'Content-Type': 'application/json',
           },

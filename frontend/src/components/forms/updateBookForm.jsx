@@ -8,6 +8,7 @@ import TextArea from '../inputs/textArea.jsx';
 import SectionTitle from '../layout/sectionTitle.jsx';
 import FileInput from '../inputs/fileInput.jsx';
 import useFetch from '../../hooks/useFetch.jsx';
+import api from '../../config/api.jsx';
 
 const AddAuthorForm = () => {
   const { id } = useParams();
@@ -52,7 +53,7 @@ const AddAuthorForm = () => {
       })}
       onSubmit={(values, { setSubmitting }) => {
         values.id = id;
-        fetch('https://fathomless-ravine-92681.herokuapp.com/api/books', {
+        fetch(api.books(), {
           headers: {
             'Content-Type': 'application/json',
           },

@@ -2,9 +2,11 @@ import React from 'react';
 import SectionTitle from '../layout/sectionTitle.jsx';
 import BookList from './bookList.jsx';
 import useFetch from '../../hooks/useFetch.jsx';
+import api from '../../config/api.jsx';
+
 
 const Recommendations = () => {
-  const { isLoaded, data: books } = useFetch('https://fathomless-ravine-92681.herokuapp.com/api/books');
+  const { isLoaded, data: books } = useFetch(api.books());
   if (!isLoaded) return true;
   return (
     <>

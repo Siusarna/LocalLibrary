@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { Redirect, useParams } from 'react-router-dom';
 import TextInput from '../inputs/textInput.jsx';
 import SectionTitle from '../layout/sectionTitle.jsx';
+import api from '../../config/api.jsx';
 
 const ConfirmationCodeForm = () => {
   const { id } = useParams();
@@ -23,7 +24,7 @@ const ConfirmationCodeForm = () => {
         })}
         onSubmit={(values, { setSubmitting }) => {
           setServerError('');
-          fetch('https://fathomless-ravine-92681.herokuapp.com/api/orders/confirmCode', {
+          fetch(api.orders.confirmCode(), {
             headers: {
               'Content-Type': 'application/json',
             },

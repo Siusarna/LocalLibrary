@@ -7,6 +7,7 @@ import TextInput from '../inputs/textInput.jsx';
 import TextArea from '../inputs/textArea.jsx';
 import SectionTitle from '../layout/sectionTitle.jsx';
 import FileInput from '../inputs/fileInput.jsx';
+import api from '../../config/api.jsx';
 
 const AddAuthorForm = () => {
   const [serverError, setServerError] = useState('');
@@ -41,7 +42,7 @@ const AddAuthorForm = () => {
         photo: Yup.string(),
       })}
       onSubmit={(values, { setSubmitting }) => {
-        fetch('https://fathomless-ravine-92681.herokuapp.com/api/authors', {
+        fetch(api.authors(), {
           headers: {
             'Content-Type': 'application/json',
           },

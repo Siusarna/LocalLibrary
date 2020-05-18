@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import api from '../../config/api.jsx';
 
 
 const order = (book, setSuccess) => () => {
-  fetch('https://fathomless-ravine-92681.herokuapp.com/api/orders/create', {
+  fetch(api.orders.create(), {
     headers: {
       'Content-Type': 'application/json',
     },
