@@ -4,7 +4,7 @@
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:jsx-a11y/recommended",
-    'plugin:react/recommended'
+    "plugin:react/recommended"
   ],
   "rules": {
     "react/prop-types": 0,
@@ -24,5 +24,6 @@
     "jsx-a11y/aria-role": [ 2, {
         "ignoreNonDOM": true
     }],
+    "no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement"]
   }
 }
