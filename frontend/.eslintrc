@@ -1,0 +1,25 @@
+{
+  "extends": [
+    "airbnb-base",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:jsx-a11y/recommended",
+  ],
+    "plugins": 
+        ["react", "jsx-a11y"],
+  "rules": {
+    "linebreak-style": 0,
+    "no-underscore-dangle": "off",
+    "max-len": [
+      "error",
+      125
+    ],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": false
+      }
+    ],
+    "no-useless-escape": "off"
+  }
+}
