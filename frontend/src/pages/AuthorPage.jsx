@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthorInfo from '../components/authorInfo';
+import AuthorInfo from '../components/authors/authorInfo';
 import { useParams } from 'react-router-dom';
 
 const AuthorPage = () => {

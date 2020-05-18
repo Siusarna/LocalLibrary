@@ -1,12 +1,12 @@
 import React from 'react';
-import Recommendations from '../components/recommendations';
-import NewsList from '../components/newsList';
-import SectionTitle from '../components/sectionTitle';
+import Recommendations from '../components/books/recommendations';
+import NewsList from '../components/news/newsList';
+import SectionTitle from '../components/layout/sectionTitle';
 import { useContext } from 'react';
 import AuthContext from '../context/authContext';
 import SearchForm from '../components/forms/searchForm';
 import { useState } from 'react';
-import BookList from '../components/bookList';
+import BookList from '../components/books/bookList';
 
 const HomePage = () => {
   const { role } = useContext(AuthContext);

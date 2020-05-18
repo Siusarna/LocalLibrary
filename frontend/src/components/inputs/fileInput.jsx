@@ -1,6 +1,6 @@
 import React from 'react';
 import { useField, useFormikContext } from 'formik';
-import toBase64 from '../helpers/toBase64';
+import toBase64 from '../../helpers/toBase64';
 
 
 const FileInput = ({ label, ...props }) => {

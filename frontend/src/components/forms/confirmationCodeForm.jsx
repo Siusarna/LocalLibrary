@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import TextInput from '../textInput';
+import TextInput from '../inputs/textInput';
 import { Redirect, useParams } from 'react-router-dom';
-import SectionTitle from '../sectionTitle';
+import SectionTitle from '../layout/sectionTitle';
 
 const ConfirmationCodeForm = () => {
   const { id } = useParams();

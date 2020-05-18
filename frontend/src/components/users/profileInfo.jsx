@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import ImageTextContainer from './imageTextContainer';
-import useFetch from '../hooks/useFetch';
-import AuthContext from '../context/authContext';
+import ImageTextContainer from '../layout/imageTextContainer';
+import useFetch from '../../hooks/useFetch';
+import AuthContext from '../../context/authContext';
 import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import SectionTitle from './sectionTitle';
-import OrderList from './orderList';
+import SectionTitle from '../layout/sectionTitle';
+import OrderList from '../orders/orderList';
 
 
 

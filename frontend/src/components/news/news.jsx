@@ -1,5 +1,5 @@
 import React from 'react';
-import LeftRightContainer from './leftRightContainer';
+import LeftRightContainer from '../layout/leftRightContainer';
 
 // Fake data
 // Must be replaced with request on server

@@ -1,5 +1,5 @@
 import React from 'react';
-import ProfileInfo from '../components/profileInfo';
+import ProfileInfo from '../components/users/profileInfo';
 
 const ProfilePage = () => (
   <>

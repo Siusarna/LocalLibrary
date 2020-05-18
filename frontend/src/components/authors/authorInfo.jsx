@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import ImageTextContainer from './imageTextContainer';
-import SectionTitle from './sectionTitle';
-import BookList from './bookList';
+import ImageTextContainer from '../layout/imageTextContainer';
+import SectionTitle from '../layout/sectionTitle';
+import BookList from '../books/bookList';
 import { useParams, Redirect } from 'react-router-dom';
-import useFetch from '../hooks/useFetch';
+import useFetch from '../../hooks/useFetch';
 import { useContext } from 'react';
-import AuthContext from '../context/authContext';
+import AuthContext from '../../context/authContext';
 
 const deleteAuthor = (id, setRedirect) => () => {
   const isConfirmed = window.confirm('Do you really want to delete this Author ?');

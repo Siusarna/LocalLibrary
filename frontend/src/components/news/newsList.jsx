@@ -1,5 +1,5 @@
 import React from 'react';
-import SectionTitle from './sectionTitle';
+import SectionTitle from '../layout/sectionTitle';
 import News from './news';
 
 // Fake data

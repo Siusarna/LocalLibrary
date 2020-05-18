@@ -2,10 +2,10 @@
 import React, { useState, useContext } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import SectionTitle from '../sectionTitle';
+import SectionTitle from '../layout/sectionTitle';
 import AuthContext from '../../context/authContext';
 import { Redirect } from 'react-router-dom';
-import FileInput from '../fileInput';
+import FileInput from '../inputs/fileInput';
 
 const SignUpForm = () => {
   const [serverError, setServerError] = useState('');

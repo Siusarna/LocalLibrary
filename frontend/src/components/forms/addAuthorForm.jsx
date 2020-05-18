@@ -2,11 +2,11 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import TextInput from '../textInput';
-import TextArea from '../textArea';
-import SectionTitle from '../sectionTitle';
+import TextInput from '../inputs/textInput';
+import TextArea from '../inputs/textArea';
+import SectionTitle from '../layout/sectionTitle';
 import { Redirect } from 'react-router-dom';
-import FileInput from '../fileInput';
+import FileInput from '../inputs/fileInput';
 
 const AddAuthorForm = () => {
   const [serverError, setServerError] = useState('');

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LeftRightContainer from './leftRightContainer';
+import LeftRightContainer from '../layout/leftRightContainer';
 
 const Book = (props) => {
   const SAMPLE_COVER = 'https://res.cloudinary.com/domvzvfy1/image/upload/v1586096630/23377249_cgzt8c.jpg';

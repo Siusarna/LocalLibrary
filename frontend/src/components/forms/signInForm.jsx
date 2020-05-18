@@ -2,8 +2,8 @@
 import React, { useState, useContext } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import TextInput from '../textInput';
-import SectionTitle from '../sectionTitle';
+import TextInput from '../inputs/textInput';
+import SectionTitle from '../layout/sectionTitle';
 import AuthContext from '../../context/authContext';
 import { Redirect } from 'react-router-dom';
 import TelegramLoginButton from 'react-telegram-login';

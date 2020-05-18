@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import TextInput from '../textInput';
+import TextInput from '../inputs/textInput';
 import { Redirect, useParams } from 'react-router-dom';
 
 const RejectOrderForm = () => {

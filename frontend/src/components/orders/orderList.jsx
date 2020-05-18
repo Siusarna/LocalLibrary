@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useContext } from 'react';
-import AuthContext from '../context/authContext';
-import useFetch from '../hooks/useFetch';
+import AuthContext from '../../context/authContext';
+import useFetch from '../../hooks/useFetch';
 import Order from './order';
-import SectionTitle from './sectionTitle';
+import SectionTitle from '../layout/sectionTitle';
 import OrderStatusButton from './orderStatusButton';
 
 const LOAN_PERIOD = 30; //days

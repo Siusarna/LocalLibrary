@@ -1,5 +1,5 @@
 import React from 'react';
-import OrderList from '../components/orderList';
+import OrderList from '../components/orders/orderList';
 
 const WorkPage = () => {
   return (

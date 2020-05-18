@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
-import ImageTextContainer from './imageTextContainer';
-import LeftRightContainer from './leftRightContainer';
-import SectionTitle from './sectionTitle';
-import useFetch from '../hooks/useFetch';
-import AuthContext from '../context/authContext';
+import ImageTextContainer from '../layout/imageTextContainer';
+import LeftRightContainer from '../layout/leftRightContainer';
+import SectionTitle from '../layout/sectionTitle';
+import useFetch from '../../hooks/useFetch';
+import AuthContext from '../../context/authContext';
 import { useParams, Redirect } from 'react-router-dom';
 import { useState } from 'react';
-import OrderBookButton from './orderBookButton';
-import FollowBookButton from './followBookButton';
+import OrderBookButton from '../orders/orderBookButton';
+import FollowBookButton from '../orders/followBookButton';
 
 const deleteBook = (id, setRedirect) => () => {
   const isConfirmed = window.confirm('Do you really want to delete this book ?');

@@ -1,7 +1,7 @@
 import React from 'react';
-import SectionTitle from './sectionTitle';
+import SectionTitle from '../layout/sectionTitle';
 import BookList from './bookList';
-import useFetch from '../hooks/useFetch';
+import useFetch from '../../hooks/useFetch';
 
 const Recommendations = () => {
   const { isLoaded, data: books } = useFetch('https://fathomless-ravine-92681.herokuapp.com/api/books');
