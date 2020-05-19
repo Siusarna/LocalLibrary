@@ -10,6 +10,7 @@ import api from '../../config/api.jsx';
 
 import OrderBookButton from '../orders/orderBookButton.jsx';
 import FollowBookButton from '../orders/followBookButton.jsx';
+import ReviewsList from '../reviews/reviewsList.jsx';
 
 const deleteBook = (id, setRedirect) => () => {
   // eslint-disable-next-line no-alert
@@ -43,7 +44,7 @@ const BookInfo = () => {
   if (!isBookLoaded || (role !== 'unauthorized' && !isOrderLoaded)) return null;
   if (isRedirect) return <Redirect to='/books/all' />;
 
-  const isOrdered = (orders.success || orders.length >= 0) && orders
+  const isOrdered = orders && (orders.success || orders.length >= 0) && orders
     .some((order) => order.bookId === book.id && order.status !== 'Cancel' && order.status !== 'Finished');
 
   const authorName = `${book.firstName} ${book.lastName}`;
@@ -71,6 +72,7 @@ const BookInfo = () => {
         ? (!isOrdered && <OrderBookButton book={book} />)
         : <FollowBookButton book={book} />
       )}
+      <ReviewsList bookId={id}/>
     </div>
   );
 };
