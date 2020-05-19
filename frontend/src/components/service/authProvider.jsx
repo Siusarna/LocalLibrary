@@ -5,9 +5,8 @@ import AuthContext from '../../context/authContext.jsx';
 import api from '../../config/api.jsx';
 
 const AuthProvider = (props) => {
-  const [role, setRole] = useState('unauthorized');
+  const [user, setUser] = useState({ role: 'unauthorized' });
   const [isValid, setValid] = useState('false');
-
   useEffect(() => {
     if (isValid) return;
 
@@ -16,13 +15,13 @@ const AuthProvider = (props) => {
       .then((res) => {
         setValid(res.ok);
         if (res.status === 401) {
-          setRole('unauthorized');
+          setUser({ role: 'unauthorized' });
         }
         return res.json();
       })
       .then((data) => {
         if (['customer', 'librarian'].includes(data.role)) {
-          setRole(data.role);
+          setUser(data);
         }
       });
   }, [isValid]);
@@ -30,7 +29,7 @@ const AuthProvider = (props) => {
   const updateAuth = () => { setValid(false); };
 
   return (
-    <AuthContext.Provider value={{ role, updateAuth }}>
+    <AuthContext.Provider value={{ updateAuth, ...user }}>
       {props.children}
     </AuthContext.Provider>
   );
