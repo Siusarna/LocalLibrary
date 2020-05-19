@@ -20,7 +20,8 @@ const getReviewsInfoByBookId = (bookId) => knex('review')
       .on('rating.userId', 'review.userId')
       .on('rating.bookId', 'review.bookId');
   })
-  .select('review.title as title', 'review.content as content', 'review.createdAt as createdAt',
+  .select('review.id as id', 'review.title as title', 'review.content as content', 'review.createdAt as createdAt',
+    'review.userId as userId',
     'users.firstName as firstName', 'users.lastName as lastName', 'users.photo as photo',
     'rating.value as rating')
   .where({

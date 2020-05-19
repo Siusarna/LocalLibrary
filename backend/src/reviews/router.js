@@ -5,7 +5,7 @@ const checkValues = require('./validation/checkValues');
 const { checkAuth } = require('../middleware/chechAuth');
 
 const router = new Router({
-  prefix: '/review',
+  prefix: '/reviews',
 });
 
 router.post('/', checkAuth, checkRequired, checkValues, reviewControllers.addReview);
