@@ -27,6 +27,8 @@ import AllNewsPage from '../../pages/AllNewsPage.jsx';
 import NewsPage from '../../pages/NewsPage.jsx';
 import AddNewsPage from '../../pages/AddNewsPage.jsx';
 import UpdateNewsPage from '../../pages/UpdateNewsPage.jsx';
+import AddReviewPage from '../../pages/AddReviewPage.jsx';
+import UpdateReviewPage from '../../pages/UpdateReviewPage.jsx';
 
 
 const Router = () => (
@@ -43,6 +45,8 @@ const Router = () => (
     <PrivateRoute path='/change-profile' component={ChangeProfilePage}/>
     <PrivateRoute path='/change-photo' component={ChangePhotoPage}/>
     <PrivateRoute path='/change-photo' component={ChangePhotoPage}/>
+    <PrivateRoute path='/reviews/:bookId/add' component={AddReviewPage}/>
+    <PrivateRoute path='/reviews/update' component={UpdateReviewPage}/>
     <PrivateRoute path='/books/add' role='librarian' component={AddBookPage}/>
     <PrivateRoute path='/authors/add' role='librarian' component={AddAuthorPage}/>
     <PrivateRoute path='/news/add' role='librarian' component={AddNewsPage}/>
