@@ -40,10 +40,10 @@ const BookInfo = () => {
   const { data: book, isLoaded: isBookLoaded } = useFetch(api.books(id));
   const { data: orders, isLoaded: isOrderLoaded } = useFetch(api.orders());
 
-  if (!isBookLoaded || !isOrderLoaded) return null;
+  if (!isBookLoaded || (role !== 'unauthorized' && !isOrderLoaded)) return null;
   if (isRedirect) return <Redirect to='/books/all' />;
 
-  const isOrdered = orders
+  const isOrdered = (orders.success || orders.length >= 0) && orders
     .some((order) => order.bookId === book.id && order.status !== 'Cancel' && order.status !== 'Finished');
 
   const authorName = `${book.firstName} ${book.lastName}`;
