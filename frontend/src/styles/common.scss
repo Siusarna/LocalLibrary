@@ -191,7 +191,7 @@ form {
   }
 }
 
-.News {
+/*.News {
   background-color: $SecondaryColor;
   color: $SecondaryFontColor;
 
@@ -213,7 +213,7 @@ form {
     margin: 0;
     padding: 10px;
   }
-}
+}*/
 
 .ImageTextContainer {
   display: flex;
@@ -231,7 +231,8 @@ form {
 }
 
 .ProfileInfo,
-.BookInfo {
+.BookInfo,
+.NewsInfo {
   .title {
     padding: 5px;
   }
