@@ -1,18 +1,20 @@
 import React from 'react';
 import SectionTitle from '../layout/sectionTitle.jsx';
 import News from './news.jsx';
+import useFetch from '../../hooks/useFetch.jsx';
+import api from '../../config/api.jsx';
 
-// Fake data
-// Must be replaced with request on server
-const news = ['3', '2', '1'];
-
-const NewsList = () => (
+const NewsList = () => {
+  const { isLoaded, data: news } = useFetch(api.news());
+  if (!isLoaded) return null;
+  return (
     <>
-      <SectionTitle to='/news' text='News' />
+      <SectionTitle to='/news/all' text='News' />
       <div className='NewsList'>
-        {news.map((id) => <News id={id} key={id}/>)}
+        {news.slice(0, 3).map((item, id) => <News news={item} key={id} />)}
       </div>
     </>
-);
+  );
+};
 
 export default NewsList;
