@@ -302,6 +302,14 @@ form {
   }
 }
 
+.RatingSelect {
+  margin: 0;
+  select {
+    display: inline-block;
+    color: white;
+  }
+}
+
 /** Tables **/
 
 table {

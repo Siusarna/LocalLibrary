@@ -11,6 +11,7 @@ import api from '../../config/api.jsx';
 import OrderBookButton from '../orders/orderBookButton.jsx';
 import FollowBookButton from '../orders/followBookButton.jsx';
 import ReviewsList from '../reviews/reviewsList.jsx';
+import RatingSelect from '../rating/RatingSelect.jsx';
 
 const deleteBook = (id, setRedirect) => () => {
   // eslint-disable-next-line no-alert
@@ -55,10 +56,13 @@ const BookInfo = () => {
         <div className='title'>
           <LeftRightContainer
             left={book.title}
-            right={book.rating && <>
-              <img src='/star.png' className='starIcon' alt='rating star'/>
-              {book.rating}
-            </>}
+            right={<LeftRightContainer
+              left={<RatingSelect bookId={book.id}/>}
+              right={book.rating && <>
+                <img src='/star.png' className='starIcon' alt='rating star' />
+                {book.rating}
+              </>} />
+            }
           />
         </div>
         <SectionTitle to={`/authors/${book.authorId}`} text={authorName} />
@@ -72,7 +76,7 @@ const BookInfo = () => {
         ? (!isOrdered && <OrderBookButton book={book} />)
         : <FollowBookButton book={book} />
       )}
-      <ReviewsList bookId={id}/>
+      <ReviewsList bookId={id} />
     </div>
   );
 };

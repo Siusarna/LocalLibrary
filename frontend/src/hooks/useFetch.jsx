@@ -5,6 +5,7 @@ const useFetch = (url) => {
   const [fetchResult, setFetchResult] = useState({ isLoaded: false, error: null });
 
   useEffect(() => {
+    if (!url) return;
     if (!shouldUpdate) return;
     const newFetchResult = {};
     fetch(url, { credentials: 'include' })
