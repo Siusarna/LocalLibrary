@@ -281,6 +281,21 @@ form {
   margin: 10px;
 }
 
+.Review {
+  .title {
+    font-size: 14px;
+    padding: 5px;
+  }
+  .author,
+  .time {
+    padding: 5px;
+    font-size: 13px;
+  }
+  .time {
+    margin: 10px 0 0 0;
+  }
+}
+
 /** Tables **/
 
 table {
