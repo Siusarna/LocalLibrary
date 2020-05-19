@@ -23,6 +23,10 @@ import WorkPage from '../../pages/WorkPage.jsx';
 import Empty from './empty.jsx';
 import RejectOrderPage from '../../pages/RejectOrderPage.jsx';
 import ConfirmationCodePage from '../../pages/ConfirmationCodePage.jsx';
+import AllNewsPage from '../../pages/AllNewsPage.jsx';
+import NewsPage from '../../pages/NewsPage.jsx';
+import AddNewsPage from '../../pages/AddNewsPage.jsx';
+import UpdateNewsPage from '../../pages/UpdateNewsPage.jsx';
 
 
 const Router = () => (
@@ -33,6 +37,7 @@ const Router = () => (
     <Route path='/forgot-password' component={ForgotPasswordPage}/>
     <Route path='/books/all' component={AllBooksPage}/>
     <Route path='/authors/all' component={AllAuthorsPage}/>
+    <Route path='/news/all' component={AllNewsPage}/>
     <PrivateRoute path='/profile' component={ProfilePage}/>
     <PrivateRoute path='/change-password' component={ChangePasswordPage}/>
     <PrivateRoute path='/change-profile' component={ChangeProfilePage}/>
@@ -40,13 +45,16 @@ const Router = () => (
     <PrivateRoute path='/change-photo' component={ChangePhotoPage}/>
     <PrivateRoute path='/books/add' role='librarian' component={AddBookPage}/>
     <PrivateRoute path='/authors/add' role='librarian' component={AddAuthorPage}/>
+    <PrivateRoute path='/news/add' role='librarian' component={AddNewsPage}/>
     <PrivateRoute path='/books/:id/update' role='librarian' component={UpdateBookPage}/>
     <PrivateRoute path='/authors/:id/update' role='librarian' component={UpdateAuthorPage}/>
+    <PrivateRoute path='/news/:id/update' role='librarian' component={UpdateNewsPage}/>
     <PrivateRoute path='/work' role='librarian' component={WorkPage}/>
     <PrivateRoute path='/orders/reject/:id' role='librarian' component={RejectOrderPage}/>
     <PrivateRoute path='/orders/ccode/:id' role='librarian' component={ConfirmationCodePage}/>
     <Route path='/books/:id' component={BookPage}/>
     <Route path='/authors/:id' component={AuthorPage}/>
+    <Route path='/news/:id' component={NewsPage}/>
     <Route path='/empty' component={Empty}/>
   </Switch>
 );
