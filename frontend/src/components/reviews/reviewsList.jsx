@@ -6,7 +6,7 @@ import SectionTitle from '../layout/sectionTitle.jsx';
 
 const ReviewsList = (props) => {
   const { bookId } = props;
-  const { data: reviews, isLoaded } = useFetch(api.review(bookId));
+  const { data: reviews, isLoaded } = useFetch(api.reviews(bookId));
   if (!isLoaded) return null;
 
   return (
