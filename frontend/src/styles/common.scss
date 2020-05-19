@@ -293,6 +293,12 @@ form {
   }
   .time {
     margin: 10px 0 0 0;
+    .link {
+      &:hover {
+        background-color: $AccentColor;
+        transition: background-color 0.15s;
+      }    
+    }
   }
 }
 
