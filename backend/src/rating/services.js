@@ -14,7 +14,7 @@ const addRating = async (user, { bookId, rating: newRating }) => {
 };
 
 const getRating = async (user, { bookId }) => {
-  const [rating] = queries.getRatingByUserIdAndBookId(user.id, bookId);
+  const [rating] = await queries.getRatingByUserIdAndBookId(user.id, bookId);
   if (!rating) {
     throw new Error('You haven\'t rated this book yet');
   }
