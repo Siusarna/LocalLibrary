@@ -10,8 +10,10 @@ const Recommendations = () => {
   if (!isLoaded) return true;
   return (
     <>
-      <SectionTitle text='Recommendations' to='/recommendations'/>
-      <BookList books={books.slice(0, 5)}/>
+      <SectionTitle text='Popular' />
+      <BookList books={books
+        .sort((book1, book2) => book1.rating < book2.rating)
+        .slice(0, 5)} />
     </>
   );
 };
