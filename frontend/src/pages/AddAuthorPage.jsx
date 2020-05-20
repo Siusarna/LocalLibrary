@@ -1,12 +1,10 @@
 import React from 'react';
-import AddAuthorForm from '../components/forms/addAuthorForm';
+import AddAuthorForm from '../components/forms/addAuthorForm.jsx';
 
-const AddAuthorPage = () => {
-  return (
+const AddAuthorPage = () => (
     <>
       <AddAuthorForm/>
     </>
-  )
-}
+);
 
 export default AddAuthorPage;

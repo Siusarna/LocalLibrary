@@ -2,17 +2,18 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import TextInput from '../textInput';
-import TextArea from '../textArea';
-import SectionTitle from '../sectionTitle';
 import { Redirect } from 'react-router-dom';
-import FileInput from '../fileInput';
+import TextInput from '../inputs/textInput.jsx';
+import TextArea from '../inputs/textArea.jsx';
+import SectionTitle from '../layout/sectionTitle.jsx';
+import FileInput from '../inputs/fileInput.jsx';
+import api from '../../config/api.jsx';
 
 const AddAuthorForm = () => {
   const [serverError, setServerError] = useState('');
   const [success, setSuccess] = useState(false);
   if (success) {
-    return <Redirect to='/authors/all' />
+    return <Redirect to='/authors/all' />;
   }
 
   return (
@@ -41,7 +42,7 @@ const AddAuthorForm = () => {
         photo: Yup.string(),
       })}
       onSubmit={(values, { setSubmitting }) => {
-        fetch('https://fathomless-ravine-92681.herokuapp.com/api/authors', {
+        fetch(api.authors(), {
           headers: {
             'Content-Type': 'application/json',
           },
@@ -61,7 +62,7 @@ const AddAuthorForm = () => {
               setServerError(error);
             }
             setSubmitting(false);
-          })
+          });
       }}
     >
       <Form>
