@@ -11,6 +11,8 @@ RUN npm install react-scripts -g
 
 COPY . /localLibrary-client
 
+RUN export SKIP_PREFLIGHT_CHECK=true
+
 RUN npm run build
 
 # => Run container
