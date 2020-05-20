@@ -67,11 +67,13 @@ const SignInForm = () => {
         <div className='error'>{serverError}</div>
         <button type='submit' className='dark submit' disabled={Formik.isSubmitting}>Sign In</button>
         <SectionTitle text='Forgot Password' to='/forgot-password' />
+        <div className='center'>
         <TelegramLoginButton
           dataOnauth={fetchAuth(api.accounts.telegram())}
           botName='teenLibraryBot'
           data-userpic='false'
         />
+        </div>
       </Form>
     </Formik >
   );
