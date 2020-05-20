@@ -1,0 +1,29 @@
+{
+  "extends": [
+    "airbnb-base",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:jsx-a11y/recommended",
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "react/prop-types": 0,
+    "linebreak-style": 0,
+    "no-underscore-dangle": "off",
+    "max-len": [
+      "error",
+      125
+    ],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": false
+      }
+    ],
+    "no-useless-escape": "off",
+    "jsx-a11y/aria-role": [ 2, {
+        "ignoreNonDOM": true
+    }],
+    "no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement"]
+  }
+}

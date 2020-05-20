@@ -191,7 +191,7 @@ form {
   }
 }
 
-.News {
+/*.News {
   background-color: $SecondaryColor;
   color: $SecondaryFontColor;
 
@@ -213,7 +213,7 @@ form {
     margin: 0;
     padding: 10px;
   }
-}
+}*/
 
 .ImageTextContainer {
   display: flex;
@@ -231,7 +231,8 @@ form {
 }
 
 .ProfileInfo,
-.BookInfo {
+.BookInfo,
+.NewsInfo {
   .title {
     padding: 5px;
   }
@@ -278,6 +279,35 @@ form {
     width: 100%;
   }
   margin: 10px;
+}
+
+.Review {
+  .title {
+    font-size: 14px;
+    padding: 5px;
+  }
+  .author,
+  .time {
+    padding: 5px;
+    font-size: 13px;
+  }
+  .time {
+    margin: 10px 0 0 0;
+    .link {
+      &:hover {
+        background-color: $AccentColor;
+        transition: background-color 0.15s;
+      }    
+    }
+  }
+}
+
+.RatingSelect {
+  margin: 0;
+  select {
+    display: inline-block;
+    color: white;
+  }
 }
 
 /** Tables **/

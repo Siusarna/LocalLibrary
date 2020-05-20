@@ -1,12 +1,10 @@
 import React from 'react';
-import UpdateAuthorForm from '../components/forms/updateAuthorForm';
+import UpdateAuthorForm from '../components/forms/updateAuthorForm.jsx';
 
-const UpdateAuthorPage = () => {
-  return (
+const UpdateAuthorPage = () => (
     <>
       <UpdateAuthorForm/>
     </>
-  )
-}
+);
 
 export default UpdateAuthorPage;

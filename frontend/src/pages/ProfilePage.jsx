@@ -1,10 +1,10 @@
 import React from 'react';
-import ProfileInfo from '../components/profileInfo';
+import ProfileInfo from '../components/users/profileInfo.jsx';
 
 const ProfilePage = () => (
   <>
     <ProfileInfo />
   </>
-)
+);
 
 export default ProfilePage;

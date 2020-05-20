@@ -1,12 +1,10 @@
 import React from 'react';
-import UpdateBookForm from '../components/forms/updateBookForm';
+import UpdateBookForm from '../components/forms/updateBookForm.jsx';
 
-const UpdateBookPage = () => {
-  return (
+const UpdateBookPage = () => (
     <>
       <UpdateBookForm/>
     </>
-  )
-}
+);
 
 export default UpdateBookPage;
