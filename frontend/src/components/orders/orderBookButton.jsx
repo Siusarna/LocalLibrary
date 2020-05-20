@@ -3,6 +3,7 @@ import api from '../../config/api.jsx';
 
 
 const order = (book, setSuccess) => () => {
+  setSuccess(true);
   fetch(api.orders.create(), {
     headers: {
       'Content-Type': 'application/json',
@@ -12,8 +13,8 @@ const order = (book, setSuccess) => () => {
     body: JSON.stringify({ bookId: book.id }),
   })
     .then((res) => {
-      if (res.ok) {
-        setSuccess(true);
+      if (!res.ok) {
+        setSuccess(false);
       }
     });
 };
