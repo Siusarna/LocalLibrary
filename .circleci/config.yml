@@ -113,7 +113,8 @@ jobs:
           command: |
             cd frontend
             docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-            docker build -t $DOCKER_LOGIN/local-library-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM --build-arg SKIP_PREFLIGHT_CHECK=true .
+            export SKIP_PREFLIGHT_CHECK=true
+            docker build -t $DOCKER_LOGIN/local-library-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM .
             docker push $DOCKER_LOGIN/local-library-client:$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
       - run:
           name: Setup Google Cloud SDK
