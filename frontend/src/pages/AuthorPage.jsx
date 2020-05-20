@@ -1,6 +1,6 @@
 import React from 'react';
-import AuthorInfo from '../components/authorInfo';
 import { useParams } from 'react-router-dom';
+import AuthorInfo from '../components/authors/authorInfo.jsx';
 
 const AuthorPage = () => {
   const { id } = useParams();
@@ -8,7 +8,7 @@ const AuthorPage = () => {
     <>
       <AuthorInfo id={id}/>
     </>
-  )
+  );
 };
 
 export default AuthorPage;
